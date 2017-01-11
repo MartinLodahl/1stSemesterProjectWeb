@@ -1,0 +1,98 @@
+body {
+    background-color: #333;
+}
+.outer {
+    text-align: center;
+}
+
+.page {
+    display: inline-block;
+    position: relative;
+    
+    width: 1200px;
+    height: 900px;
+}
+
+#start {
+    background-color: transparent;
+    border: none;
+
+    position: absolute;
+    left: 450px;
+    top: 750px;
+    width: 300px;
+    height: 130px;
+
+    cursor: pointer;
+
+    background-image: url("start-off.png");
+}
+
+#start:hover {
+    background-image: url("start-on.png");
+}
+
+#north {
+    position: absolute;
+    left: 450px;
+    top: 0px;
+    width: 300px;
+    height: 100px;
+
+    cursor: pointer;
+
+    background-image: url("north-off.png");
+}
+
+#north:hover {
+    background-image: url("north-on.png");
+}
+
+#south {
+    position: absolute;
+    left: 450px;
+    top: 800px;
+    width: 300px;
+    height: 100px;
+
+    cursor: pointer;
+
+    background-image: url("south-off.png");
+}
+
+#south:hover {
+    background-image: url("south-on.png");
+}
+
+#east {
+    position: absolute;
+    left: 1100px;
+    top: 300px;
+    width: 100px;
+    height: 300px;
+
+    cursor: pointer;
+
+    background-image: url("east-off.png");
+}
+
+#east:hover {
+    background-image: url("east-on.png");
+}
+
+#west {
+    position: absolute;
+    left: 0px;
+    top: 300px;
+    width: 100px;
+    height: 300px;
+
+    cursor: pointer;
+
+    background-image: url("west-off.png");
+}
+
+#west:hover {
+    background-image: url("west-on.png");
+}
+

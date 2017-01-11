@@ -2,14 +2,19 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>DungeonOnline</title>
+    <title>Dungeon Online</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <h1>Welcome to DungeonOnline!</h1>
-    
-    <form action="registration.html" method="post">
-    <input type="submit" name="btn" value="Start!"/>
-    </form>
+    <div class="outer">
+        <div class="page" style="background-image: url(&quot;title.png&quot;);">
+            <form action="Gameserv" method="post" style="background-color: blue;">
+                <input type="hidden" name="room" value="0">
+                <input type="hidden" name="direction" value="north">
+                <input type="submit" value="" id="start">
+            </form>
+        </div>
+    </div>
 </body>
 </html>
