@@ -13,18 +13,16 @@ import java.util.ArrayList;
  */
 public class DAO {
     
-    public ArrayList<Double> getPriceValue(String frame) {
+    public ArrayList<Double> getDirection(int currentRoom) {
         ArrayList<Double> list = new ArrayList<>();
 
         try {
-            String query = "SELECT * FROM price WHERE frame='" + frame + "';";
+            String query = "SELECT"+ currentRoom + "FROM link ;";
             Statement stmt = new DBConnector().getConnection().createStatement();
             ResultSet res = stmt.executeQuery(query);
             while (res.next()) {
-                Double FramePrice = Double.parseDouble(res.getString("FramePrice"));
-                list.add(0, FramePrice);
-                Double GlassPrice = Double.parseDouble(res.getString("GlassPrice"));
-                list.add(1, GlassPrice);
+                ;
+                list.add( );
             }
             return list;
         } catch (Exception ex) {
