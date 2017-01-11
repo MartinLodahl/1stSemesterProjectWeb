@@ -14,6 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import semesterafslutning.Link;
+import semesterafslutning.Room;
 
 /**
  *
@@ -51,12 +52,20 @@ public class DAOtest {
     // @Test
     // public void hello() {}
     @Test
-    public void DAOtest() {
+    public void getDirectionTest() {
         ArrayList<Link> links = dao.getDirection(1);
         //east 2 & north 3
         assertEquals(links.get(0).getTo(), 2);
         assertEquals(links.get(1).getDirection(), "north");
                 
+    }
+    @Test
+    public void getRoom(){
+        Room room = dao.getRoom(1);
+        Room room2 = dao.getRoom(2);
+        
+        assertEquals(room.getDescription(), "Der var en stor stor trold");
+        assertEquals(room2.getDescription(), "Per");
     }
 
 }
