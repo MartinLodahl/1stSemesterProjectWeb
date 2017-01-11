@@ -16,6 +16,12 @@ import java.util.ArrayList;
  * @author MartinLodahl
  */
 public class DAO {
+    
+    private final DBConnector connector;
+    
+    public DAO (DBConnector connector){
+        this.connector = connector;
+    }
 
     public ArrayList<Link> getDirection(int currentRoom) {
         ArrayList<Link> list = new ArrayList<>();
