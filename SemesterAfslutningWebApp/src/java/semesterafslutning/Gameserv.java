@@ -38,30 +38,47 @@ public class Gameserv extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
-        String name = request.getParameter("name");
-        Player myPlayer = new Player(name);
-        DBConnector connector = new DBConnector();
-        DAO dao = new DAO(connector);
-        if (!dao.checkUser(name)) {
-            dao.createUser(name);
-
-            response.setContentType("text/html;charset=UTF-8");
-            try (PrintWriter out = response.getWriter()) {
-                /* TODO output your page here. You may use following sample code. */
-                out.println("<!DOCTYPE html>");
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<title>Servlet Gameserv1</title>");
-                out.println("</head>");
-                out.println("<body>");
-                out.println("<p>" + name + "</p>");
-                out.println("<p>" + name + "</p>");
-                out.println("<h1>Servlet yo </h1>");
-                out.println("</body>");
-                out.println("</html>");
+        try (PrintWriter out = response.getWriter()) {
+            try {
+                String name = request.getParameter("name");
+                Player myPlayer = new Player(name);
+                DBConnector connector = new DBConnector();
+                DAO dao = new DAO(connector);
+                if (!dao.checkUser(name)) {
+                    dao.createUser(name);
+                    out.print(
+                        "<!DOCTYPE html>\n" +
+                        "<html>\n" +
+                        "<head>\n" +
+                        "    <meta charset=\"UTF-8\">\n" +
+                        "    <title>Dungeon Online</title>\n" +
+                        "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+                        "    <link rel=\"stylesheet\" href=\"main.css\">\n" +
+                        "</head>\n" +
+                        "<body>\n" +
+                        "    <div class=\"outer\">\n" +
+                        "        <div class=\"page\" style=\"background-image: url(&quot;0001.png&quot;);\">"
+                    );
+                    out.print(
+                        "           <form action=\"Gameserv\" method=\"post\">\n" +
+                        "                <input type=\"hidden\" name=\"room\" value=\"1\">\n" +
+                        "                <input type=\"hidden\" name=\"direction\" value=\"north\">\n" +
+                        "                <input type=\"submit\" value=\"North\" id=\"north\">\n" +
+                        "            </form>\n"
+                    );
+                    out.println(
+                        "        </div>\n" +
+                        "    </div>\n" +
+                        "</body>\n" +
+                        "</html>\n"
+                    );
+                    response.setContentType("text/html;charset=UTF-8");
+                } else{
+                    response.sendRedirect("registration.html");
+                }
+            } catch (Exception ex) {
+                out.println(out.toString());
             }
-        } else{
-            response.sendRedirect("registration.html");
         }
     }
 
