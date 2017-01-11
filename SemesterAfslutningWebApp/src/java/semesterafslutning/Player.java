@@ -15,7 +15,7 @@ public class Player implements ICharacter
         
 {
     private String name;
-    private int health;
+    private int health = 80;
     
     public Player (String name){
         this.name = name;
