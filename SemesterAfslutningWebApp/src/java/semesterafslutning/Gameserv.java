@@ -42,21 +42,26 @@ public class Gameserv extends HttpServlet {
         Player myPlayer = new Player(name);
         DBConnector connector = new DBConnector();
         DAO dao = new DAO(connector);
-        dao.createUser(name);
-        
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Gameserv1</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<p>" + name + "</p>");
-            out.println("<h1>Servlet yo </h1>");
-            out.println("</body>");
-            out.println("</html>");
+        if (!dao.checkUser(name)) {
+            dao.createUser(name);
+
+            response.setContentType("text/html;charset=UTF-8");
+            try (PrintWriter out = response.getWriter()) {
+                /* TODO output your page here. You may use following sample code. */
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Servlet Gameserv1</title>");
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<p>" + name + "</p>");
+                out.println("<p>" + name + "</p>");
+                out.println("<h1>Servlet yo </h1>");
+                out.println("</body>");
+                out.println("</html>");
+            }
+        } else{
+            response.sendRedirect("registration.html");
         }
     }
 
