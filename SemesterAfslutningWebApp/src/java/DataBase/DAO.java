@@ -4,25 +4,32 @@
  * and open the template in the editor.
  */
 package DataBase;
+
+import semesterafslutning.Link;
+import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+
 /**
  *
  * @author MartinLodahl
  */
 public class DAO {
-    
-    public ArrayList<Double> getDirection(int currentRoom) {
-        ArrayList<Double> list = new ArrayList<>();
+
+    public ArrayList<Link> getDirection(int currentRoom) {
+        ArrayList<Link> list = new ArrayList<>();
 
         try {
-            String query = "SELECT"+ currentRoom + "FROM link ;";
-            Statement stmt = new DBConnector().getConnection().createStatement();
-            ResultSet res = stmt.executeQuery(query);
+            String query = "SELECT * FROM link WHERE room_id = ?;";
+            PreparedStatement stmt = (PreparedStatement) new DBConnector().getConnection().prepareStatement(query);
+            stmt.setInt(1, currentRoom);
+            ResultSet res = stmt.executeQuery();
             while (res.next()) {
-                ;
-                list.add( );
+                String direction = res.getString("direction");
+                int to = res.getInt("goto");
+                Link way = new Link(currentRoom, direction, to);
+                list.add(way);
             }
             return list;
         } catch (Exception ex) {
@@ -30,5 +37,5 @@ public class DAO {
             return null;
         }
     }
-    
+
 }
