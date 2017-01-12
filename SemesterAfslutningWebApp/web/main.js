@@ -5,11 +5,11 @@ var south = document.getElementById('south')
 var east = document.getElementById('east')
 var west = document.getElementById('west')
 
-var currentRoom = 0
+var currentRoom = 1
 
 function goTo(direction) {
     var data = new FormData()
-    data.append('room', String(currentRoom))
+    data.append('room',""+ currentRoom)
     data.append('direction', direction)
 
     var xhr = new XMLHttpRequest()
