@@ -10,7 +10,7 @@ var currentRoom = 0
 var playerId = 0
 
 function startGame() {
-    game.style.backgroundImage = 'url("title.png")'
+    game.style.backgroundImage = 'url("PicturesGeneral/Title.png")'
     start.style.display = 'block'
     north.style.display = 'none'
     south.style.display = 'none'
