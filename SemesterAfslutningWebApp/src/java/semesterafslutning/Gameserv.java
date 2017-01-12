@@ -50,8 +50,8 @@ public class Gameserv extends HttpServlet {
                 DBConnector connector = new DBConnector();
                 DAO dao = new DAO(connector);
                 // finder det næste rooms ID
-                //int nextRoomId = dao.currentRoomId(currentroomId,direction);
-                int nextRoomId = 1;
+                int nextRoomId = dao.currentRoomId(currentroomId,direction);
+                
                 
                 
                 if (!dao.checkUser(name)) {
