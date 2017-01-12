@@ -4,6 +4,7 @@ var north = document.getElementById('north')
 var south = document.getElementById('south')
 var east = document.getElementById('east')
 var west = document.getElementById('west')
+var items = document.getElementById('items')
 
 var currentRoom = 0
 var playerId = 0
@@ -50,9 +51,29 @@ function goTo(direction) {
             game.style.backgroundImage='url("'+obj.picture+'")'
             currentRoom = obj.room
             playerId = obj.playerId
+            for (var i = 0; i < obj.items.length; i++) {
+                var item = obj.items[i]
+                var img = new Image()
+                img.src = item.picture
+                img.style.position = 'absolute'
+                img.style.left = item.x+'px'
+                img.style.top = item.y+'px'
+                items.appendChild(img)
+            }
         } catch (ex) {
             alert(xhr.responseText)
         }
+    }
+}
+
+function pickUp(id) {
+    var xhr = new XMLHttpRequest()
+    xhr.open('POST', 'PickUp', true)
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send('room='+currentRoom+'&direction='+direction+'&playerId='+playerId)
+
+    xhr.onload = function() {
+        
     }
 }
 
