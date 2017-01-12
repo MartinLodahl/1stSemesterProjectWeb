@@ -41,7 +41,6 @@ public class Gameserv extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             try {
                 String name = request.getParameter("name");
-                Player myPlayer = new Player(name);
                 DBConnector connector = new DBConnector();
                 DAO dao = new DAO(connector);
                 if (!dao.checkUser(name)) {
