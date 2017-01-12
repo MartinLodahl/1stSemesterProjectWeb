@@ -21,8 +21,10 @@
  
  INSERT INTO link(room_id, direction, goto)
 VALUES 
+(1, 'NORTH', 2),
+(1, 'EAST', 6),
+(1, 'SOUTH', 5),
 (1, 'WEST', 2),
-(1, 'EAST', 2),
 (2, 'WEST', 3),
 (2, 'NORTH', 4),
 (0, 'NORTH', 1);
