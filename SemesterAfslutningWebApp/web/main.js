@@ -5,10 +5,9 @@ var south = document.getElementById('south')
 var east = document.getElementById('east')
 var west = document.getElementById('west')
 
-var currentRoom = 1
+var currentRoom = 0
 
 function goTo(direction) {
-
     var xhr = new XMLHttpRequest()
     xhr.open('POST', 'Gameserv', true)
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

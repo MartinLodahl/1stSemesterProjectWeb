@@ -44,7 +44,7 @@ public class Gameserv extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             try {
                 String name = request.getParameter("name");
-                String currentroomId = request.getParameter("room");
+                int currentroomId = Integer.parseInt(request.getParameter("room"));
                 System.out.println(currentroomId);
                 String direction = request.getParameter("direction");
                 DBConnector connector = new DBConnector();
