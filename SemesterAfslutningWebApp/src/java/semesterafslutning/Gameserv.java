@@ -85,7 +85,9 @@ public class Gameserv extends HttpServlet {
                         + "\"south\": " + png.ValidMove("SOUTH", dao.getDirection(nextRoomId)) + ","
                         + "\"east\": " + png.ValidMove("EAST", dao.getDirection(nextRoomId)) + ","
                         + "\"west\": " + png.ValidMove("WEST", dao.getDirection(nextRoomId)) + ","
-                        + "\"items\": []"
+                        + "\"items\": ["
+                        + "{\"id\": 8, \"picture\":\"PicturesItems/coins.png\", \"x\": 200, \"y\": 200}"
+                        + "]"
                         + "}");
                 }
                 
