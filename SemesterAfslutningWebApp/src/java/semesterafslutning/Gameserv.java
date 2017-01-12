@@ -44,15 +44,18 @@ public class Gameserv extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             try {
                 String name = request.getParameter("name");
+                int currentroomId = Integer.parseInt(request.getParameter("room"));
+                String direction = request.getParameter("direction");
                 DBConnector connector = new DBConnector();
                 DAO dao = new DAO(connector);
-                
+                // finder det næste rooms ID
+                int nextRoomId = dao.currentRoomId(currentroomId,direction);
                 
                 
                 if (!dao.checkUser(name)) {
                     dao.createUser(name);
                     
-                    out.print("{\"room\": 1, \"picture\": \"0001.png\", \"north\":" +png.ValidMove("NORTH", dao.getDirection(1))+", \"south\": "+png.ValidMove("SOUTH", dao.getDirection(1))+", \"east\": "+png.ValidMove("EAST", dao.getDirection(1))+", \"west\": "+png.ValidMove("WEST", dao.getDirection(1))+" }");
+                    out.print("{\"room\":"+ nextRoomId+", \"picture\": \"0001.png\", \"north\":" +png.ValidMove("NORTH", dao.getDirection(nextRoomId))+", \"south\": "+png.ValidMove("SOUTH", dao.getDirection(nextRoomId))+", \"east\": "+png.ValidMove("EAST", dao.getDirection(nextRoomId))+", \"west\": "+png.ValidMove("WEST", dao.getDirection(nextRoomId))+" }");
                     /*
                     out.print(
                         "<!DOCTYPE html>\n" +
