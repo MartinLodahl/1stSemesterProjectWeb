@@ -11,11 +11,11 @@ import java.util.ArrayList;
  *
  * @author Pravien
  */
-public class PNGParthCreator
+public class PNGPathCreator
 {
     LinkCollectionSort linksort;
     
-    public PNGParthCreator(){
+    public PNGPathCreator(){
         linksort = new LinkCollectionSort();
     }
     
