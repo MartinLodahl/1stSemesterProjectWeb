@@ -129,16 +129,16 @@ public class DAO {
     public int createUniquePlayerId(){
         
         try {
-            String query = "SELECT count(name) AS NUMBER FROM players;";
+            String query = "SELECT count(*) AS NUMBER FROM players;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             ResultSet res = stmt.executeQuery();
             res.next();
-
-            return res.getInt("NUMBER")+1;
+            
+            return res.getInt("NUMBER");
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return 0;
+        return 5;
     }
 }

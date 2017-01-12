@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import semesterafslutning.Controller;
 import semesterafslutning.Link;
 import semesterafslutning.PNGPathCreator;
 import semesterafslutning.Room;
@@ -77,17 +78,19 @@ public class DAOtest {
         
     }
     */
-//    @Test
-//    public void sortDirec(){
-//        ArrayList<Link> list = dao.getDirection(1);
-//        
-//        PNGPathCreator png = new PNGPathCreator();
-//        
-//        String directions = png.pathCreator(list);
-//        
-//        assertEquals(directions, "EW");
-//        
-//    }
+    @Test
+    public void sortDirec(){
+        ArrayList<Link> list = dao.getDirection(1);
+        
+        PNGPathCreator png = new PNGPathCreator();
+        
+        String directions = png.pathCreator(list);
+        Controller ctrl = new Controller ();
+        dao.createUser(dao.createUniquePlayerId(),"bob",ctrl.createPlayerRoomId());
+        
+        assertEquals(2, 2);
+        
+    }
     
     
 
