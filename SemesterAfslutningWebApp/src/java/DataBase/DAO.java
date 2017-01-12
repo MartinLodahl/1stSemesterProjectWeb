@@ -9,7 +9,7 @@ import semesterafslutning.Link;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
+
 import java.util.ArrayList;
 import semesterafslutning.Room;
 
