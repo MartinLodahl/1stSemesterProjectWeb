@@ -96,39 +96,40 @@ public class DAO {
         }
     }
 
-    public void createUser(int playerId , String name,int roomId) {
+    public Player createUser(int playerId , String name,int roomId) {
         try {
-            String query = "INSERT INTO players(playerId ,name, health, gold, room) VALUES (?, ?, 10, 0, ?);";
+            String query = "INSERT INTO players(playerId ,name, health, gold, roomId) VALUES (?, ?, 10, 0, ?);";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, playerId);
             stmt.setString(2, name);
             stmt.setInt(3, roomId);
             stmt.executeUpdate();
-
+           Player player = new Player ( name,  100, roomId,  playerId);
+           return player;
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        return null;
     }
 
-    public boolean checkUser(String name) {
+    public void updateUser(int roomId,int playerId) {
         try {
-            String query = "SELECT count(name) AS NUMBER FROM players WHERE name = ?;";
+            String query = "UPDATE players SET roomId = ? WHERE playerId=?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
-            stmt.setString(1, name);
-            ResultSet res = stmt.executeQuery();
-            res.next();
+            stmt.setInt(1, roomId);
+            stmt.setInt(2,playerId);
+            stmt.executeUpdate();
+            
 
-            if (res.getInt("NUMBER") == 0) {
-                return false;
-            }
+            
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return true;
+        
     }
 
-    public Player checkUser(int playerId) {
+    public Player getPlayer(int playerId) {
         try {
             String query = "SELECT * FROM players WHERE playerId = ?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
@@ -139,7 +140,7 @@ public class DAO {
             String name = res.getString("name");
             int health = res.getInt("health");
             int gold = res.getInt("gold");
-            int room = res.getInt("room");
+            int room = res.getInt("roomId");
             Player player = new Player(name, health, room,playerId);
             return player;
             
