@@ -14,7 +14,9 @@ function goTo(direction) {
 
     var xhr = new XMLHttpRequest()
     xhr.open('POST', 'Gameserv', true)
-    xhr.send(data)
+    xhr.send('room='+currentRoom+'&direction='+direction)
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
     xhr.onload = function() {
         try {
             var obj = JSON.parse(xhr.responseText)
