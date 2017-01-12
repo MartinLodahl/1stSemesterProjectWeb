@@ -11,15 +11,15 @@ import java.util.ArrayList;
  *
  * @author Pravien
  */
-public class PNGParthCreator
+public class PNGPathCreator
 {
     LinkCollectionSort linksort;
     
-    public PNGParthCreator(){
+    public PNGPathCreator(){
         linksort = new LinkCollectionSort();
     }
     
-    public String parthCreator(ArrayList<Link> link){
+    public String pathCreator(ArrayList<Link> link){
         StringBuilder sb = new StringBuilder();
         ArrayList<Link> temp = linksort.sortedByDirection(link);
         

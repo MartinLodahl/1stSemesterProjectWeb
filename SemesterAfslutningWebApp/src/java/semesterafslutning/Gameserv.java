@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 public class Gameserv extends HttpServlet {
                     
                     
-    PNGParthCreator png = new PNGParthCreator();
+    PNGPathCreator png = new PNGPathCreator();
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

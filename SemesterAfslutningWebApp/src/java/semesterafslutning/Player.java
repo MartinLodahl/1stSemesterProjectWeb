@@ -21,21 +21,25 @@ public class Player implements ICharacter
         this.name = name;
     }
 
+    @Override
     public String getName()
     {
         return name;
     }
 
+    @Override
     public void setName(String name)
     {
         this.name = name;
     }
 
+    @Override
     public int getHealth()
     {
         return health;
     }
 
+    @Override
     public void setHealth(int health)
     {
         this.health = health;
