@@ -52,6 +52,29 @@ public class DAO {
             return null;
         }
     }
+    
+    
+    public int currentRoomId (int currentRoomId, String direction){
+        try {
+            String query = "SELECT * FROM link WHERE room_id = ? and direction= ?;";
+            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+            stmt.setInt(1, currentRoomId);
+            stmt.setString(2,direction);
+            ResultSet res = stmt.executeQuery();
+            int goTo=0;
+            while (res.next()) {
+                goTo = res.getInt("goto");
+               
+            }
+            return goTo;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return 0;
+        }
+    }
+    
+    
+    
     public Room getRoom(int currentRoom) {
 
         try {

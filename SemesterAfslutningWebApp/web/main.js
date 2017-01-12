@@ -6,15 +6,14 @@ var east = document.getElementById('east')
 var west = document.getElementById('west')
 
 var currentRoom = 0
+var playerId = 0
 
 function goTo(direction) {
-    var data = new FormData()
-    data.append('room', String(currentRoom))
-    data.append('direction', direction)
-
     var xhr = new XMLHttpRequest()
     xhr.open('POST', 'Gameserv', true)
-    xhr.send(data)
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send('room='+currentRoom+'&direction='+direction+'&playerId='+playerId)
+
     xhr.onload = function() {
         try {
             var obj = JSON.parse(xhr.responseText)
@@ -41,6 +40,7 @@ function goTo(direction) {
             }
             game.style.backgroundImage='url("'+obj.picture+'")'
             currentRoom = obj.room
+            playerId = obj.playerId
         } catch (ex) {
             alert(xhr.responseText)
         }
