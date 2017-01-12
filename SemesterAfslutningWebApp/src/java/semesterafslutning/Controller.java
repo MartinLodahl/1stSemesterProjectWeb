@@ -37,13 +37,13 @@ public class Controller
         return (int) Math.floor((Math.random() * 5) + 1);
     }
 
-    public int createPlayer()
-    {
-        int uniqPlayerId = dao.createUniquePlayerId();
-        System.out.println("Talk fra unique"+uniqPlayerId);
-        int playRoomId = createPlayerRoomId();
-        dao.createUser(uniqPlayerId, "marton", playRoomId);
-        
-        return uniqPlayerId;
-    }
+//    public int createPlayer()
+//    {
+//        int uniqPlayerId = dao.createUniquePlayerId();
+//        System.out.println("Talk fra unique"+uniqPlayerId);
+//        int playRoomId = createPlayerRoomId();
+//        dao.createUser(uniqPlayerId, "marton", playRoomId);
+//        
+//        return uniqPlayerId;
+//    }
 }

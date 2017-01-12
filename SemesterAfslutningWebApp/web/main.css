@@ -25,11 +25,11 @@ body {
 
     cursor: pointer;
 
-    background-image: url("start-off.png");
+    background-image: url("PicturesGeneral/start-off.png");
 }
 
 #start:hover {
-    background-image: url("start-on.png");
+    background-image: url("PicturesGeneral/start-on.png");
 }
 
 #north {
@@ -44,11 +44,11 @@ body {
 
     cursor: pointer;
 
-    background-image: url("arrow-off.png");
+    background-image: url("PicturesGeneral/arrow-off.png");
 }
 
 #north:hover {
-    background-image: url("arrow-on.png");
+    background-image: url("PicturesGeneral/arrow-on.png");
 }
 
 #south {
@@ -64,11 +64,11 @@ body {
     cursor: pointer;
 
     transform: rotate(180deg);
-    background-image: url("arrow-off.png");
+    background-image: url("PicturesGeneral/arrow-off.png");
 }
 
 #south:hover {
-    background-image: url("arrow-on.png");
+    background-image: url("PicturesGeneral/arrow-on.png");
 }
 
 #east {
@@ -84,11 +84,11 @@ body {
     cursor: pointer;
 
     transform: rotate(90deg);
-    background-image: url("arrow-off.png");
+    background-image: url("PicturesGeneral/arrow-off.png");
 }
 
 #east:hover {
-    background-image: url("arrow-on.png");
+    background-image: url("PicturesGeneral/arrow-on.png");
 }
 
 #west {
@@ -104,10 +104,10 @@ body {
     cursor: pointer;
 
     transform: rotate(270deg);
-    background-image: url("arrow-off.png");
+    background-image: url("PicturesGeneral/arrow-off.png");
 }
 
 #west:hover {
-    background-image: url("arrow-on.png");
+    background-image: url("PicturesGeneral/arrow-on.png");
 }
 

@@ -22,6 +22,15 @@ public class Player implements ICharacter
         this.setHealth(100);
     }
 
+    public Player(String name, int health, int roomId, int playerId) {
+        this.name = name;
+        this.health = health;
+        this.roomId = roomId;
+        this.playerId = playerId;
+    }
+
+   
+
     @Override
     public String getName()
     {

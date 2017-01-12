@@ -18,7 +18,7 @@
  name varchar(40),
  health int,
  gold int,
- room int);
+ roomId int);
  
  INSERT INTO link(room_id, direction, goto)
 VALUES 

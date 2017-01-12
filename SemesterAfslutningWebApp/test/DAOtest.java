@@ -87,8 +87,9 @@ public class DAOtest {
         String directions = png.pathCreator(list);
         Controller ctrl = new Controller ();
         dao.createUser(dao.createUniquePlayerId(),"bob",ctrl.createPlayerRoomId());
+       int check =  dao.createUniquePlayerId();
         
-        assertEquals(2, 2);
+        assertEquals(4, check);
         
     }
     
