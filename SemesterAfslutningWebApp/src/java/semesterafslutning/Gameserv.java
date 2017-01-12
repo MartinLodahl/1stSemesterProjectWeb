@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 public class Gameserv extends HttpServlet {
                     
                     
+    PNGParthCreator png = new PNGParthCreator();
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,7 +49,7 @@ public class Gameserv extends HttpServlet {
                 if (!dao.checkUser(name)) {
                     dao.createUser(name);
                     
-                    out.print("{\"room\": 1, \"picture\": \"0001.png\", \"north\": true, \"south\": true, \"east\": false, \"west\": true }");
+                    out.print("{\"room\": 1, \"picture\": \"0001.png\", \"north\":" +png.ValidMove("NORTH", dao.getDirection(1))+", \"south\": "+png.ValidMove("SOUTH", dao.getDirection(1))+", \"east\": "+png.ValidMove("EAST", dao.getDirection(1))+", \"west\": "+png.ValidMove("WEST", dao.getDirection(1))+" }");
                     /*
                     out.print(
                         "<!DOCTYPE html>\n" +

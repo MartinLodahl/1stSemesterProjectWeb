@@ -33,4 +33,16 @@ public class PNGParthCreator
         return sb.toString();
     }
     
+    public boolean ValidMove(String direction, ArrayList<Link> links){
+        for (int i = 0; i < links.size(); i++)
+        {
+            if(direction.equals(links.get(i).getDirection())){
+                return true;
+            }
+                
+            
+        }
+        return false;
+    }
+    
 }
