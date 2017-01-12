@@ -50,6 +50,9 @@ public class Gameserv extends HttpServlet {
                 
                 if (!dao.checkUser(name)) {
                     dao.createUser(name);
+                    
+                    out.print("{\"room\": 1, \"picture\": \"0001.png\", \"north\": true, \"south\": true, \"east\": false, \"west\": true }");
+                    /*
                     out.print(
                         "<!DOCTYPE html>\n" +
                         "<html>\n" +
@@ -76,6 +79,7 @@ public class Gameserv extends HttpServlet {
                         "</body>\n" +
                         "</html>\n"
                     );
+                    */
                     response.setContentType("text/html;charset=UTF-8");
                 } else{
                     response.sendRedirect("registration.html");

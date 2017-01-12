@@ -8,13 +8,16 @@
 </head>
 <body>
     <div class="outer">
-        <div class="page" style="background-image: url(&quot;title.png&quot;);">
+        <div id="game" class="page" style="background-image: url(&quot;title.png&quot;);">
             <form action="Gameserv" method="post" style="background-color: blue;">
-                <input type="hidden" name="room" value="0">
-                <input type="hidden" name="direction" value="north">
-                <input type="submit" value="" id="start">
+                <input type="button" value="-" id="start" onclick="goTo('North')">
+                <input style="display: none;" type="button" value="-" id="north" onclick="goTo('North')">
+                <input style="display: none;" type="button" value="-" id="south" onclick="goTo('South')">
+                <input style="display: none;" type="button" value="-" id="east" onclick="goTo('East')">
+                <input style="display: none;" type="button" value="-" id="west" onclick="goTo('West')">
             </form>
         </div>
     </div>
+    <script src="main.js"></script>
 </body>
 </html>
