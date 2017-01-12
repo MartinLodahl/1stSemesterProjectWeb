@@ -24,6 +24,12 @@ public interface ICharacter
 
     public void setHealth(int health);
     
+    public void setRoomID (int roomId);
+    
+    public int getRoomId();
+        
+    
+    
    
     
 } 
