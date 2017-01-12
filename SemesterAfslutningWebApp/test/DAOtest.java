@@ -14,6 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import semesterafslutning.Link;
+import semesterafslutning.PNGParthCreator;
 import semesterafslutning.Room;
 
 /**
@@ -79,8 +80,12 @@ public class DAOtest {
     @Test
     public void sortDirec(){
         ArrayList<Link> list = dao.getDirection(1);
-        assertEquals(list.get(0).getDirection(), "EAST");
-        assertEquals(list.get(1).getDirection(), "WEST");
+        
+        PNGParthCreator png = new PNGParthCreator();
+        
+        String directions = png.parthCreator(list);
+        
+        assertEquals(directions, "EW");
         
     }
 
