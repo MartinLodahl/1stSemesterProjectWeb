@@ -58,6 +58,7 @@ public class Gameserv extends HttpServlet {
                     System.out.println(playerId);
                     dao.createUser(playerId, "marton", playRoomId);
                 }
+                
 
                 out.print("{\"room\":" + nextRoomId + ",\"playerId\":" + playerId + ", \"picture\": \"PicturesRooms/" + png.pathCreator(dao.getDirection(nextRoomId)) + ".png\", \"north\":" + png.ValidMove("NORTH", dao.getDirection(nextRoomId)) + ", \"south\": " + png.ValidMove("SOUTH", dao.getDirection(nextRoomId)) + ", \"east\": " + png.ValidMove("EAST", dao.getDirection(nextRoomId)) + ", \"west\": " + png.ValidMove("WEST", dao.getDirection(nextRoomId)) + " }");
                 /*
