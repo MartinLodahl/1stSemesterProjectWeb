@@ -14,7 +14,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import semesterafslutning.ICharacter;
 import semesterafslutning.LinkCollectionSort;
+import semesterafslutning.Player;
 import semesterafslutning.Room;
 
 /**
@@ -96,7 +98,7 @@ public class DAO {
 
     public void createUser(int playerId , String name,int roomId) {
         try {
-            String query = "INSERT INTO dungonsonline.players(playerId ,name, health, gold, room) VALUES (?, ?, 10, 0, ?);";
+            String query = "INSERT INTO players(playerId ,name, health, gold, room) VALUES (?, ?, 10, 0, ?);";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, playerId);
             stmt.setString(2, name);
@@ -126,6 +128,28 @@ public class DAO {
         return true;
     }
 
+    public Player checkUser(int playerId) {
+        try {
+            String query = "SELECT * FROM players WHERE playerId = ?;";
+            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+            stmt.setInt(1, playerId);
+            ResultSet res = stmt.executeQuery();
+            res.next();
+
+            String name = res.getString("name");
+            int health = res.getInt("health");
+            int gold = res.getInt("gold");
+            int room = res.getInt("room");
+            Player player = new Player(name, health, room,playerId);
+            return player;
+            
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
     public int createUniquePlayerId(){
         
         try {
@@ -134,7 +158,7 @@ public class DAO {
             ResultSet res = stmt.executeQuery();
             res.next();
             
-            return res.getInt("NUMBER");
+            return (res.getInt("NUMBER")+1);
 
         } catch (Exception ex) {
             ex.printStackTrace();
