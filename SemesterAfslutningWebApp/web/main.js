@@ -8,6 +8,15 @@ var west = document.getElementById('west')
 var currentRoom = 0
 var playerId = 0
 
+function startGame() {
+    game.style.backgroundImage = 'url("title.png")'
+    start.style.display = 'block'
+    north.style.display = 'none'
+    south.style.display = 'none'
+    east.style.display = 'none'
+    west.style.display = 'none'
+}
+
 function goTo(direction) {
     var xhr = new XMLHttpRequest()
     xhr.open('POST', 'Gameserv', true)
@@ -47,5 +56,6 @@ function goTo(direction) {
     }
 }
 
+startGame()
 
 
