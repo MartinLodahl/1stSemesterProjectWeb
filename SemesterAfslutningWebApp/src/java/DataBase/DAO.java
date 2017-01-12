@@ -137,7 +137,7 @@ public class DAO {
             return res.getInt("NUMBER");
 
         } catch (Exception ex) {
-            ex.printStackTrace();
+            
         }
         return 5;
     }
