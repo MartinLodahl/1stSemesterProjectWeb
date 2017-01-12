@@ -44,12 +44,14 @@ public class Gameserv extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             try {
                 String name = request.getParameter("name");
-                int currentroomId = Integer.parseInt(request.getParameter("room"));
+                String currentroomId = request.getParameter("room");
+                System.out.println(currentroomId);
                 String direction = request.getParameter("direction");
                 DBConnector connector = new DBConnector();
                 DAO dao = new DAO(connector);
                 // finder det næste rooms ID
-                int nextRoomId = dao.currentRoomId(currentroomId,direction);
+                //int nextRoomId = dao.currentRoomId(currentroomId,direction);
+                int nextRoomId = 1;
                 
                 
                 if (!dao.checkUser(name)) {
