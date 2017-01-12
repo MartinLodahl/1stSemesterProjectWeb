@@ -59,35 +59,25 @@ public class Gameserv extends HttpServlet {
                     System.out.println(playerId);
                    player= dao.createUser(playerId, "marton", playRoomId);
                    
-                    out.print("{"
-                        + "\"room\":" + player.getRoomId() + ","
-                        + "\"playerId\":" + playerId + ","
-                        + "\"picture\": \"PicturesRooms/" + png.pathCreator(dao.getDirection(player.getRoomId())) + ".png\","
-                        + "\"north\":" + png.ValidMove("NORTH", dao.getDirection(player.getRoomId())) + ","
-                        + "\"south\": " + png.ValidMove("SOUTH", dao.getDirection(player.getRoomId())) + ","
-                        + "\"east\": " + png.ValidMove("EAST", dao.getDirection(player.getRoomId())) + ","
-                        + "\"west\": " + png.ValidMove("WEST", dao.getDirection(player.getRoomId())) + ","
-                        + "\"items\": []"
-                        + "}");
                 }
                 else {
-                    
                    player = dao.getPlayer(playerId);
-                 int nextRoomId = dao.currentRoomId(currentroomId, direction);
+                   int nextRoomId = dao.currentRoomId(currentroomId, direction);
                    player.setRoomID(nextRoomId);
                    dao.updateUser(nextRoomId, playerId);
-                   
-                    out.print("{"
-                        + "\"room\":" + player.getRoomId() + ","
-                        + "\"playerId\":" + playerId + ","
-                        + "\"picture\": \"PicturesRooms/" + png.pathCreator(dao.getDirection(nextRoomId)) + ".png\","
-                        + "\"north\":" + png.ValidMove("NORTH", dao.getDirection(nextRoomId)) + ","
-                        + "\"south\": " + png.ValidMove("SOUTH", dao.getDirection(nextRoomId)) + ","
-                        + "\"east\": " + png.ValidMove("EAST", dao.getDirection(nextRoomId)) + ","
-                        + "\"west\": " + png.ValidMove("WEST", dao.getDirection(nextRoomId)) + ","
-                        + "\"items\": []"
-                        + "}");
                 }
+                out.print("{"
+                    + "\"room\":" + player.getRoomId() + ","
+                    + "\"playerId\":" + playerId + ","
+                    + "\"picture\": \"PicturesRooms/" + png.pathCreator(dao.getDirection(player.getRoomId())) + ".png\","
+                    + "\"north\":" + png.ValidMove("NORTH", dao.getDirection(player.getRoomId())) + ","
+                    + "\"south\": " + png.ValidMove("SOUTH", dao.getDirection(player.getRoomId())) + ","
+                    + "\"east\": " + png.ValidMove("EAST", dao.getDirection(player.getRoomId())) + ","
+                    + "\"west\": " + png.ValidMove("WEST", dao.getDirection(player.getRoomId())) + ","
+                    + "\"items\": ["
+                    + "{\"id\": 8, \"picture\":\"PicturesItems/coins.png\", \"x\": 200, \"y\": 200}"
+                    + "]"
+                    + "}");
                 
 
                
