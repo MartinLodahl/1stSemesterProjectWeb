@@ -46,6 +46,9 @@ public class Gameserv extends HttpServlet {
                 String name = request.getParameter("name");
                 DBConnector connector = new DBConnector();
                 DAO dao = new DAO(connector);
+                
+                
+                
                 if (!dao.checkUser(name)) {
                     dao.createUser(name);
                     
