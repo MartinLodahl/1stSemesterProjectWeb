@@ -5,16 +5,33 @@
  */
 package semesterafslutning;
 
+import DataBase.DAO;
+import DataBase.DBConnector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Pravien
  */
 public class Controller
 {
-    
-   public void createPlayer (String name){
+    DBConnector connector;
+    DAO dao = new DAO(connector);
+
+    public Controller()
+    {
+        try
+        {
+            this.connector = new DBConnector ();
+        } catch (Exception ex)
+        {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+   public void createPlayer (){
        
-       
+       dao.createUser(dao.createUniquePlayerId(), "bob",createPlayerRoomId());
        
    }
    
@@ -22,4 +39,5 @@ public class Controller
       return (int) Math.floor((Math.random() * 5) + 1);
    }
     
+   
 }

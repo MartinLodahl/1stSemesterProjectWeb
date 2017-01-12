@@ -29,7 +29,7 @@ public class Gameserv extends HttpServlet {
                     
                     
     PNGPathCreator png = new PNGPathCreator();
-    
+    Controller ctrl = new Controller ();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -45,17 +45,20 @@ public class Gameserv extends HttpServlet {
             try {
                 String name = request.getParameter("name");
                 int currentroomId = Integer.parseInt(request.getParameter("room"));
-                System.out.println(currentroomId);
+                int playerId = Integer.parseInt(request.getParameter("playerId"));
                 String direction = request.getParameter("direction");
                 DBConnector connector = new DBConnector();
                 DAO dao = new DAO(connector);
                 // finder det næste rooms ID
                 int nextRoomId = dao.currentRoomId(currentroomId,direction);
                 
+                if(playerId==0){
+                ctrl.createPlayer();
+                }
                 
                 
-                if (!dao.checkUser(name)) {
-                    dao.createUser(name);
+                
+                
                     
                     out.print("{\"room\":"+ nextRoomId+", \"picture\": \"PicturesRooms/"+png.pathCreator(dao.getDirection(nextRoomId))+".png\", \"north\":" +png.ValidMove("NORTH", dao.getDirection(nextRoomId))+", \"south\": "+png.ValidMove("SOUTH", dao.getDirection(nextRoomId))+", \"east\": "+png.ValidMove("EAST", dao.getDirection(nextRoomId))+", \"west\": "+png.ValidMove("WEST", dao.getDirection(nextRoomId))+" }");
                     /*
@@ -87,9 +90,7 @@ public class Gameserv extends HttpServlet {
                     );
                     */
                     response.setContentType("text/html;charset=UTF-8");
-                } else{
-                    response.sendRedirect("registration.html");
-                }
+                
             } catch (Exception ex) {
                 out.println(out.toString());
             }

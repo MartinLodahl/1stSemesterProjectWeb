@@ -77,16 +77,18 @@ public class DAOtest {
         
     }
     */
-    @Test
-    public void sortDirec(){
-        ArrayList<Link> list = dao.getDirection(1);
-        
-        PNGPathCreator png = new PNGPathCreator();
-        
-        String directions = png.pathCreator(list);
-        
-        assertEquals(directions, "EW");
-        
-    }
+//    @Test
+//    public void sortDirec(){
+//        ArrayList<Link> list = dao.getDirection(1);
+//        
+//        PNGPathCreator png = new PNGPathCreator();
+//        
+//        String directions = png.pathCreator(list);
+//        
+//        assertEquals(directions, "EW");
+//        
+//    }
+    
+    
 
 }
