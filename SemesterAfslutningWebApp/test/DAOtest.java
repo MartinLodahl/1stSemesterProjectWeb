@@ -14,7 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import semesterafslutning.Link;
-import semesterafslutning.PNGParthCreator;
+import semesterafslutning.PNGPathCreator;
 import semesterafslutning.Room;
 
 /**
@@ -81,7 +81,7 @@ public class DAOtest {
     public void sortDirec(){
         ArrayList<Link> list = dao.getDirection(1);
         
-        PNGParthCreator png = new PNGParthCreator();
+        PNGPathCreator png = new PNGPathCreator();
         
         String directions = png.parthCreator(list);
         
