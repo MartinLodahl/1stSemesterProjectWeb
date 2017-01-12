@@ -8,14 +8,11 @@ var west = document.getElementById('west')
 var currentRoom = 1
 
 function goTo(direction) {
-    var data = new FormData()
-    data.append('room',""+ currentRoom)
-    data.append('direction', direction)
 
     var xhr = new XMLHttpRequest()
     xhr.open('POST', 'Gameserv', true)
-    xhr.send('room='+currentRoom+'&direction='+direction)
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send('room='+currentRoom+'&direction='+direction)
 
     xhr.onload = function() {
         try {
