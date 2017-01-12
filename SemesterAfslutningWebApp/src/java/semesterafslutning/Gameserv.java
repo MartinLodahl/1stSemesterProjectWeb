@@ -57,7 +57,7 @@ public class Gameserv extends HttpServlet {
                 if (!dao.checkUser(name)) {
                     dao.createUser(name);
                     
-                    out.print("{\"room\":"+ nextRoomId+", \"picture\": \"0001.png\", \"north\":" +png.ValidMove("NORTH", dao.getDirection(nextRoomId))+", \"south\": "+png.ValidMove("SOUTH", dao.getDirection(nextRoomId))+", \"east\": "+png.ValidMove("EAST", dao.getDirection(nextRoomId))+", \"west\": "+png.ValidMove("WEST", dao.getDirection(nextRoomId))+" }");
+                    out.print("{\"room\":"+ nextRoomId+", \"picture\": \"PicturesRooms/"+png.pathCreator(dao.getDirection(nextRoomId))+".png\", \"north\":" +png.ValidMove("NORTH", dao.getDirection(nextRoomId))+", \"south\": "+png.ValidMove("SOUTH", dao.getDirection(nextRoomId))+", \"east\": "+png.ValidMove("EAST", dao.getDirection(nextRoomId))+", \"west\": "+png.ValidMove("WEST", dao.getDirection(nextRoomId))+" }");
                     /*
                     out.print(
                         "<!DOCTYPE html>\n" +
