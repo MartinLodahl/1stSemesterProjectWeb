@@ -19,7 +19,7 @@ public class PNGPathCreator
         linksort = new LinkCollectionSort();
     }
     
-    public String parthCreator(ArrayList<Link> link){
+    public String pathCreator(ArrayList<Link> link){
         StringBuilder sb = new StringBuilder();
         ArrayList<Link> temp = linksort.sortedByDirection(link);
         

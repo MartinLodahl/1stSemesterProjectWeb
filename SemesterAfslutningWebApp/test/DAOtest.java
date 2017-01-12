@@ -83,7 +83,7 @@ public class DAOtest {
         
         PNGPathCreator png = new PNGPathCreator();
         
-        String directions = png.parthCreator(list);
+        String directions = png.pathCreator(list);
         
         assertEquals(directions, "EW");
         
