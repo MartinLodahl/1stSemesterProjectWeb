@@ -67,12 +67,20 @@ public class DAOtest {
         assertEquals(room.getDescription(), "Der var en stor stor trold");
         assertEquals(room2.getDescription(), "Per");
     }*/
-    @Test 
+  /*  @Test 
     public void checkUser(){
         boolean per = dao.checkUser("Per");
         boolean falsez = dao.checkUser("false");
         assertEquals(per, true);
         assertEquals(falsez, false);
+        
+    }
+    */
+    @Test
+    public void sortDirec(){
+        ArrayList<Link> list = dao.getDirection(1);
+        assertEquals(list.get(0).getDirection(), "EAST");
+        assertEquals(list.get(1).getDirection(), "WEST");
         
     }
 
