@@ -14,7 +14,8 @@
  
  
  CREATE TABLE players
- (name varchar(40),
+ (playerId int NOT NULL UNIQUE,
+ name varchar(40),
  health int,
  gold int,
  room int);

@@ -94,11 +94,13 @@ public class DAO {
         }
     }
 
-    public void createUser(String name) {
+    public void createUser(int playerId , String name,int roomId) {
         try {
-            String query = "INSERT INTO dungeonsonline.players(name, health, gold, room) VALUES (?, 10, 100, 1);";
+            String query = "INSERT INTO dungonsonline.players(playerId ,name, health, gold, room) VALUES (?, ?, 10, 0, ?);";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
-            stmt.setString(1, name);
+            stmt.setInt(1, playerId);
+            stmt.setString(2, name);
+            stmt.setInt(3, roomId);
             stmt.executeUpdate();
 
         } catch (Exception ex) {
@@ -124,4 +126,19 @@ public class DAO {
         return true;
     }
 
+    public int createUniquePlayerId(){
+        
+        try {
+            String query = "SELECT count(*) AS NUMBER FROM players;";
+            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+            ResultSet res = stmt.executeQuery();
+            res.next();
+            
+            return res.getInt("NUMBER");
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return 5;
+    }
 }
