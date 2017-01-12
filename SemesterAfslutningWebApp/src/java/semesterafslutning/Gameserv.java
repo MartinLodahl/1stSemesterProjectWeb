@@ -49,18 +49,36 @@ public class Gameserv extends HttpServlet {
                 String direction = request.getParameter("direction");
                 DBConnector connector = new DBConnector();
                 DAO dao = new DAO(connector);
+                Player player;
                 // finder det næste rooms ID
-                int nextRoomId = dao.currentRoomId(currentroomId, direction);
+                
 
                 if (playerId == 0) {
                      playerId = dao.createUniquePlayerId();
                     int playRoomId = ctrl.createPlayerRoomId();
                     System.out.println(playerId);
-                    dao.createUser(playerId, "marton", playRoomId);
+                   player= dao.createUser(playerId, "marton", playRoomId);
+                   
+                    out.print("{"
+                        + "\"room\":" + player.getRoomId() + ","
+                        + "\"playerId\":" + playerId + ","
+                        + "\"picture\": \"PicturesRooms/" + png.pathCreator(dao.getDirection(player.getRoomId())) + ".png\","
+                        + "\"north\":" + png.ValidMove("NORTH", dao.getDirection(player.getRoomId())) + ","
+                        + "\"south\": " + png.ValidMove("SOUTH", dao.getDirection(player.getRoomId())) + ","
+                        + "\"east\": " + png.ValidMove("EAST", dao.getDirection(player.getRoomId())) + ","
+                        + "\"west\": " + png.ValidMove("WEST", dao.getDirection(player.getRoomId())) + ","
+                        + "\"items\": []"
+                        + "}");
                 }
-
-                out.print("{"
-                        + "\"room\":" + nextRoomId + ","
+                else {
+                    
+                   player = dao.getPlayer(playerId);
+                 int nextRoomId = dao.currentRoomId(currentroomId, direction);
+                   player.setRoomID(nextRoomId);
+                   dao.updateUser(nextRoomId, playerId);
+                   
+                    out.print("{"
+                        + "\"room\":" + player.getRoomId() + ","
                         + "\"playerId\":" + playerId + ","
                         + "\"picture\": \"PicturesRooms/" + png.pathCreator(dao.getDirection(nextRoomId)) + ".png\","
                         + "\"north\":" + png.ValidMove("NORTH", dao.getDirection(nextRoomId)) + ","
@@ -69,6 +87,10 @@ public class Gameserv extends HttpServlet {
                         + "\"west\": " + png.ValidMove("WEST", dao.getDirection(nextRoomId)) + ","
                         + "\"items\": []"
                         + "}");
+                }
+                
+
+               
                 /*
                     out.print(
                         "<!DOCTYPE html>\n" +
