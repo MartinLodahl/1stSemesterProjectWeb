@@ -11,6 +11,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+import semesterafslutning.LinkCollectionSort;
 import semesterafslutning.Room;
 
 /**
@@ -20,9 +24,11 @@ import semesterafslutning.Room;
 public class DAO {
 
     private final DBConnector connector;
+    LinkCollectionSort linkSort ;
 
     public DAO(DBConnector connector) {
         this.connector = connector;
+        linkSort= new LinkCollectionSort();
     }
 
     public ArrayList<Link> getDirection(int currentRoom) {
@@ -39,13 +45,13 @@ public class DAO {
                 Link way = new Link(currentRoom, direction, to);
                 list.add(way);
             }
+            
             return list;
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
     }
-
     public Room getRoom(int currentRoom) {
 
         try {
