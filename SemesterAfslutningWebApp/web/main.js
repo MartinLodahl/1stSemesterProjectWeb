@@ -58,6 +58,22 @@ function addItem(item) {
     itemsDiv.appendChild(img);
 }
 
+function addMonster(item) {
+    var img = new Image();
+    img.src = item.picture;
+    img.className = 'item';
+    img.style.position = 'absolute';
+    img.style.left = item.x+'px';
+    img.style.top = item.y+'px';
+    img.onclick = function() {
+        attack(item.id);
+        itemsDiv.removeChild(img);
+    };
+    itemsDiv.appendChild(img);
+}
+
+
+
 function show(obj) {
     startImg.style.display = 'none';
     nameLabel.style.display = 'none';
@@ -94,7 +110,7 @@ function show(obj) {
     }
     for (var i = 0; i < obj.monsters.length; i++) {
         var monster = obj.monsters[i];
-        addItem(monster);
+        addMonster(monster);
     }
 }
 
@@ -128,6 +144,18 @@ function pickUp(itemId) {
         direction: '',
         playerId: playerId,
         itemId: itemId
+    }, function (obj) {
+        show(obj);
+    });
+}
+
+function attack(monsterId) {
+    ajax({
+        room: currentRoom,
+        action: 'ATTACK',
+        direction: '',
+        playerId: playerId,
+        monsterId: monsterId
     }, function (obj) {
         show(obj);
     });

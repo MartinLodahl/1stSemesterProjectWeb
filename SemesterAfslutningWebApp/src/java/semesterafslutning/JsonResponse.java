@@ -55,7 +55,7 @@ public class JsonResponse
             out.print("],");
             
             out.print("\"monsters\":[");
-            out.print("{\"id\":444,\"picture\":\"PicturesItems/Armor/Inna.png\",\"x\":400,\"y\":400}");
+            out.print("{\"id\":444,\"picture\":\"PicturesItems/ArmorChest/Inna.png\",\"x\":400,\"y\":400}");
             out.print(
                     // close monster
                     "]"
