@@ -129,16 +129,20 @@ function pickUp(itemId) {
     });
 }
 
-function update(itemId) {
-    ajax({
-        playerId: playerId,
-        action: 'UPDATE'
-    }, function (obj) {
-        show(obj);
-    });
+function update() {
+    if (playerId != 0) {
+        ajax({
+            room: currentRoom,
+            action: 'UPDATE',
+            playerId: playerId,
+            direction: ''
+        }, function (obj) {
+            show(obj);
+        });
+    }
 }
 
-//window.setInterval(update, 1000)
+window.setInterval(update, 1000)
 
 window.onload = startGame;
 

@@ -65,8 +65,10 @@ public class Gameserv extends HttpServlet
                 JsonResponse jResponse = new JsonResponse();
                 Player player;
                 // finder det næste rooms ID
-
-                if(action.equals("PICKUP")){
+                if (action.equals("UPDATE")) {
+                    player = dao.getPlayer(playerId);
+                    jResponse.response(player, dao, png, response, action);
+                } else if(action.equals("PICKUP")){
                    player = dao.getPlayer(playerId);
                     int itemId =Integer.parseInt(request.getParameter("itemId"));
                     dao.removeItem(itemId);
