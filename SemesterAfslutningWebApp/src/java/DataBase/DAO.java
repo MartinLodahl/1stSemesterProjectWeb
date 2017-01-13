@@ -64,7 +64,7 @@ public class DAO {
             stmt.setInt(1, currentRoomId);
             stmt.setString(2,direction);
             ResultSet res = stmt.executeQuery();
-            int goTo=0;
+            int goTo=currentRoomId;
             while (res.next()) {
                 goTo = res.getInt("goto");
                
@@ -72,7 +72,7 @@ public class DAO {
             return goTo;
         } catch (Exception ex) {
             ex.printStackTrace();
-            return 0;
+            return currentRoomId;
         }
     }
     
