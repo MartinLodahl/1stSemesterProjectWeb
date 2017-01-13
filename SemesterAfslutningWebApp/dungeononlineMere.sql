@@ -31,12 +31,12 @@
  INSERT INTO items
  VALUES
  (1,'coins',200,200,1),
-  (2,'coins',200,200,1),
-   (3,'coins',200,200,1),
-    (4,'coins',200,200,1),
-     (5,'coins',200,200,1),
-      (6,'coins',200,200,1),
-       (7,'coins',200,200,1);
+  (2,'coins',300,500,3),
+   (3,'coins',200,400,4),
+    (4,'Armor/Kindregret',300,450,5),
+     (5,'WeaponsRanged/Manticore',650,250,2),
+      (6,'WeaponsMelee/Bonewrath',700,400,3),
+       (7,'WeaponsMelee/Dishonored',500,200,1);
  
  INSERT INTO link(room_id, direction, goto)
 VALUES 
