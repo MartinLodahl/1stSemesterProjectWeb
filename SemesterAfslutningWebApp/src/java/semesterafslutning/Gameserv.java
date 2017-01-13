@@ -53,8 +53,10 @@ public class Gameserv extends HttpServlet
                 int currentroomId = Integer.parseInt(request.getParameter("room"));
                 int playerId = Integer.parseInt(request.getParameter("playerId"));
                 String direction = request.getParameter("direction");
+                String action = request.getParameter("action");
                 DBConnector connector = new DBConnector();
                 DAO dao = new DAO(connector);
+                JsonResponse jResponse = new JsonResponse();
                 Player player;
                 // finder det næste rooms ID
 
@@ -72,32 +74,9 @@ public class Gameserv extends HttpServlet
                     player.setRoomID(nextRoomId);
                     dao.updateUser(nextRoomId, playerId);
                 }
-                response.setContentType("application/json");
-                out.print("{"
-                        + "\"room\":" + player.getRoomId() + ","
-                        + "\"playerId\":" + playerId + ","
-                        + "\"picture\": \"PicturesRooms/" + png.pathCreator(dao.getDirection(player.getRoomId())) + ".png\","
-                        + "\"north\":" + png.ValidMove("NORTH", dao.getDirection(player.getRoomId())) + ","
-                        + "\"south\": " + png.ValidMove("SOUTH", dao.getDirection(player.getRoomId())) + ","
-                        + "\"east\": " + png.ValidMove("EAST", dao.getDirection(player.getRoomId())) + ","
-                        + "\"west\": " + png.ValidMove("WEST", dao.getDirection(player.getRoomId())) + ","
-                        + "\"items\": [");
-                ArrayList<Item> itemList = dao.getRoomItems(player.getRoomId());
-                for (int i = 0; i < itemList.size(); i++)
-                {
-                    out.print("{\"id\":"+itemList.get(i).getItemId()
-                            +", \"picture\":\"PicturesItems/"+itemList.get(i).getItemName()+".png\","
-                            + " \"x\":"+itemList.get(i).getX()
-                            +", \"y\":"+itemList.get(i).getY()+"}");
-                    if(itemList.size()-1>i){
-                        out.print(",");
-                    }
-                }
-
-                out.print(
-                        // close items
-                        "]"
-                        + "}");
+                
+                jResponse.response(player, dao, png, response, "START");
+                
             } catch (Exception ex)
             {
                 out.println(out.toString());
