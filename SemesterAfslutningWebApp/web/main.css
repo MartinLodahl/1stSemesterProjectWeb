@@ -1,3 +1,17 @@
+@font-face {
+    font-family: RingBearer;
+    src: url("fonts/ringbearer.medium.ttf");
+}
+
+
+input {
+    font-family: RingBearer, serif;
+}
+
+span {
+    font-family: RingBearer, serif;
+}
+
 body {
     background-color: #000;
 }
@@ -113,4 +127,17 @@ body {
 
 .item {
     cursor: pointer;
+}
+
+#name {
+    color: #fff;
+    background-color: transparent;
+    border: 2px solid #666;
+    font-size: 70px;
+    
+    position: absolute;
+    left: 350px;
+    top: 620px;
+    width: 496px;
+    height: 124px;
 }
