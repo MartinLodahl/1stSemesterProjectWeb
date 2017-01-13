@@ -21,13 +21,14 @@ function startGame() {
 function addItem(item) {
     var img = new Image();
     img.src = item.picture;
+    img.className = 'item';
     img.style.position = 'absolute';
     img.style.left = item.x+'px';
     img.style.top = item.y+'px';
     img.onclick = function() {
         pickUp(item.id);
         items.removeChild(img);
-    }
+    };
     items.appendChild(img);
 }
 
@@ -75,7 +76,7 @@ function goTo(direction) {
         } catch (ex) {
             alert(xhr.responseText);
         }
-    }
+    };
 }
 
 function pickUp(id) {
@@ -91,7 +92,7 @@ function pickUp(id) {
         } catch (ex) {
             alert(xhr.responseText);
         }
-    }
+    };
 }
 
 startGame();
