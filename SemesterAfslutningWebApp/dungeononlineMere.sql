@@ -2,6 +2,7 @@
  DROP TABLE IF exists room;
  DROP TABLE IF exists link;
  DROP TABLE IF exists players;
+ DROP TABLE IF exists items;
  
  CREATE TABLE room
  (ID int(11),
@@ -19,6 +20,17 @@
  health int,
  gold int,
  roomId int);
+ 
+ CREATE TABLE items
+ (ItemId int NOT NULL UNIQUE,
+ itemName varchar(40),
+ x int,
+ y int,
+ roomId int);
+ 
+ INSERT INTO items
+ VALUES
+ (1,'coins',200,200,1);
  
  INSERT INTO link(room_id, direction, goto)
 VALUES 

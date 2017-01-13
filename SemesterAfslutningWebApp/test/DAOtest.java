@@ -14,6 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import semesterafslutning.Controller;
+import semesterafslutning.Item;
 import semesterafslutning.Link;
 import semesterafslutning.PNGPathCreator;
 import semesterafslutning.Room;
@@ -78,21 +79,28 @@ public class DAOtest {
         
     }
     */
+//    @Test
+//    public void sortDirec(){
+//        ArrayList<Link> list = dao.getDirection(1);
+//        
+//        PNGPathCreator png = new PNGPathCreator();
+//        
+//        String directions = png.pathCreator(list);
+//        Controller ctrl = new Controller ();
+//        dao.createUser(dao.createUniquePlayerId(),"bob",ctrl.createPlayerRoomId());
+//       int check =  dao.createUniquePlayerId();
+//        
+//        assertEquals(4, check);
+//        
+//    }
+    
     @Test
-    public void sortDirec(){
-        ArrayList<Link> list = dao.getDirection(1);
+    public void getRoomItems(){
+        ArrayList <Item> list = dao.getRoomItems(1);
         
-        PNGPathCreator png = new PNGPathCreator();
-        
-        String directions = png.pathCreator(list);
-        Controller ctrl = new Controller ();
-        dao.createUser(dao.createUniquePlayerId(),"bob",ctrl.createPlayerRoomId());
-       int check =  dao.createUniquePlayerId();
-        
-        assertEquals(4, check);
+        assertEquals(list.size(),1);
+        assertEquals(list.get(0).getX(),200);
         
     }
-    
-    
 
 }

@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import semesterafslutning.ICharacter;
+import semesterafslutning.Item;
 import semesterafslutning.LinkCollectionSort;
 import semesterafslutning.Player;
 import semesterafslutning.Room;
@@ -165,5 +166,30 @@ public class DAO {
             
         }
         return 5;
+    }
+    
+    public ArrayList<Item> getRoomItems(int roomId){
+         
+        ArrayList<Item> temp  = new ArrayList();
+        
+        try {
+            String query = "SELECT * FROM items WHERE roomId =?;";
+            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+            stmt.setInt(1, roomId);
+            ResultSet res = stmt.executeQuery();
+            while(res.next()){
+                
+                int itemId = res.getInt("itemId");
+                String itemName = res.getString("itemName");
+                int x = res.getInt("x");
+                int y = res.getInt("y");
+                
+                temp.add(new Item(itemId,x,y,roomId,itemName));
+            }
+
+        } catch (Exception ex) {
+            
+        }
+        return temp;
     }
 }
