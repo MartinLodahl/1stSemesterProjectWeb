@@ -100,7 +100,7 @@ function logIn() {
         action: 'START',
         direction: 'NORTH',
         playerId: 0,
-        playerName: name2.value,
+        playerName: name2.value
     }, function(obj) {
         show(obj);
     });
@@ -128,6 +128,17 @@ function pickUp(itemId) {
         show(obj);
     });
 }
+
+function update(itemId) {
+    ajax({
+        playerId: playerId,
+        action: 'UPDATE'
+    }, function (obj) {
+        show(obj);
+    });
+}
+
+//window.setInterval(update, 1000)
 
 window.onload = startGame;
 
