@@ -11,6 +11,26 @@ var labelName = document.getElementById('label-name');
 var currentRoom = 0;
 var playerId = 0;
 
+function ajax(options, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'Gameserv', true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    var data = '';
+    for (var key in options) {
+        var value = options[key];
+        data += '&'+key+'='+encodeURIComponent(value);
+    }
+    xhr.send(data.substr(1));
+    xhr.onload = function () {
+        try {
+            var obj = JSON.parse(xhr.responseText);
+            callback(obj);
+        } catch (ex) {
+            alert(xhr.responseText);
+        }
+    };
+}
+
 function startGame() {
     game.style.backgroundImage = 'url("PicturesGeneral/Title.png")';
     start.style.display = 'block';
@@ -75,62 +95,38 @@ function show(obj) {
 }
 
 function logIn() {
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'Gameserv', true);
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    var data = 'room='+encodeURIComponent(currentRoom);
-    data += '&direction='+encodeURIComponent('NORTH');
-    data += '&playerId='+encodeURIComponent(0);
-    data += '&playerName='+encodeURIComponent(name2.value);
-    xhr.send(data);
-
-    xhr.onload = function() {
-        try {
-            var obj = JSON.parse(xhr.responseText);
-            show(obj);
-        } catch (ex) {
-            alert(xhr.responseText);
-        }
-    };
+    ajax({
+        room: currentRoom,
+        action: 'START',
+        direction: 'NORTH',
+        playerId: 0,
+        playerName: name2.value,
+    }, function(obj) {
+        show(obj);
+    });
 }
 
 function goTo(direction) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'Gameserv', true);
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    var data = 'room='+encodeURIComponent(currentRoom);
-    data += '&direction='+encodeURIComponent(direction);
-    data += '&playerId='+encodeURIComponent(playerId);
-    xhr.send(data);
-
-    xhr.onload = function() {
-        try {
-            var obj = JSON.parse(xhr.responseText);
-            show(obj);
-        } catch (ex) {
-            alert(xhr.responseText);
-        }
-    };
+    ajax({
+        room: currentRoom,
+        action: 'GOTO',
+        direction: direction,
+        playerId: playerId
+    }, function(obj) {
+        show(obj);
+    });
 }
 
 function pickUp(itemId) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'PickUp', true);
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    var data = 'room='+encodeURIComponent(currentRoom);
-    data += '&direction='+encodeURIComponent('PICK_UP');
-    data += '&playerId='+encodeURIComponent(playerId);
-    data += '&itemId='+encodeURIComponent(itemId);
-    xhr.send(data);
-
-    xhr.onload = function() {
-        try {
-            var obj = JSON.parse(xhr.responseText);
-            show(obj);
-        } catch (ex) {
-            alert(xhr.responseText);
-        }
-    };
+    ajax({
+        room: currentRoom,
+        action: 'PICKUP',
+        direction: '',
+        playerId: playerId,
+        itemId: itemId
+    }, function (obj) {
+        show(obj);
+    });
 }
 
 window.onload = startGame;
