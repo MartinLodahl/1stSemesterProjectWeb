@@ -13,11 +13,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import semesterafslutning.Controller;
-import semesterafslutning.Item;
-import semesterafslutning.Link;
-import semesterafslutning.PNGPathCreator;
-import semesterafslutning.Room;
+import controller.Controller;
+import controller.Item;
+import controller.Link;
+import controller.PNGPathCreator;
+import controller.Room;
 
 /**
  *

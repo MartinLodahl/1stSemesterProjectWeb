@@ -1,4 +1,4 @@
-package semesterafslutning;
+package controller;
 
 public class Link {
     private int from;

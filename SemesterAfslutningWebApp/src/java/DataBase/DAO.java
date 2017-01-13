@@ -5,7 +5,7 @@
  */
 package DataBase;
 
-import semesterafslutning.Link;
+import controller.Link;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,11 +14,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
-import semesterafslutning.ICharacter;
-import semesterafslutning.Item;
-import semesterafslutning.LinkCollectionSort;
-import semesterafslutning.Player;
-import semesterafslutning.Room;
+import controller.ICharacter;
+import controller.Item;
+import controller.LinkCollectionSort;
+import controller.Player;
+import controller.Room;
 
 /**
  *

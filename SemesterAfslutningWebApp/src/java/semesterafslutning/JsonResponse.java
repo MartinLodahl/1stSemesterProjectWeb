@@ -5,6 +5,9 @@
  */
 package semesterafslutning;
 
+import controller.PNGPathCreator;
+import controller.Player;
+import controller.Item;
 import DataBase.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;

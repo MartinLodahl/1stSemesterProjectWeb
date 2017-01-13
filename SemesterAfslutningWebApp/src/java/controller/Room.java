@@ -1,4 +1,4 @@
-package semesterafslutning;
+package controller;
 
 public class Room {
     private int id;
