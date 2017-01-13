@@ -11,6 +11,10 @@ var labelName = document.getElementById('label-name');
 var currentRoom = 0;
 var playerId = 0;
 
+function ajax(options, callback) {
+    
+}
+
 function startGame() {
     game.style.backgroundImage = 'url("PicturesGeneral/Title.png")';
     start.style.display = 'block';
@@ -117,7 +121,7 @@ function goTo(direction) {
 
 function pickUp(itemId) {
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'PickUp', true);
+    xhr.open('POST', 'Gameserv', true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     var data = 'room='+encodeURIComponent(currentRoom);
     data += '&action=PICKUP';
