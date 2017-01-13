@@ -5,6 +5,8 @@ var south = document.getElementById('south');
 var east = document.getElementById('east');
 var west = document.getElementById('west');
 var items = document.getElementById('items');
+var name2 = document.getElementById('input-name');
+var labelName = document.getElementById('label-name');
 
 var currentRoom = 0;
 var playerId = 0;
@@ -16,6 +18,10 @@ function startGame() {
     south.style.display = 'none';
     east.style.display = 'none';
     west.style.display = 'none';
+    labelName.style.display = 'block';
+    name2.style.display = 'block';
+    name2.value = '';
+    name2.focus();
 }
 
 function addItem(item) {
@@ -34,6 +40,8 @@ function addItem(item) {
 
 function show(obj) {
     start.style.display = 'none';
+    labelName.style.display = 'none';
+    name2.style.display = 'none';
     if (obj.north) {
         north.style.display = 'block';
     } else {
@@ -57,17 +65,43 @@ function show(obj) {
     game.style.backgroundImage='url("'+obj.picture+'")';
     currentRoom = obj.room;
     playerId = obj.playerId;
+    while (items.firstChild) {
+        items.removeChild(items.firstChild);
+    }
     for (var i = 0; i < obj.items.length; i++) {
         var item = obj.items[i];
         addItem(item);
     }
 }
 
+function logIn() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'Gameserv', true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    var data = 'room='+encodeURIComponent(currentRoom);
+    data += '&direction='+encodeURIComponent('NORTH');
+    data += '&playerId='+encodeURIComponent(0);
+    data += '&playerName='+encodeURIComponent(name2.value);
+    xhr.send(data);
+
+    xhr.onload = function() {
+        try {
+            var obj = JSON.parse(xhr.responseText);
+            show(obj);
+        } catch (ex) {
+            alert(xhr.responseText);
+        }
+    };
+}
+
 function goTo(direction) {
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'Gameserv', true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.send('room='+currentRoom+'&direction='+direction+'&playerId='+playerId);
+    var data = 'room='+encodeURIComponent(currentRoom);
+    data += '&direction='+encodeURIComponent(direction);
+    data += '&playerId='+encodeURIComponent(playerId);
+    xhr.send(data);
 
     xhr.onload = function() {
         try {
@@ -79,11 +113,15 @@ function goTo(direction) {
     };
 }
 
-function pickUp(id) {
+function pickUp(itemId) {
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'PickUp', true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.send('room='+currentRoom+'&direction=PICK_UP&playerId='+playerId+'&itemId='+id);
+    var data = 'room='+encodeURIComponent(currentRoom);
+    data += '&direction='+encodeURIComponent('PICK_UP');
+    data += '&playerId='+encodeURIComponent(playerId);
+    data += '&itemId='+encodeURIComponent(itemId);
+    xhr.send(data);
 
     xhr.onload = function() {
         try {
@@ -95,6 +133,6 @@ function pickUp(id) {
     };
 }
 
-startGame();
+window.onload = startGame;
 
 
