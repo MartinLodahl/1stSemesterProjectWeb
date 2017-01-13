@@ -15,7 +15,7 @@ public class Player implements ICharacter
         
 {
     private String name;
-    private int health,roomId,playerId;
+    private int health,roomId,playerId,attackDmg;
     
     public Player (String name){
         this.name = name;
@@ -75,6 +75,18 @@ public class Player implements ICharacter
     public void setPlayerId(int playerId)
     {
         this.playerId = playerId;
+    }
+
+    @Override
+    public void setAttackDmg(int attackDmg)
+    {
+        this.attackDmg=attackDmg;
+    }
+
+    @Override
+    public int getAttackDmg()
+    {
+        return attackDmg;
     }
     
 }
