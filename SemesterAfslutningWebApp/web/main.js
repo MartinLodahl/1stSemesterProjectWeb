@@ -79,6 +79,7 @@ function logIn() {
     xhr.open('POST', 'Gameserv', true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     var data = 'room='+encodeURIComponent(currentRoom);
+    data += '&action=GOTO';
     data += '&direction='+encodeURIComponent('NORTH');
     data += '&playerId='+encodeURIComponent(0);
     data += '&playerName='+encodeURIComponent(name2.value);
@@ -118,7 +119,8 @@ function pickUp(itemId) {
     xhr.open('POST', 'PickUp', true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     var data = 'room='+encodeURIComponent(currentRoom);
-    data += '&direction='+encodeURIComponent('PICK_UP');
+    data += '&action=PICKUP';
+    data += '&direction=';
     data += '&playerId='+encodeURIComponent(playerId);
     data += '&itemId='+encodeURIComponent(itemId);
     xhr.send(data);
