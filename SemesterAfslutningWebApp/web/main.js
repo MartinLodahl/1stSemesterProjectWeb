@@ -130,7 +130,7 @@ function pickUp(itemId) {
 }
 
 function update() {
-    if (playerId != 0) {
+    if (playerId !== 0) {
         ajax({
             room: currentRoom,
             action: 'UPDATE',
