@@ -5,7 +5,7 @@ var south = document.getElementById('south');
 var east = document.getElementById('east');
 var west = document.getElementById('west');
 var items = document.getElementById('items');
-var name2 = document.getElementById('name');
+var name2 = document.getElementById('input-name');
 
 var currentRoom = 0;
 var playerId = 0;
@@ -18,6 +18,7 @@ function startGame() {
     east.style.display = 'none';
     west.style.display = 'none';
     name2.style.display = 'block';
+    name2.value = '';
     name2.focus();
 }
 

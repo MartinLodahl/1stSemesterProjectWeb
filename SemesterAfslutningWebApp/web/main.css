@@ -3,6 +3,29 @@
     src: url("fonts/ringbearer.medium.ttf");
 }
 
+#input-name {
+    color: #fff;
+    background-color: #333;
+    border: 2px solid #666;
+    font-size: 70px;
+    
+    position: absolute;
+    left: 350px;
+    top: 620px;
+    width: 496px;
+    height: 124px;
+}
+
+#label-name {
+    font-family: RingBearer, serif;
+    color: #fff;
+    background-color: transparent;
+    font-size: 70px;
+    
+    position: absolute;
+    left: 100px;
+    top: 645px;
+}
 
 input {
     font-family: RingBearer, serif;
@@ -129,15 +152,3 @@ body {
     cursor: pointer;
 }
 
-#name {
-    color: #fff;
-    background-color: transparent;
-    border: 2px solid #666;
-    font-size: 70px;
-    
-    position: absolute;
-    left: 350px;
-    top: 620px;
-    width: 496px;
-    height: 124px;
-}
