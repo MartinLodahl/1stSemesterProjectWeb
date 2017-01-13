@@ -92,6 +92,10 @@ function show(obj) {
         var item = obj.items[i];
         addItem(item);
     }
+    for (var i = 0; i < obj.monsters.length; i++) {
+        var monster = obj.monsters[i];
+        addItem(monster);
+    }
 }
 
 function logIn() {
@@ -130,7 +134,7 @@ function pickUp(itemId) {
 }
 
 function update() {
-    if (playerId != 0) {
+    if (playerId !== 0) {
         ajax({
             room: currentRoom,
             action: 'UPDATE',
@@ -142,7 +146,7 @@ function update() {
     }
 }
 
-window.setInterval(update, 1000)
+//window.setInterval(update, 1000)
 
 window.onload = startGame;
 
