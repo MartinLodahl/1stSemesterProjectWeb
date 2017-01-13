@@ -75,7 +75,7 @@ public class Gameserv extends HttpServlet
                     dao.updateUser(nextRoomId, playerId);
                 }
                 
-                jResponse.response(player, dao, png, response, "START");
+                jResponse.response(player, dao, png, response, action);
                 
             } catch (Exception ex)
             {
