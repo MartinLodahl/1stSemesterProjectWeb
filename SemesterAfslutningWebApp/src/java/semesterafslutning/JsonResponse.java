@@ -26,9 +26,10 @@ public class JsonResponse
         PrintWriter out = null;
         try
         {
+            out = response.getWriter();
             if (action.toUpperCase().equals("START") || action.toUpperCase().equals("GOTO"))
             {
-                out = response.getWriter();
+                
 
                 response.setContentType("application/json");
                 out.print("{"
@@ -68,7 +69,7 @@ public class JsonResponse
                         + "\"north\":" + png.ValidMove("NORTH", dao.getDirection(player.getRoomId())) + ","
                         + "\"south\": " + png.ValidMove("SOUTH", dao.getDirection(player.getRoomId())) + ","
                         + "\"east\": " + png.ValidMove("EAST", dao.getDirection(player.getRoomId())) + ","
-                        + "\"west\": " + png.ValidMove("WEST", dao.getDirection(player.getRoomId())) + ","
+                        + "\"west\": " + png.ValidMove("WEST", dao.getDirection(player.getRoomId()))
                         + "}");
                 
             }
