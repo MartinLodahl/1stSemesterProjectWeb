@@ -192,4 +192,16 @@ public class DAO {
         }
         return temp;
     }
+    
+    public void removeItem (int itemId){
+        try {
+            String query = "DELETE FROM items WHERE itemId =?;";
+            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+            stmt.setInt(1, itemId);
+            stmt.executeUpdate();
+        } catch (Exception ex) {
+            
+        }
+        
+    }
 }

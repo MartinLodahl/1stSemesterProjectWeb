@@ -49,11 +49,14 @@ public class Gameserv extends HttpServlet
         {
             try
             {
+                //Request from website
                 String name = request.getParameter("name");
                 int currentroomId = Integer.parseInt(request.getParameter("room"));
                 int playerId = Integer.parseInt(request.getParameter("playerId"));
                 String direction = request.getParameter("direction");
                 String action = request.getParameter("action");
+                
+                
                 DBConnector connector = new DBConnector();
                 DAO dao = new DAO(connector);
                 JsonResponse jResponse = new JsonResponse();
@@ -74,8 +77,15 @@ public class Gameserv extends HttpServlet
                     player.setRoomID(nextRoomId);
                     dao.updateUser(nextRoomId, playerId);
                 }
+                if(action.equals("PICKUP")){
+                   int itemId =Integer.parseInt(request.getParameter("itemId"));
+                    System.out.println("itemID "+itemId);
+                jResponse.response(player, dao, png, response, action,itemId);
+                }
+                else{
+                    jResponse.response(player, dao, png, response, action,0);
+                }
                 
-                jResponse.response(player, dao, png, response, action);
                 
             } catch (Exception ex)
             {
