@@ -111,3 +111,6 @@ body {
     background-image: url("PicturesGeneral/arrow-on.png");
 }
 
+.item {
+    cursor: pointer;
+}

@@ -66,6 +66,7 @@ public class Gameserv extends HttpServlet {
                    player.setRoomID(nextRoomId);
                    dao.updateUser(nextRoomId, playerId);
                 }
+                response.setContentType("application/json");
                 out.print("{"
                     + "\"room\":" + player.getRoomId() + ","
                     + "\"playerId\":" + playerId + ","
@@ -78,39 +79,6 @@ public class Gameserv extends HttpServlet {
                     + "{\"id\": 8, \"picture\":\"PicturesItems/coins.png\", \"x\": 200, \"y\": 200}"
                     + "]"
                     + "}");
-                
-
-               
-                /*
-                    out.print(
-                        "<!DOCTYPE html>\n" +
-                        "<html>\n" +
-                        "<head>\n" +
-                        "    <meta charset=\"UTF-8\">\n" +
-                        "    <title>Dungeon Online</title>\n" +
-                        "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
-                        "    <link rel=\"stylesheet\" href=\"main.css\">\n" +
-                        "</head>\n" +
-                        "<body>\n" +
-                        "    <div class=\"outer\">\n" +
-                        "        <div class=\"page\" style=\"background-image: url(&quot;0001.png&quot;);\">"
-                    );
-                    out.print(
-                        "           <form action=\"Gameserv\" method=\"post\">\n" +
-                        "                <input type=\"hidden\" name=\"room\" value=\"1\">\n" +
-                        "                <input type=\"hidden\" name=\"direction\" value=\"north\">\n" +
-                        "                <input type=\"submit\" value=\"North\" id=\"north\">\n" +
-                        "            </form>\n"
-                    );
-                    out.println(
-                        "        </div>\n" +
-                        "    </div>\n" +
-                        "</body>\n" +
-                        "</html>\n"
-                    );
-                 */
-                response.setContentType("text/html;charset=UTF-8");
-
             } catch (Exception ex) {
                 out.println(out.toString());
             }
