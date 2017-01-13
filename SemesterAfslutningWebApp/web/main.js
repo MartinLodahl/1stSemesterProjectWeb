@@ -142,7 +142,7 @@ function update() {
     }
 }
 
-window.setInterval(update, 1000)
+//window.setInterval(update, 1000)
 
 window.onload = startGame;
 
