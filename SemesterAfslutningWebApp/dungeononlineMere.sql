@@ -3,6 +3,7 @@
  DROP TABLE IF exists link;
  DROP TABLE IF exists players;
  DROP TABLE IF exists items;
+ DROP TABLE IF exists itemtypes;
  
  CREATE TABLE room
  (ID int(11),
@@ -18,25 +19,42 @@
  (playerId int NOT NULL UNIQUE,
  name varchar(40),
  health int,
+ attackDmg int,
  gold int,
  roomId int);
  
  CREATE TABLE items
  (ItemId int NOT NULL UNIQUE,
- itemName varchar(40),
+ type int,
  x int,
  y int,
  roomId int);
  
+ CREATE TABLE itemtypes
+ (type int,
+ picName VARCHAR(40),
+ stat int,
+ modify int,
+ note varchar(40));
+
+ 
+ Insert into itemtypes
+ values
+ (1,'coin',1,50,'Conin give you money'),
+ (2,'Kindregret',2,20,'Armor of type Kindregret, give u bonus health'),
+ (3,'Manticore',3,10,'Ranged weapon type Manticore, give u bonus attack dmg'),
+ (4,'Bonewrath',3,15,'Melee weapon type Bonewrath, give u bonus attack dmg'),
+ (5,'Dishonored',3,25,'Melle weapon type Dishonored, give u bonus attack dmg');
+ 
  INSERT INTO items
  VALUES
- (1,'coins',200,200,1),
-  (2,'coins',300,500,3),
-   (3,'coins',200,400,4),
-    (4,'Armor/Kindregret',300,450,5),
-     (5,'WeaponsRanged/Manticore',650,250,2),
-      (6,'WeaponsMelee/Bonewrath',700,400,3),
-       (7,'WeaponsMelee/Dishonored',500,200,1);
+ (1,1,200,200,1),
+  (2,1,300,500,3),
+   (3,1,200,400,4),
+    (4,2,300,450,5),
+     (5,3,650,250,2),
+      (6,4,700,400,3),
+       (7,5,500,200,1);
  
  INSERT INTO link(room_id, direction, goto)
 VALUES 

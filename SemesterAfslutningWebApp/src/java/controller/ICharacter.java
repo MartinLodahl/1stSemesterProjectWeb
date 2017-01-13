@@ -13,6 +13,11 @@ package controller;
  */
 public interface ICharacter
 {
+    public void setAttackDmg(int attackDmg);
+    
+    public int getAttackDmg();
+        
+    
      public String getName();
     
 
