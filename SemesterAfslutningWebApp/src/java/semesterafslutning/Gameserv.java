@@ -50,7 +50,7 @@ public class Gameserv extends HttpServlet
             try
             {
                 //Request from website
-                String name = request.getParameter("name");
+                String name = request.getParameter("playerName");
                 int currentroomId = Integer.parseInt(request.getParameter("room"));
                 int playerId = Integer.parseInt(request.getParameter("playerId"));
                 String direction = request.getParameter("direction");
@@ -76,7 +76,7 @@ public class Gameserv extends HttpServlet
                     playerId = dao.createUniquePlayerId();
                     int playRoomId = ctrl.createPlayerRoomId();
                     System.out.println(playerId);
-                    player = dao.createUser(playerId, "marton", playRoomId);
+                    player = dao.createUser(playerId, name, playRoomId);
 
                 } else
                 {
