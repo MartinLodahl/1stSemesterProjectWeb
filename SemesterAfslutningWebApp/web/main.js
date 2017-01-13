@@ -92,6 +92,10 @@ function show(obj) {
         var item = obj.items[i];
         addItem(item);
     }
+    for (var i = 0; i < obj.monsters.length; i++) {
+        var monster = obj.monsters[i];
+        addItem(monster);
+    }
 }
 
 function logIn() {
