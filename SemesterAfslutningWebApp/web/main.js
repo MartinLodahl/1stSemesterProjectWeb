@@ -92,6 +92,10 @@ function show(obj) {
         var item = obj.items[i];
         addItem(item);
     }
+    for (var i = 0; i < obj.monsters.length; i++) {
+        var monster = obj.monsters[i];
+        addItem(monster);
+    }
 }
 
 function logIn() {
@@ -129,13 +133,17 @@ function pickUp(itemId) {
     });
 }
 
-function update(itemId) {
-    ajax({
-        playerId: playerId,
-        action: 'UPDATE'
-    }, function (obj) {
-        show(obj);
-    });
+function update() {
+    if (playerId !== 0) {
+        ajax({
+            room: currentRoom,
+            action: 'UPDATE',
+            playerId: playerId,
+            direction: ''
+        }, function (obj) {
+            show(obj);
+        });
+    }
 }
 
 //window.setInterval(update, 1000)

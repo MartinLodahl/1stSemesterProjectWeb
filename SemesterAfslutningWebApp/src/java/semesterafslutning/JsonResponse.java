@@ -5,6 +5,9 @@
  */
 package semesterafslutning;
 
+import controller.PNGPathCreator;
+import controller.Player;
+import controller.Item;
 import DataBase.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -49,9 +52,12 @@ public class JsonResponse
                     out.print(",");
                 }
             }
-
+            out.print("],");
+            
+            out.print("\"monsters\":[");
+            out.print("{\"id\":444,\"picture\":\"PicturesItems/Armor/Inna.png\",\"x\":400,\"y\":400}");
             out.print(
-                    // close items
+                    // close monster
                     "]"
                     + "}");
         } catch (IOException ex)
