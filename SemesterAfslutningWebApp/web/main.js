@@ -65,6 +65,9 @@ function show(obj) {
     game.style.backgroundImage='url("'+obj.picture+'")';
     currentRoom = obj.room;
     playerId = obj.playerId;
+    while (items.firstChild) {
+        items.removeChild(items.firstChild);
+    }
     for (var i = 0; i < obj.items.length; i++) {
         var item = obj.items[i];
         addItem(item);
