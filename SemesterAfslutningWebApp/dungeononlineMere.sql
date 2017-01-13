@@ -30,7 +30,13 @@
  
  INSERT INTO items
  VALUES
- (1,'coins',200,200,1);
+ (1,'coins',200,200,1),
+  (2,'coins',200,200,1),
+   (3,'coins',200,200,1),
+    (4,'coins',200,200,1),
+     (5,'coins',200,200,1),
+      (6,'coins',200,200,1),
+       (7,'coins',200,200,1);
  
  INSERT INTO link(room_id, direction, goto)
 VALUES 

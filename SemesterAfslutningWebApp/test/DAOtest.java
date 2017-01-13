@@ -100,7 +100,9 @@ public class DAOtest {
         
         assertEquals(list.size(),1);
         assertEquals(list.get(0).getX(),200);
-        
+        dao.removeItem(1);
+        list = dao.getRoomItems(1);
+        assertEquals(list.size(), 0);
     }
 
 }
