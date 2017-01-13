@@ -21,59 +21,39 @@ import javax.servlet.http.HttpServletResponse;
 public class JsonResponse
 {
 
-    public void response(Player player, DAO dao, PNGPathCreator png, HttpServletResponse response, String action,int itemId)
+    public void response(Player player, DAO dao, PNGPathCreator png, HttpServletResponse response, String action)
     {
         PrintWriter out = null;
         try
         {
             out = response.getWriter();
-            if (action.toUpperCase().equals("START") || action.toUpperCase().equals("GOTO"))
+            response.setContentType("application/json");
+            out.print("{"
+                    + "\"room\":" + player.getRoomId() + ","
+                    + "\"playerId\":" + player.getPlayerId() + ","
+                    + "\"picture\": \"PicturesRooms/" + png.pathCreator(dao.getDirection(player.getRoomId())) + ".png\","
+                    + "\"north\":" + png.ValidMove("NORTH", dao.getDirection(player.getRoomId())) + ","
+                    + "\"south\": " + png.ValidMove("SOUTH", dao.getDirection(player.getRoomId())) + ","
+                    + "\"east\": " + png.ValidMove("EAST", dao.getDirection(player.getRoomId())) + ","
+                    + "\"west\": " + png.ValidMove("WEST", dao.getDirection(player.getRoomId())) + ","
+                    + "\"items\": [");
+            ArrayList<Item> itemList = dao.getRoomItems(player.getRoomId());
+            for (int i = 0; i < itemList.size(); i++)
             {
-                
-
-                response.setContentType("application/json");
-                out.print("{"
-                        + "\"room\":" + player.getRoomId() + ","
-                        + "\"playerId\":" + player.getPlayerId() + ","
-                        + "\"picture\": \"PicturesRooms/" + png.pathCreator(dao.getDirection(player.getRoomId())) + ".png\","
-                        + "\"north\":" + png.ValidMove("NORTH", dao.getDirection(player.getRoomId())) + ","
-                        + "\"south\": " + png.ValidMove("SOUTH", dao.getDirection(player.getRoomId())) + ","
-                        + "\"east\": " + png.ValidMove("EAST", dao.getDirection(player.getRoomId())) + ","
-                        + "\"west\": " + png.ValidMove("WEST", dao.getDirection(player.getRoomId())) + ","
-                        + "\"items\": [");
-                ArrayList<Item> itemList = dao.getRoomItems(player.getRoomId());
-                for (int i = 0; i < itemList.size(); i++)
+                out.print("{\"id\":" + itemList.get(i).getItemId()
+                        + ", \"picture\":\"PicturesItems/" + itemList.get(i).getItemName() + ".png\","
+                        + " \"x\":" + itemList.get(i).getX()
+                        + ", \"y\":" + itemList.get(i).getY() + "}");
+                if (itemList.size() - 1 > i)
                 {
-                    out.print("{\"id\":" + itemList.get(i).getItemId()
-                            + ", \"picture\":\"PicturesItems/" + itemList.get(i).getItemName() + ".png\","
-                            + " \"x\":" + itemList.get(i).getX()
-                            + ", \"y\":" + itemList.get(i).getY() + "}");
-                    if (itemList.size() - 1 > i)
-                    {
-                        out.print(",");
-                    }
+                    out.print(",");
                 }
-
-                out.print(
-                        // close items
-                        "]"
-                        + "}");
-            } else
-            {
-                //dao.removeItem(itemId);
-                response.setContentType("application/json");
-                out.print("{"
-                        + "\"room\":" + player.getRoomId() + ","
-                        + "\"playerId\":" + player.getPlayerId() + ","
-                        + "\"picture\": \"PicturesRooms/" + png.pathCreator(dao.getDirection(player.getRoomId())) + ".png\","
-                        + "\"north\":" + png.ValidMove("NORTH", dao.getDirection(player.getRoomId())) + ","
-                        + "\"south\": " + png.ValidMove("SOUTH", dao.getDirection(player.getRoomId())) + ","
-                        + "\"east\": " + png.ValidMove("EAST", dao.getDirection(player.getRoomId())) + ","
-                        + "\"west\": " + png.ValidMove("WEST", dao.getDirection(player.getRoomId()))
-                        + "}");
-                
             }
 
+            out.print(
+                    // close items
+                    "]"
+                    + "}");
         } catch (IOException ex)
         {
             Logger.getLogger(JsonResponse.class.getName()).log(Level.SEVERE, null, ex);

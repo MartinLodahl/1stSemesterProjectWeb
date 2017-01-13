@@ -63,6 +63,14 @@ public class Gameserv extends HttpServlet
                 Player player;
                 // finder det næste rooms ID
 
+                if(action.equals("PICKUP")){
+                   player = dao.getPlayer(playerId);
+                    int itemId =Integer.parseInt(request.getParameter("itemId"));
+                    dao.removeItem(itemId);
+                    System.out.println("itemID "+itemId);
+                jResponse.response(player, dao, png, response, action);
+                }
+                else{
                 if (playerId == 0)
                 {
                     playerId = dao.createUniquePlayerId();
@@ -77,13 +85,7 @@ public class Gameserv extends HttpServlet
                     player.setRoomID(nextRoomId);
                     dao.updateUser(nextRoomId, playerId);
                 }
-                if(action.equals("PICKUP")){
-                   int itemId =Integer.parseInt(request.getParameter("itemId"));
-                    System.out.println("itemID "+itemId);
-                jResponse.response(player, dao, png, response, action,itemId);
-                }
-                else{
-                    jResponse.response(player, dao, png, response, action,0);
+                    jResponse.response(player, dao, png, response, action);
                 }
                 
                 
