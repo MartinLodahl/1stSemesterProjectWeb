@@ -78,8 +78,6 @@ public class Gameserv extends HttpServlet
                         monster.setAttack(monsterType.getAttack());
                     }
                     controller.fight(monster, player);
-                    
-                    
                     jResponse.response(player, dao, png, response, action);
                 }
                 else{
