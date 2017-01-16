@@ -74,8 +74,15 @@ public class JsonResponse
             }
             out.print(
                     // close monster
-                    "]"
-                    + "}");
+                    "],");
+            // Player
+            out.print("\"player\":");
+            out.print("{\"health\":"+player.getHealth());
+            out.print(",\"name\":\""+player.getName()+"\"");
+            out.print(",\"attack\":"+player.getAttackDmg());
+            out.print("}");
+            
+            out.print("}");
         } catch (IOException ex)
         {
             Logger.getLogger(JsonResponse.class.getName()).log(Level.SEVERE, null, ex);
