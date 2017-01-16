@@ -58,15 +58,15 @@ function addItem(item) {
     itemsDiv.appendChild(img);
 }
 
-function addMonster(item) {
+function addMonster(monster) {
     var img = new Image();
-    img.src = item.picture;
+    img.src = monster.picture;
     img.className = 'item';
     img.style.position = 'absolute';
-    img.style.left = item.x+'px';
-    img.style.top = item.y+'px';
+    img.style.left = monster.x+'px';
+    img.style.top = monster.y+'px';
     img.onclick = function() {
-        attack(item.id);
+        attack(monster.id);
         itemsDiv.removeChild(img);
     };
     itemsDiv.appendChild(img);
