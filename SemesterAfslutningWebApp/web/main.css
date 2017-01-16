@@ -16,17 +16,49 @@
     height: 124px;
 }
 
+#hp-div {
+    display: none;
+}
 
 #name-div {
     position: absolute;
     left: 750px;
     top: 10px;
-    
+
     color: #fff;
     font-family: RingBearer, serif;
     font-size: 40px;
 }
 
+#hp-under {
+    position: absolute;
+    left: 10px;
+    top: -20px;
+    width: 500px;
+    height: 100px;
+    
+    background-image: url("PicturesGeneral/hp-under.png");
+}
+
+#hp-bar {
+    position: absolute;
+    left: 10px;
+    top: -20px;
+    width: 500px;
+    height: 100px;
+    
+    background-image: url("PicturesGeneral/hp-bar.png");
+}
+
+#hp-over {
+    position: absolute;
+    left: 10px;
+    top: -20px;
+    width: 500px;
+    height: 100px;
+    
+    background-image: url("PicturesGeneral/hp-over.png");
+}
 
 #label-name {
     font-family: RingBearer, serif;
