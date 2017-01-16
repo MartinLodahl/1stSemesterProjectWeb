@@ -81,7 +81,7 @@ public class JsonResponse
                     "],");
             // Player
             out.print("\"player\":");
-            out.print("{\"id\":"+player.getId());
+            out.print("{\"id\":"+player.getId();
             out.print("{\"health\":"+player.getHealth());
             out.print(",\"name\":\""+player.getName()+"\"");
             out.print(",\"attack\":"+player.getAttackDmg());
