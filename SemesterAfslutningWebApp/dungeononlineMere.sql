@@ -27,6 +27,7 @@
  CREATE TABLE items
  (ItemId int NOT NULL UNIQUE,
  type int,
+ picture varchar(40),
  x int,
  y int,
  roomId int);
