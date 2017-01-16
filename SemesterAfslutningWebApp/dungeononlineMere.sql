@@ -5,6 +5,7 @@
  DROP TABLE IF exists items;
  DROP TABLE IF exists itemtypes;
  DROP TABLE IF exists monster;
+ DROP TABLE IF exists monstertype;
  
  CREATE TABLE room
  (ID int(11),
@@ -42,6 +43,8 @@
  (ID int (11) UNIQUE,
  type int,
  roomId int,
+ health int(11),
+ attack int (11),
  x int,
  y int);
 
@@ -54,10 +57,10 @@
  
  INSERT INTO monster
  values 
- (1, 1, 1, 600, 600),
- (2, 2, 2, 200, 400),
- (3, 3, 3, 300, 200),
- (4, 4, 4, 400, 400);
+ (1, 1, 1,-1,-1, 600, 600),
+ (2, 2, 2,-1,-1, 200, 400),
+ (3, 3, 3,-1,-1, 300, 200),
+ (4, 4, 4,-1,-1, 400, 400);
 
  
  INSERT INTO monstertype

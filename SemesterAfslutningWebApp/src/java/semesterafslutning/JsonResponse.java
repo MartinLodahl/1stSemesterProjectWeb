@@ -36,7 +36,11 @@ public class JsonResponse
             response.setContentType("application/json");
             out.print("{"
                     + "\"room\":" + player.getRoomId() + ","
+                    + "\"player\": [" 
                     + "\"playerId\":" + player.getPlayerId() + ","
+                    + "\"playerHealth\":" + player.getHealth()+ ","
+                    + "\"playerDamage\":" + player.getAttackDmg()+ ","
+                    + "],"
                     + "\"picture\": \"PicturesRooms/" + png.pathCreator(dao.getDirection(player.getRoomId())) + ".png\","
                     + "\"north\":" + png.ValidMove("NORTH", dao.getDirection(player.getRoomId())) + ","
                     + "\"south\": " + png.ValidMove("SOUTH", dao.getDirection(player.getRoomId())) + ","

@@ -5,6 +5,8 @@ import controller.PNGPathCreator;
 import controller.Player;
 import DataBase.DAO;
 import DataBase.DBConnector;
+import DataBase.Monster;
+import DataBase.MonsterType;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -64,7 +66,21 @@ public class Gameserv extends HttpServlet
                     int itemId =Integer.parseInt(request.getParameter("itemId"));
                     dao.removeItem(itemId);
                     System.out.println("itemID "+itemId);
-                jResponse.response(player, dao, png, response, action);
+                    jResponse.response(player, dao, png, response, action);
+                } else if (action.equals("ATTACK")){
+                    Controller controller = new Controller();
+                    player = dao.getPlayer(playerId);
+                    int monsterId = Integer.parseInt(request.getParameter("monsterId"));
+                    MonsterType monsterType = dao.getMonsterType(monsterId);
+                    Monster monster = dao.getMonster(monsterId);
+                    if (monster.getHealth() == -1){
+                        monster.setHealth(monsterType.getHealth());
+                        monster.setAttack(monsterType.getAttack());
+                    }
+                    controller.fight(monster, player);
+                    
+                    
+                    jResponse.response(player, dao, png, response, action);
                 }
                 else{
                 if (playerId == 0)

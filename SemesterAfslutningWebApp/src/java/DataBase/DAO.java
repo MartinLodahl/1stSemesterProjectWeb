@@ -124,6 +124,22 @@ public class DAO {
         }
 
     }
+    
+    public void updateUser(Player player) {
+        try {
+            String query = "UPDATE players SET name = ?, health =?, attackDmg = ?, roomId = ? WHERE playerId=?;";
+            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+            stmt.setString(1, player.getName());
+            stmt.setInt(2, player.getHealth());
+            stmt.setInt(3, player.getAttackDmg());
+            stmt.setInt(4, player.getRoomId());
+            stmt.setInt(5, player.getPlayerId());
+            stmt.executeUpdate();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
     public Player getPlayer(int playerId) {
         try {
@@ -225,9 +241,12 @@ public class DAO {
             while (res.next()) {
                 int id = res.getInt("id");
                 int type = res.getInt("type");
+                int health = res.getInt("health");
+                int attack = res.getInt("attack");
                 int x = res.getInt("x");
                 int y = res.getInt("y");
-                list.add(new Monster(id, type, roomId, x, y));
+                list.add(new Monster(id, type, roomId,health, attack, x, y));
+                
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -245,9 +264,11 @@ public class DAO {
             while (res.next()) {
                 int type = res.getInt("type");
                 int roomId = res.getInt("roomId");
+                int health = res.getInt("health");
+                int attack = res.getInt("attack");
                 int x = res.getInt("x");
                 int y = res.getInt("y");
-                monster = new Monster(id, type, roomId, x, y);
+                monster = new Monster(id, type, roomId,health, attack, x, y);
             }
             return monster;
         } catch (SQLException ex) {

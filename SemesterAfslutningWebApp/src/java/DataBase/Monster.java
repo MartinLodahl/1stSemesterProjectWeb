@@ -4,19 +4,39 @@ public class Monster {
     private int id;
     private int type;
     private int roomId;
+    private int health;
+    private int attack;
     private int x;
     private int y;
 
-    public Monster(int id, int type, int roomId, int x, int y) {
+    public Monster(int id, int type, int roomId, int health, int attack, int x, int y) {
         this.id = id;
         this.type = type;
         this.roomId = roomId;
+        this.health = health;
+        this.attack = attack;
         this.x = x;
         this.y = y;
     }
 
     public int getId() {
         return id;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public void setAttack(int attack) {
+        this.attack = attack;
     }
 
     public void setId(int id) {
