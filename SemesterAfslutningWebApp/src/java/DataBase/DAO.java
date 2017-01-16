@@ -214,4 +214,76 @@ public class DAO {
         }
         return null;
     }
+    
+    public Monster getMonster(int id) {
+        try {
+            String query = "SELECT * FROM monster WHERE id=?;";
+            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+            stmt.setInt(1, id);
+            ResultSet res = stmt.executeQuery();
+            Monster monster = null;
+            while (res.next()) {
+                int type = res.getInt("type");
+                int roomId = res.getInt("roomId");
+                int x = res.getInt("x");
+                int y = res.getInt("y");
+                monster = new Monster(id, type, roomId, x, y);
+            }
+            return monster;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    public void updateMonster(Monster monster) {
+        try {
+            String query = "UPDATE monster SET type=?, roomId=? WHERE id=?;";
+            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+            stmt.setInt(1, monster.getType());
+            stmt.setInt(2, monster.getRoomId());
+            stmt.setInt(3, monster.getX());
+            stmt.setInt(4, monster.getY());
+            stmt.setInt(5, monster.getId());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public MonsterType getMonsterType(int type) {
+        try {
+            String query = "SELECT * FROM monster WHERE id=?;";
+            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+            stmt.setInt(1, type);
+            ResultSet res = stmt.executeQuery();
+            MonsterType monsterType = null;
+            while (res.next()) {
+                String picture = res.getString("picture");
+                String description = res.getString("description");
+                int health = res.getInt("health");
+                int attack = res.getInt("attack");
+                monsterType = new MonsterType(type, picture, description, health, attack);
+            }
+            return monsterType;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    public void updateMonsterType(MonsterType monsterType) {
+        try {
+            String query = "UPDATE monster SET picture=?, description=?, health=?, attack=? WHERE type=?;";
+            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+            stmt.setString(1, monsterType.getPicture());
+            stmt.setString(2, monsterType.getDescription());
+            stmt.setInt(3, monsterType.getHealth());
+            stmt.setInt(4, monsterType.getAttack());
+            stmt.setInt(5, monsterType.getType());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

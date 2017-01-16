@@ -40,12 +40,27 @@
 
  CREATE TABLE monster
  (ID int (11) UNIQUE,
+ type int,
+ roomId int,
+ x int,
+ y int);
+
+ CREATE TABLE monstertype
+ (type int,
  picture varchar(40),
  description text,
  health int(11),
  attack int(11));
  
  INSERT INTO monster
+ values 
+ (1, 1, 1, 600, 600),
+ (2, 2, 2, 200, 400),
+ (3, 3, 3, 300, 200),
+ (4, 4, 4, 400, 400);
+
+ 
+ INSERT INTO monstertype
  values 
  (1, '', 'This is a mean alf', 20, 5),
  (2, '', 'This is a mean dog', 30, 5),
