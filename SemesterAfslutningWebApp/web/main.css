@@ -16,6 +16,18 @@
     height: 124px;
 }
 
+
+#name-div {
+    position: absolute;
+    left: 750px;
+    top: 10px;
+    
+    color: #fff;
+    font-family: RingBearer, serif;
+    font-size: 40px;
+}
+
+
 #label-name {
     font-family: RingBearer, serif;
     color: #fff;
