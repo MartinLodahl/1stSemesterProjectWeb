@@ -9,6 +9,8 @@ import controller.PNGPathCreator;
 import controller.Player;
 import controller.Item;
 import DataBase.DAO;
+import DataBase.Monster;
+import DataBase.MonsterType;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -56,6 +58,20 @@ public class JsonResponse
             out.print("],");
             
             out.print("\"monsters\":[");
+            ArrayList<Monster> monsters = dao.getRoomMonsters(player.getRoomId());
+            for (int i = 0; i < monsters.size(); i++) {
+                Monster monster = monsters.get(i);
+                MonsterType monsterType = dao.getMonsterType(monster.getType());
+                
+                out.print("{\"id\":" + monster.getId()
+                        + ", \"picture\":\"PicturesItems/" + monsterType.getPicture() + ".png\","
+                        + ", \"description\":\"" + monsterType.getDescription() + "\","
+                        + " \"x\":" + monster.getX()
+                        + ", \"y\":" + monster.getY() + "}");
+                if (itemList.size() - 1 > i) {
+                    out.print(",");
+                }
+            }
             out.print("{\"id\":444,\"picture\":\"PicturesItems/ArmorChest/Inna.png\",\"x\":400,\"y\":400}");
             out.print(
                     // close monster

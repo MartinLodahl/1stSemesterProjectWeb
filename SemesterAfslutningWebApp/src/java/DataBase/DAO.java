@@ -215,6 +215,27 @@ public class DAO {
         return null;
     }
     
+    public ArrayList<Monster> getRoomMonsters(int roomId) {
+        ArrayList<Monster> list = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM monster WHERE roomId=?;";
+            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+            stmt.setInt(1, roomId);
+            ResultSet res = stmt.executeQuery();
+            Monster monster = null;
+            while (res.next()) {
+                int id = res.getInt("id");
+                int type = res.getInt("type");
+                int x = res.getInt("x");
+                int y = res.getInt("y");
+                list.add(new Monster(id, type, roomId, x, y));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
     public Monster getMonster(int id) {
         try {
             String query = "SELECT * FROM monster WHERE id=?;";
