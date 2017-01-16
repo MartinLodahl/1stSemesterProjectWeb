@@ -9,6 +9,7 @@ var nameInput = document.getElementById('input-name');
 var nameLabel = document.getElementById('label-name');
 var nameDiv = document.getElementById("name-div");
 var hpDiv = document.getElementById("hp-div");
+var hpBar = document.getElementById("hp-bar");
 
 var currentRoom = 0;
 var playerId = 0;
@@ -117,6 +118,8 @@ function show(obj) {
         addMonster(monster);
     }
     hpDiv.style.display = 'block';
+    // start: 36, stop: 464, diff: 428
+    hpBar.style.width = Math.floor(36 + obj.player.health * 428 / 100) + 'px';
 }
 
 function logIn() {
