@@ -19,12 +19,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "Gameserv", urlPatterns
-        =
-        {
+        = {
             "/Gameserv"
         })
-public class Gameserv extends HttpServlet
-{
+public class Gameserv extends HttpServlet {
 
     PNGPathCreator png = new PNGPathCreator();
     Controller ctrl = new Controller();
@@ -39,68 +37,66 @@ public class Gameserv extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, Exception
-    {
-        try (PrintWriter out = response.getWriter())
-        {
-            try
-            {
+            throws ServletException, IOException, Exception {
+        try (PrintWriter out = response.getWriter()) {
+            try {
                 //Request from website
-                String name = request.getParameter("playerName");
+
                 int currentroomId = Integer.parseInt(request.getParameter("room"));
                 int playerId = Integer.parseInt(request.getParameter("playerId"));
-                String direction = request.getParameter("direction");
+
                 String action = request.getParameter("action");
-                
-                
+
                 DBConnector connector = new DBConnector();
                 DAO dao = new DAO(connector);
                 JsonResponse jResponse = new JsonResponse();
                 Player player;
                 // finder det næste rooms ID
                 if (action.equals("UPDATE")) {
+
                     player = dao.getPlayer(playerId);
                     jResponse.response(player, dao, png, response, action);
-                } else if(action.equals("PICKUP")){
-                   player = dao.getPlayer(playerId);
-                    int itemId =Integer.parseInt(request.getParameter("itemId"));
+                } else if (action.equals("PICKUP")) {
+                    player = dao.getPlayer(playerId);
+                    int itemId = Integer.parseInt(request.getParameter("itemId"));
                     dao.removeItem(itemId);
-                    System.out.println("itemID "+itemId);
+                    System.out.println("itemID " + itemId);
                     jResponse.response(player, dao, png, response, action);
-                } else if (action.equals("ATTACK")){
+                } else if (action.equals("ATTACK")) {
                     Controller controller = new Controller();
+                    System.out.println("1");
                     player = dao.getPlayer(playerId);
+                    System.out.println("2");
                     int monsterId = Integer.parseInt(request.getParameter("monsterId"));
+                    System.out.println(player.toString());
                     MonsterType monsterType = dao.getMonsterType(monsterId);
                     Monster monster = dao.getMonster(monsterId);
-                    if (monster.getHealth() == -1){
+                    if (monster.getHealth() == -1) {
                         monster.setHealth(monsterType.getHealth());
                         monster.setAttack(monsterType.getAttack());
                     }
+                    
                     controller.fight(monster, player);
                     jResponse.response(player, dao, png, response, action);
-                }
-                else{
-                if (playerId == 0)
-                {
-                    playerId = dao.createUniquePlayerId();
-                    int playRoomId = ctrl.createPlayerRoomId();
-                    System.out.println(playerId);
-                    player = dao.createUser(playerId, name, playRoomId);
+                } else {
+                    if (playerId == 0) {
+                        String name = request.getParameter("playerName");
+                        playerId = dao.createUniquePlayerId();
+                        int playRoomId = ctrl.createPlayerRoomId();
+                        System.out.println(playerId);
+                        player = dao.createUser(playerId, name, playRoomId);
 
-                } else
-                {
-                    player = dao.getPlayer(playerId);
-                    int nextRoomId = dao.currentRoomId(currentroomId, direction);
-                    player.setRoomId(nextRoomId);
-                    dao.updateUser(nextRoomId, playerId);
-                }
+                    } else {
+                        String direction = request.getParameter("direction");
+                        player = dao.getPlayer(playerId);
+                        int nextRoomId = dao.currentRoomId(currentroomId, direction);
+                        player.setRoomId(nextRoomId);
+                        dao.updateUser(nextRoomId, playerId);
+                    }
                     jResponse.response(player, dao, png, response, action);
                 }
-                
-                
-            } catch (Exception ex)
-            {
+
+            } catch (Exception ex) {
                 out.println(out.toString());
             }
         }
@@ -117,13 +113,10 @@ public class Gameserv extends HttpServlet
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
-        try
-        {
+            throws ServletException, IOException {
+        try {
             processRequest(request, response);
-        } catch (Exception ex)
-        {
+        } catch (Exception ex) {
             Logger.getLogger(Gameserv.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -138,13 +131,10 @@ public class Gameserv extends HttpServlet
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
-        try
-        {
+            throws ServletException, IOException {
+        try {
             processRequest(request, response);
-        } catch (Exception ex)
-        {
+        } catch (Exception ex) {
             Logger.getLogger(Gameserv.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -155,8 +145,7 @@ public class Gameserv extends HttpServlet
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo()
-    {
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

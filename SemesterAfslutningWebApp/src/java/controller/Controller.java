@@ -30,11 +30,18 @@ public class Controller
     }
 
     public void fight(Monster monster, Player player){
-    player.setHealth(monster.getAttack());
-    monster.setHealth(player.getAttackDmg());
-    
-    dao.updateMonster(monster);
-    dao.updateUser(player);
+       
+        System.out.println("monster id"+monster.getId()+" monster health"+monster.getHealth());
+       
+    player.setHealth(player.getHealth() -monster.getAttack());
+        System.out.println("player damage: "+player.getAttackDmg());
+    monster.setHealth(monster.getHealth() - player.getAttackDmg());
+    System.out.println("monster id"+monster.getId()+" monster health"+monster.getHealth());
+        System.out.println(monster.toString());
+        System.out.println(player.toString());
+        dao.updateMonster(monster);
+        dao.updateUser(player);
+        
     }
     
     

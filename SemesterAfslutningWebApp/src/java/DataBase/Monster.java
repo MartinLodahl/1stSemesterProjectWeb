@@ -19,6 +19,11 @@ public class Monster {
         this.y = y;
     }
 
+    @Override
+    public String toString() {
+        return "Monster{" + "id=" + id + ", type=" + type + ", roomId=" + roomId + ", health=" + health + ", attack=" + attack + ", x=" + x + ", y=" + y + '}';
+    }
+
     public int getId() {
         return id;
     }

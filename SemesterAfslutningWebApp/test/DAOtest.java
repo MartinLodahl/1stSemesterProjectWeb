@@ -6,6 +6,7 @@
 
 import DataBase.DAO;
 import DataBase.DBConnector;
+import DataBase.Monster;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -93,16 +94,26 @@ public class DAOtest {
 //        assertEquals(4, check);
 //        
 //    }
-    
+//    
+//    @Test
+//    public void getRoomItems(){
+//        ArrayList <Item> list = dao.getRoomItems(1);
+//        
+//        assertEquals(list.size(),1);
+//        assertEquals(list.get(0).getX(),200);
+//        dao.removeItem(1);
+//        list = dao.getRoomItems(1);
+//        assertEquals(list.size(), 0);
+//    }
+//    
     @Test
-    public void getRoomItems(){
-        ArrayList <Item> list = dao.getRoomItems(1);
-        
-        assertEquals(list.size(),1);
-        assertEquals(list.get(0).getX(),200);
-        dao.removeItem(1);
-        list = dao.getRoomItems(1);
-        assertEquals(list.size(), 0);
+    public void updateMonster(){
+        Monster monster = dao.getMonster(1);
+        monster.setHealth(3);
+       dao.updateMonster(monster);
+       
+       assertEquals(monster.getHealth(), 3);
+       
+       
     }
-
 }

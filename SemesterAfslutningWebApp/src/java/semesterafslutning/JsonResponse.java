@@ -36,11 +36,11 @@ public class JsonResponse
             response.setContentType("application/json");
             out.print("{"
                     + "\"room\":" + player.getRoomId() + ","
-                    + "\"player\": [" 
-                    + "\"playerId\":" + player.getPlayerId() + ","
-                    + "\"playerHealth\":" + player.getHealth()+ ","
-                    + "\"playerDamage\":" + player.getAttackDmg()+ ","
-                    + "],"
+//                    + "\"player\": [" 
+                    
+//                    + "\"playerHealth\":" + player.getHealth()+ ","
+//                    + "\"playerDamage\":" + player.getAttackDmg()+ ","
+//                    + "],"
                     + "\"picture\": \"PicturesRooms/" + png.pathCreator(dao.getDirection(player.getRoomId())) + ".png\","
                     + "\"north\":" + png.ValidMove("NORTH", dao.getDirection(player.getRoomId())) + ","
                     + "\"south\": " + png.ValidMove("SOUTH", dao.getDirection(player.getRoomId())) + ","
@@ -80,6 +80,7 @@ public class JsonResponse
                     // close monster
                     "],");
             // Player
+            out.print("\"playerId\":" + player.getPlayerId() + ",");
             out.print("\"player\":");
             out.print("{\"health\":"+player.getHealth());
             out.print(",\"name\":\""+player.getName()+"\"");

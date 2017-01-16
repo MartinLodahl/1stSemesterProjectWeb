@@ -97,7 +97,7 @@ public class DAO {
 
     public Player createUser(int playerId, String name, int roomId) {
         try {
-            String query = "INSERT INTO players(playerId ,name, health, gold, roomId) VALUES (?, ?, 10, 0, ?);";
+            String query = "INSERT INTO players(playerId ,name, health,attackDmg, gold, roomId) VALUES (?, ?, 10,5, 0, ?);";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, playerId);
             stmt.setString(2, name);
@@ -124,7 +124,7 @@ public class DAO {
         }
 
     }
-    
+
     public void updateUser(Player player) {
         try {
             String query = "UPDATE players SET name = ?, health =?, attackDmg = ?, roomId = ? WHERE playerId=?;";
@@ -151,9 +151,9 @@ public class DAO {
 
             String name = res.getString("name");
             int health = res.getInt("health");
-            int gold = res.getInt("gold");
+            int attack = res.getInt("attackDmg");
             int room = res.getInt("roomId");
-            Player player = new Player(name, health, room, playerId);
+            Player player = new Player(name, health,attack, room, playerId);
             return player;
 
         } catch (Exception ex) {
@@ -230,7 +230,7 @@ public class DAO {
         }
         return null;
     }
-    
+
     public ArrayList<Monster> getRoomMonsters(int roomId) {
         ArrayList<Monster> list = new ArrayList<>();
         try {
@@ -245,8 +245,8 @@ public class DAO {
                 int attack = res.getInt("attack");
                 int x = res.getInt("x");
                 int y = res.getInt("y");
-                list.add(new Monster(id, type, roomId,health, attack, x, y));
-                
+                list.add(new Monster(id, type, roomId, health, attack, x, y));
+
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -261,15 +261,15 @@ public class DAO {
             stmt.setInt(1, id);
             ResultSet res = stmt.executeQuery();
             Monster monster = null;
-            while (res.next()) {
-                int type = res.getInt("type");
-                int roomId = res.getInt("roomId");
-                int health = res.getInt("health");
-                int attack = res.getInt("attack");
-                int x = res.getInt("x");
-                int y = res.getInt("y");
-                monster = new Monster(id, type, roomId,health, attack, x, y);
-            }
+            res.next(); 
+            int type = res.getInt("type");
+            int roomId = res.getInt("roomId");
+            int health = res.getInt("health");
+            int attack = res.getInt("attack");
+            int x = res.getInt("x");
+            int y = res.getInt("y");
+            monster = new Monster(id, type, roomId, health, attack, x, y);
+
             return monster;
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -279,13 +279,18 @@ public class DAO {
 
     public void updateMonster(Monster monster) {
         try {
-            String query = "UPDATE monster SET type=?, roomId=? WHERE id=?;";
+            String query = "UPDATE monster SET roomId=?, health = ?, attack =? WHERE id=?;";
+            System.out.println("10");
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
-            stmt.setInt(1, monster.getType());
-            stmt.setInt(2, monster.getRoomId());
-            stmt.setInt(3, monster.getX());
-            stmt.setInt(4, monster.getY());
-            stmt.setInt(5, monster.getId());
+            System.out.println("11");
+            stmt.setInt(1, monster.getRoomId());
+            System.out.println("13");
+            stmt.setInt(2, monster.getHealth());
+            System.out.println("14");
+            stmt.setInt(3, monster.getAttack());
+            System.out.println("15");
+            stmt.setInt(4, monster.getId());
+            System.out.println("16");
             stmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();

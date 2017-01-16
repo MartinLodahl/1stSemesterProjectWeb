@@ -16,6 +16,13 @@ public class Player implements ICharacter
         this.roomId = roomId;
         this.playerId = playerId;
     }
+       public Player(String name, int health,int attack, int roomId, int playerId) {
+        this.name = name;
+        this.health = health;
+        this.attackDmg = attack;
+        this.roomId = roomId;
+        this.playerId = playerId;
+    }
 
    
 
@@ -47,6 +54,11 @@ public class Player implements ICharacter
     public void setRoomId(int roomId)
     {
         this.roomId=roomId;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" + "name=" + name + ", health=" + health + ", roomId=" + roomId + ", playerId=" + playerId + ", attackDmg=" + attackDmg + '}';
     }
 
     @Override
