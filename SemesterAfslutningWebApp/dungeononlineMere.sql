@@ -27,7 +27,6 @@
  CREATE TABLE items
  (ItemId int NOT NULL UNIQUE,
  type int,
- picture varchar(40),
  x int,
  y int,
  roomId int);
@@ -56,7 +55,7 @@
  Insert into itemtypes
  values
  (1,'coins',1,50,'Conin give you money'),
- (2,'Armor/Kindregret',2,20,'Armor of type Kindregret, give u bonus health'),
+ (2,'ArmorChest/Kindregret',2,20,'Armor of type Kindregret, give u bonus health'),
  (3,'WeaponsRanged/Manticore',3,10,'Ranged weapon type Manticore, give u bonus attack dmg'),
  (4,'WeaponsMelee/Bonewrath',3,15,'Melee weapon type Bonewrath, give u bonus attack dmg'),
  (5,'WeaponsMelee/Dishonored',3,25,'Melle weapon type Dishonored, give u bonus attack dmg');
