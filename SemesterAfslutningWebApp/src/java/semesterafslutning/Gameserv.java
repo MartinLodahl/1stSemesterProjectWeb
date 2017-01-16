@@ -25,7 +25,6 @@ import javax.servlet.http.HttpServletResponse;
 public class Gameserv extends HttpServlet {
 
     PNGPathCreator png = new PNGPathCreator();
-    Controller ctrl = new Controller();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,6 +48,7 @@ public class Gameserv extends HttpServlet {
 
                 DBConnector connector = new DBConnector();
                 DAO dao = new DAO(connector);
+                Controller ctrl = new Controller(dao);
                 JsonResponse jResponse = new JsonResponse();
                 Player player;
                 // finder det næste rooms ID
@@ -59,7 +59,7 @@ public class Gameserv extends HttpServlet {
                 } else if (action.equals("PICKUP")) {
                     player = dao.getPlayer(playerId);
                     int itemId = Integer.parseInt(request.getParameter("itemId"));
-                    
+
                     dao.removeItem(itemId);
                     jResponse.response(player, dao, png, response, action);
                 } else if (action.equals("ATTACK")) {
@@ -72,12 +72,13 @@ public class Gameserv extends HttpServlet {
                         monster.setAttack(monsterType.getAttack());
                     }
                     // fight sequence
-                    player.setHealth(player.getHealth() - monster.getAttack());
-                    monster.setHealth(monster.getHealth() - player.getAttackDmg());
-                    dao.updateMonster(monster);
-                    dao.updateUser(player);
-                    
-                    if(monster.getHealth() == 0){
+//                    player.setHealth(player.getHealth() - monster.getAttack());
+//                    monster.setHealth(monster.getHealth() - player.getAttackDmg());
+//                    dao.updateMonster(monster);
+//                    dao.updateUser(player);
+                    ctrl.fight(monster, player);
+
+                    if (monster.getHealth() == 0) {
                         dao.removeMonster(monster);
                     }
 

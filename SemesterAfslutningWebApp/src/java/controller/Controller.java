@@ -6,45 +6,30 @@ import DataBase.Monster;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Controller
-{
+public class Controller {
 
-    DBConnector connector;
-    DAO dao = new DAO(connector);
+    DAO dao;
 
-    public Controller()
-    {
-        try
-        {
-            this.connector = new DBConnector();
-        } catch (Exception ex)
-        {
-            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public Controller(DAO dao) {
+        this.dao = dao;
     }
 
-    public int createPlayerRoomId()
-    {
+    public int createPlayerRoomId() {
         System.out.println("room nr generaet");
         return (int) Math.floor((Math.random() * 5) + 1);
     }
 
-    public void fight(Monster monster, Player player){
-       
-        System.out.println("monster id"+monster.getId()+" monster health"+monster.getHealth());
-       
-    player.setHealth(player.getHealth() -monster.getAttack());
-        System.out.println("player damage: "+player.getAttackDmg());
-    monster.setHealth(monster.getHealth() - player.getAttackDmg());
-    System.out.println("monster id"+monster.getId()+" monster health"+monster.getHealth());
-        System.out.println(monster.toString());
-        System.out.println(player.toString());
+    public void fight(Monster monster, Player player) {
+
+        System.out.println("monster id" + monster.getId() + " monster health" + monster.getHealth());
+
+        player.setHealth(player.getHealth() - monster.getAttack());
+        monster.setHealth(monster.getHealth() - player.getAttackDmg());
         dao.updateMonster(monster);
         dao.updateUser(player);
-        
+
     }
-    
-    
+
 //    public int createPlayer()
 //    {
 //        int uniqPlayerId = dao.createUniquePlayerId();
