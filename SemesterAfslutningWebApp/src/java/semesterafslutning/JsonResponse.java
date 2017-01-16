@@ -44,7 +44,7 @@ public class JsonResponse
             for (int i = 0; i < itemList.size(); i++)
             {
                 out.print("{\"id\":" + itemList.get(i).getItemId()
-                        + ", \"picture\":\"PicturesItems/" + itemList.get(i).getItemName() + ".png\","
+                        + ", \"picture\":\"PicturesItems/" + itemList.get(i).getItemType() + ".png\","
                         + " \"x\":" + itemList.get(i).getX()
                         + ", \"y\":" + itemList.get(i).getY() + "}");
                 if (itemList.size() - 1 > i)

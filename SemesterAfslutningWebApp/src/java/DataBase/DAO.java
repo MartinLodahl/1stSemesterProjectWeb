@@ -180,11 +180,11 @@ public class DAO {
             while(res.next()){
                 
                 int itemId = res.getInt("itemId");
-                String itemName = res.getString("itemName");
+                int type = res.getInt("type");
                 int x = res.getInt("x");
                 int y = res.getInt("y");
                 
-                temp.add(new Item(itemId,x,y,roomId,itemName));
+                temp.add(new Item(itemId,x,y,roomId,type));
             }
 
         } catch (Exception ex) {

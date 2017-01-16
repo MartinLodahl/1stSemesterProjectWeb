@@ -3,15 +3,15 @@ package controller;
 public class Item
 {
  int itemId,x,y,roomId;
- String itemName;
+ int type;
 
-    public Item(int itemId, int x, int y, int roomId, String itemName)
+    public Item(int itemId, int x, int y, int roomId, int type)
     {
         this.itemId = itemId;
         this.x = x;
         this.y = y;
         this.roomId = roomId;
-        this.itemName = itemName;
+        this.type = type;
     }
 
     public int getItemId()
@@ -54,14 +54,14 @@ public class Item
         this.roomId = roomId;
     }
 
-    public String getItemName()
+    public int getItemType()
     {
-        return itemName;
+        return type;
     }
 
-    public void setItemName(String itemName)
+    public void setType(int itemType)
     {
-        this.itemName = itemName;
+        this.type = itemType;
     }
     
 }
