@@ -11,6 +11,7 @@ import controller.Item;
 import DataBase.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 public class JsonResponse
 {
 
-    public void response(Player player, DAO dao, PNGPathCreator png, HttpServletResponse response, String action)
+    public void response(Player player, DAO dao, PNGPathCreator png, HttpServletResponse response, String action) throws SQLException
     {
         PrintWriter out = null;
         try
