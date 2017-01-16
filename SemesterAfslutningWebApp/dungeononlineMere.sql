@@ -4,6 +4,7 @@
  DROP TABLE IF exists players;
  DROP TABLE IF exists items;
  DROP TABLE IF exists itemtypes;
+ DROP TABLE IF exists monster;
  
  CREATE TABLE room
  (ID int(11),
@@ -33,10 +34,22 @@
  CREATE TABLE itemtypes
  (type int,
  picName VARCHAR(40),
- stat int,
+ stat double,
  modify int,
- note varchar(40));
+ note varchar(200));
 
+ CREATE TABLE monster
+ (ID int (11) UNIQUE,
+ description text,
+ health int(11),
+ attack int(11));
+ 
+ INSERT INTO monster
+ values 
+ (1, 'This is a mean alf', 20, 5),
+ (2, 'This is a mean dog', 30, 5),
+ (3, 'This is the Flying DutchMan', 50, 2),
+ (4, 'This person.. Is it a person? KILL IT', 10, 2);
  
  Insert into itemtypes
  values
