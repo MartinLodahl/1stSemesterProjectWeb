@@ -59,31 +59,34 @@ public class Gameserv extends HttpServlet {
                 } else if (action.equals("PICKUP")) {
                     player = dao.getPlayer(playerId);
                     int itemId = Integer.parseInt(request.getParameter("itemId"));
+                    
                     dao.removeItem(itemId);
-                    System.out.println("itemID " + itemId);
                     jResponse.response(player, dao, png, response, action);
                 } else if (action.equals("ATTACK")) {
-                    Controller controller = new Controller();
-                    System.out.println("1");
                     player = dao.getPlayer(playerId);
-                    System.out.println("2");
                     int monsterId = Integer.parseInt(request.getParameter("monsterId"));
-                    System.out.println(player.toString());
                     MonsterType monsterType = dao.getMonsterType(monsterId);
                     Monster monster = dao.getMonster(monsterId);
                     if (monster.getHealth() == -1) {
                         monster.setHealth(monsterType.getHealth());
                         monster.setAttack(monsterType.getAttack());
                     }
+                    // fight sequence
+                    player.setHealth(player.getHealth() - monster.getAttack());
+                    monster.setHealth(monster.getHealth() - player.getAttackDmg());
+                    dao.updateMonster(monster);
+                    dao.updateUser(player);
                     
-                    controller.fight(monster, player);
+                    if(monster.getHealth() == 0){
+                        dao.removeMonster(monster);
+                    }
+
                     jResponse.response(player, dao, png, response, action);
                 } else {
                     if (playerId == 0) {
                         String name = request.getParameter("playerName");
                         playerId = dao.createUniquePlayerId();
                         int playRoomId = ctrl.createPlayerRoomId();
-                        System.out.println(playerId);
                         player = dao.createUser(playerId, name, playRoomId);
 
                     } else {

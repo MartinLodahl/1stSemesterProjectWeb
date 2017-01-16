@@ -162,6 +162,24 @@ public class DAO {
         return null;
     }
 
+    public int getItemType(int itemId){
+        try {
+            String query = "SELECT * FROM items WHERE itemId =?;";
+            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+            stmt.setInt(1, itemId);
+            ResultSet res = stmt.executeQuery();
+            res.next();
+
+            int itemType = res.getInt("itemType");
+            return itemType;
+        } catch (Exception ex) {
+
+        }
+        return -1;
+        
+        
+    }
+    
     public int createUniquePlayerId() {
 
         try {
@@ -280,17 +298,11 @@ public class DAO {
     public void updateMonster(Monster monster) {
         try {
             String query = "UPDATE monster SET roomId=?, health = ?, attack =? WHERE id=?;";
-            System.out.println("10");
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
-            System.out.println("11");
             stmt.setInt(1, monster.getRoomId());
-            System.out.println("13");
             stmt.setInt(2, monster.getHealth());
-            System.out.println("14");
             stmt.setInt(3, monster.getAttack());
-            System.out.println("15");
             stmt.setInt(4, monster.getId());
-            System.out.println("16");
             stmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -331,5 +343,17 @@ public class DAO {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void removeMonster(Monster monster) {
+         try {
+            String query = "DELETE FROM monster WHERE ID =?;";
+            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+            stmt.setInt(1, monster.getId());
+            stmt.executeUpdate();
+        } catch (Exception ex) {
+
+        }
+
     }
 }
