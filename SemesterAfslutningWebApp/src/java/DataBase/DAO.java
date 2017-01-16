@@ -222,7 +222,6 @@ public class DAO {
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, roomId);
             ResultSet res = stmt.executeQuery();
-            Monster monster = null;
             while (res.next()) {
                 int id = res.getInt("id");
                 int type = res.getInt("type");
