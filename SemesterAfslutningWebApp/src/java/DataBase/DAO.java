@@ -16,6 +16,7 @@ import java.util.Comparator;
 import java.util.List;
 import controller.ICharacter;
 import controller.Item;
+import controller.ItemType;
 import controller.LinkCollectionSort;
 import controller.Player;
 import controller.Room;
@@ -162,7 +163,7 @@ public class DAO {
         return null;
     }
 
-    public int getItemType(int itemId){
+    public int getItemTypeInt(int itemId){
         try {
             String query = "SELECT * FROM items WHERE itemId =?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
@@ -175,10 +176,28 @@ public class DAO {
         } catch (Exception ex) {
 
         }
-        return -1;
-        
-        
+        return -1;        
     }
+    
+    public ItemType getItemType(int type){
+        try {
+            String query = "SELECT * FROM itemtypes WHERE type=?;";
+            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+            stmt.setInt(1, type);
+            ResultSet res = stmt.executeQuery();
+            ItemType itemType;
+            res.next(); 
+            int stat = res.getInt("stat");
+            int modifier= res.getInt("modify");
+            String note = res.getString("note");
+            itemType = new ItemType(stat,modifier,note);
+
+            return itemType;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    } 
     
     public int createUniquePlayerId() {
 
@@ -278,7 +297,7 @@ public class DAO {
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, id);
             ResultSet res = stmt.executeQuery();
-            Monster monster = null;
+            Monster monster;
             res.next(); 
             int type = res.getInt("type");
             int roomId = res.getInt("roomId");
