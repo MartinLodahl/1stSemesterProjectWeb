@@ -128,13 +128,14 @@ public class DAO {
 
     public void updateUser(Player player) {
         try {
-            String query = "UPDATE players SET name = ?, health =?, attackDmg = ?, roomId = ? WHERE playerId=?;";
+            String query = "UPDATE players SET name = ?, health =?, attackDmg = ?, roomId = ?, gold =? WHERE playerId=?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setString(1, player.getName());
             stmt.setInt(2, player.getHealth());
             stmt.setInt(3, player.getAttackDmg());
             stmt.setInt(4, player.getRoomId());
-            stmt.setInt(5, player.getPlayerId());
+            stmt.setInt(5, player.getGold());
+            stmt.setInt(6, player.getPlayerId());
             stmt.executeUpdate();
 
         } catch (Exception ex) {
@@ -154,7 +155,8 @@ public class DAO {
             int health = res.getInt("health");
             int attack = res.getInt("attackDmg");
             int room = res.getInt("roomId");
-            Player player = new Player(name, health,attack, room, playerId);
+            int gold = res.getInt("gold");
+            Player player = new Player(name, health,attack, room, playerId, gold);
             return player;
 
         } catch (Exception ex) {
@@ -165,13 +167,16 @@ public class DAO {
 
     public int getItemTypeInt(int itemId){
         try {
+            
             String query = "SELECT * FROM items WHERE itemId =?;";
+            System.out.println("1");
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+            System.out.println("2");
             stmt.setInt(1, itemId);
             ResultSet res = stmt.executeQuery();
             res.next();
 
-            int itemType = res.getInt("itemType");
+            int itemType = res.getInt("type");
             return itemType;
         } catch (Exception ex) {
 

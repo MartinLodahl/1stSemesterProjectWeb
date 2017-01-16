@@ -7,6 +7,7 @@ import DataBase.DAO;
 import DataBase.DBConnector;
 import DataBase.Monster;
 import DataBase.MonsterType;
+import controller.ItemType;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -57,10 +58,10 @@ public class Gameserv extends HttpServlet {
                     player = dao.getPlayer(playerId);
                     jResponse.response(player, dao, png, response, action);
                 } else if (action.equals("PICKUP")) {
-                    player = dao.getPlayer(playerId);
-                    int itemId = Integer.parseInt(request.getParameter("itemId"));
                     
-                    dao.removeItem(itemId);
+                     player = dao.getPlayer(playerId);
+                    int itemId = Integer.parseInt(request.getParameter("itemId"));
+                    ctrl.applyItem(player, itemId);
                     jResponse.response(player, dao, png, response, action);
                 } else if (action.equals("ATTACK")) {
                     player = dao.getPlayer(playerId);

@@ -29,6 +29,21 @@ public class Controller {
         dao.updateUser(player);
 
     }
+    
+    public void applyItem (Player player, int itemId){
+       
+                    int itemTypeInt = dao.getItemTypeInt(itemId);
+                    ItemType itemType = dao.getItemType(itemTypeInt);
+                    if(itemType.getStat() == 1){
+                        player.setGold(player.getGold()+itemType.getModifier());
+                    } else if (itemType.getStat() == 2){
+                        player.setHealth(player.getHealth()+itemType.getModifier());
+                    } else if (itemType.getStat()==3){
+                        player.setAttackDmg(player.getAttackDmg() + itemType.getModifier());
+                    }
+                    dao.updateUser(player);
+                    dao.removeItem(itemId);
+    }
 
 //    public int createPlayer()
 //    {

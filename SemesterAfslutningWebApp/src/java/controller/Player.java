@@ -3,11 +3,12 @@ package controller;
 public class Player implements ICharacter
 {
     private String name;
-    private int health,roomId,playerId,attackDmg;
+    private int health,roomId,playerId,attackDmg, gold;
     
     public Player (String name){
         this.name = name;
-        this.setHealth(100);
+        this.health=100;
+        this.gold =0;
     }
 
     public Player(String name, int health, int roomId, int playerId) {
@@ -22,6 +23,22 @@ public class Player implements ICharacter
         this.attackDmg = attack;
         this.roomId = roomId;
         this.playerId = playerId;
+    }
+       public Player(String name, int health,int attack, int roomId, int playerId, int gold) {
+        this.name = name;
+        this.health = health;
+        this.attackDmg = attack;
+        this.roomId = roomId;
+        this.playerId = playerId;
+        this.gold = gold;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
     }
 
    
