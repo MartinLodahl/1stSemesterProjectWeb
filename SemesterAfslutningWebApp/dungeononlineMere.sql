@@ -5,6 +5,7 @@
  DROP TABLE IF exists items;
  DROP TABLE IF exists itemtypes;
  DROP TABLE IF exists monster;
+ DROP TABLE IF exists monstertype;
  
  CREATE TABLE room
  (ID int(11),
@@ -33,31 +34,49 @@
  
  CREATE TABLE itemtypes
  (type int,
- picName VARCHAR(40),
+ picture VARCHAR(40),
  stat double,
  modify int,
  note varchar(200));
 
  CREATE TABLE monster
  (ID int (11) UNIQUE,
+ type int,
+ roomId int,
+ health int(11),
+ attack int (11),
+ x int,
+ y int);
+
+ CREATE TABLE monstertype
+ (type int,
+ picture varchar(40),
  description text,
  health int(11),
  attack int(11));
  
  INSERT INTO monster
  values 
- (1, 'This is a mean alf', 20, 5),
- (2, 'This is a mean dog', 30, 5),
- (3, 'This is the Flying DutchMan', 50, 2),
- (4, 'This person.. Is it a person? KILL IT', 10, 2);
+ (1, 1, 1,-1,-1, 600, 600),
+ (2, 2, 2,-1,-1, 200, 400),
+ (3, 3, 3,-1,-1, 300, 200),
+ (4, 4, 4,-1,-1, 400, 400);
+
+ 
+ INSERT INTO monstertype
+ values 
+ (1, '', 'This is a mean alf', 20, 5),
+ (2, '', 'This is a mean dog', 30, 5),
+ (3, '', 'This is the Flying DutchMan', 50, 2),
+ (4, '', 'This person.. Is it a person? KILL IT', 10, 2);
  
  Insert into itemtypes
  values
- (1,'coin',1,50,'Conin give you money'),
- (2,'Kindregret',2,20,'Armor of type Kindregret, give u bonus health'),
- (3,'Manticore',3,10,'Ranged weapon type Manticore, give u bonus attack dmg'),
- (4,'Bonewrath',3,15,'Melee weapon type Bonewrath, give u bonus attack dmg'),
- (5,'Dishonored',3,25,'Melle weapon type Dishonored, give u bonus attack dmg');
+ (1,'coins',1,50,'Conin give you money'),
+ (2,'ArmorChest/Kindregret',2,20,'Armor of type Kindregret, give u bonus health'),
+ (3,'WeaponsRanged/Manticore',3,10,'Ranged weapon type Manticore, give u bonus attack dmg'),
+ (4,'WeaponsMelee/Bonewrath',3,15,'Melee weapon type Bonewrath, give u bonus attack dmg'),
+ (5,'WeaponsMelee/Dishonored',3,25,'Melle weapon type Dishonored, give u bonus attack dmg');
  
  INSERT INTO items
  VALUES

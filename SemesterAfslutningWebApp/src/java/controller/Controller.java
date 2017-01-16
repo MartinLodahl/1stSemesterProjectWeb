@@ -2,6 +2,7 @@ package controller;
 
 import DataBase.DAO;
 import DataBase.DBConnector;
+import DataBase.Monster;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,6 +29,15 @@ public class Controller
         return (int) Math.floor((Math.random() * 5) + 1);
     }
 
+    public void fight(Monster monster, Player player){
+    player.setHealth(monster.getAttack());
+    monster.setHealth(player.getAttackDmg());
+    
+    dao.updateMonster(monster);
+    dao.updateUser(player);
+    }
+    
+    
 //    public int createPlayer()
 //    {
 //        int uniqPlayerId = dao.createUniquePlayerId();

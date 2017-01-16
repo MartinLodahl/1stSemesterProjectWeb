@@ -9,8 +9,11 @@ import controller.PNGPathCreator;
 import controller.Player;
 import controller.Item;
 import DataBase.DAO;
+import DataBase.Monster;
+import DataBase.MonsterType;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 public class JsonResponse
 {
 
-    public void response(Player player, DAO dao, PNGPathCreator png, HttpServletResponse response, String action)
+    public void response(Player player, DAO dao, PNGPathCreator png, HttpServletResponse response, String action) throws SQLException
     {
         PrintWriter out = null;
         try
@@ -33,7 +36,11 @@ public class JsonResponse
             response.setContentType("application/json");
             out.print("{"
                     + "\"room\":" + player.getRoomId() + ","
+                    + "\"player\": [" 
                     + "\"playerId\":" + player.getPlayerId() + ","
+                    + "\"playerHealth\":" + player.getHealth()+ ","
+                    + "\"playerDamage\":" + player.getAttackDmg()+ ","
+                    + "],"
                     + "\"picture\": \"PicturesRooms/" + png.pathCreator(dao.getDirection(player.getRoomId())) + ".png\","
                     + "\"north\":" + png.ValidMove("NORTH", dao.getDirection(player.getRoomId())) + ","
                     + "\"south\": " + png.ValidMove("SOUTH", dao.getDirection(player.getRoomId())) + ","
@@ -44,7 +51,7 @@ public class JsonResponse
             for (int i = 0; i < itemList.size(); i++)
             {
                 out.print("{\"id\":" + itemList.get(i).getItemId()
-                        + ", \"picture\":\"PicturesItems/" + itemList.get(i).getItemType() + ".png\","
+                        + ", \"picture\":\"PicturesItems/" + dao.getItemPicture(itemList.get(i).getItemType()) + ".png\","
                         + " \"x\":" + itemList.get(i).getX()
                         + ", \"y\":" + itemList.get(i).getY() + "}");
                 if (itemList.size() - 1 > i)
@@ -55,11 +62,32 @@ public class JsonResponse
             out.print("],");
             
             out.print("\"monsters\":[");
-            out.print("{\"id\":444,\"picture\":\"PicturesItems/ArmorChest/Inna.png\",\"x\":400,\"y\":400}");
+            ArrayList<Monster> monsters = dao.getRoomMonsters(player.getRoomId());
+            for (int i = 0; i < monsters.size(); i++) {
+                Monster monster = monsters.get(i);
+                MonsterType monsterType = dao.getMonsterType(monster.getType());
+                
+                out.print("{\"id\":" + monster.getId()
+                        + ", \"picture\":\"PicturesItems/" + monsterType.getPicture() + ".png\""
+                        + ", \"description\":\"" + monsterType.getDescription() + "\""
+                        + ", \"x\":" + monster.getX()
+                        + ", \"y\":" + monster.getY() + "}");
+                if (monsters.size() - 1 > i) {
+                    out.print(",");
+                }
+            }
             out.print(
                     // close monster
-                    "]"
-                    + "}");
+                    "],");
+            // Player
+            out.print("\"player\":");
+            out.print("{\"id\":"+player.getId());
+            out.print("{\"health\":"+player.getHealth());
+            out.print(",\"name\":\""+player.getName()+"\"");
+            out.print(",\"attack\":"+player.getAttackDmg());
+            out.print("}");
+            
+            out.print("}");
         } catch (IOException ex)
         {
             Logger.getLogger(JsonResponse.class.getName()).log(Level.SEVERE, null, ex);

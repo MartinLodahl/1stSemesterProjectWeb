@@ -7,6 +7,7 @@ var westImg = document.getElementById('west');
 var itemsDiv = document.getElementById('items');
 var nameInput = document.getElementById('input-name');
 var nameLabel = document.getElementById('label-name');
+var nameDiv = document.getElementById("name-div");
 
 var currentRoom = 0;
 var playerId = 0;
@@ -75,6 +76,7 @@ function addMonster(monster) {
 
 
 function show(obj) {
+    nameDiv.innerText = obj.player.name;
     startImg.style.display = 'none';
     nameLabel.style.display = 'none';
     nameInput.style.display = 'none';
