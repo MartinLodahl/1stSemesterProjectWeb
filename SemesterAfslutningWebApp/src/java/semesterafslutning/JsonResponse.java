@@ -64,15 +64,14 @@ public class JsonResponse
                 MonsterType monsterType = dao.getMonsterType(monster.getType());
                 
                 out.print("{\"id\":" + monster.getId()
-                        + ", \"picture\":\"PicturesItems/" + monsterType.getPicture() + ".png\","
-                        + ", \"description\":\"" + monsterType.getDescription() + "\","
-                        + " \"x\":" + monster.getX()
+                        + ", \"picture\":\"PicturesItems/" + monsterType.getPicture() + ".png\""
+                        + ", \"description\":\"" + monsterType.getDescription() + "\""
+                        + ", \"x\":" + monster.getX()
                         + ", \"y\":" + monster.getY() + "}");
-                if (itemList.size() - 1 > i) {
+                if (monsters.size() - 1 > i) {
                     out.print(",");
                 }
             }
-            out.print("{\"id\":444,\"picture\":\"PicturesItems/ArmorChest/Inna.png\",\"x\":400,\"y\":400}");
             out.print(
                     // close monster
                     "]"

@@ -274,7 +274,7 @@ public class DAO {
 
     public MonsterType getMonsterType(int type) {
         try {
-            String query = "SELECT * FROM monster WHERE id=?;";
+            String query = "SELECT * FROM monstertype WHERE type=?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, type);
             ResultSet res = stmt.executeQuery();
