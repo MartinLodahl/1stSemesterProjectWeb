@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package semesterafslutning;
 
 import controller.Controller;
@@ -21,10 +16,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Pravien
- */
 @WebServlet(name = "Gameserv", urlPatterns
         =
         {
@@ -87,7 +78,7 @@ public class Gameserv extends HttpServlet
                 {
                     player = dao.getPlayer(playerId);
                     int nextRoomId = dao.currentRoomId(currentroomId, direction);
-                    player.setRoomID(nextRoomId);
+                    player.setRoomId(nextRoomId);
                     dao.updateUser(nextRoomId, playerId);
                 }
                     jResponse.response(player, dao, png, response, action);
