@@ -16,6 +16,9 @@
     height: 124px;
 }
 
+#hp-div {
+    display: none;
+}
 
 #name-div {
     position: absolute;

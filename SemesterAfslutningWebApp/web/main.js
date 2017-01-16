@@ -8,6 +8,7 @@ var itemsDiv = document.getElementById('items');
 var nameInput = document.getElementById('input-name');
 var nameLabel = document.getElementById('label-name');
 var nameDiv = document.getElementById("name-div");
+var hpDiv = document.getElementById("hp-div");
 
 var currentRoom = 0;
 var playerId = 0;
@@ -42,6 +43,7 @@ function startGame() {
     nameLabel.style.display = 'block';
     nameInput.style.display = 'block';
     nameInput.value = '';
+    hpDiv.style.display = 'none';
     nameInput.focus();
 }
 
@@ -114,6 +116,7 @@ function show(obj) {
         var monster = obj.monsters[i];
         addMonster(monster);
     }
+    hpDiv.style.display = 'block';
 }
 
 function logIn() {
