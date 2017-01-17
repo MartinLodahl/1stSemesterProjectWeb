@@ -80,6 +80,8 @@ public class Gameserv extends HttpServlet {
                         playerId = dao.createUniquePlayerId();
                         int playRoomId = ctrl.createPlayerRoomId();
                         player = dao.createUser(playerId, name, playRoomId);
+                        dao.copyItems(playerId);
+                        dao.copyMonsters(playerId);
                         jResponse.response(player, dao, png, response, action);
                         break;
                     case "GOTO":
