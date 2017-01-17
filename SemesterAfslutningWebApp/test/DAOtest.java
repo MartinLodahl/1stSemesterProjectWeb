@@ -55,65 +55,53 @@ public class DAOtest {
     //
     // @Test
     // public void hello() {}
-   /* @Test
+    @Test
     public void getDirectionTest() {
         ArrayList<Link> links = dao.getDirection(1);
         //east 2 & north 3
         assertEquals(links.get(0).getTo(), 2);
-        assertEquals(links.get(1).getDirection(), "north");
-                
+        assertEquals(links.get(1).getDirection(), "WEST");
+
     }
+//    @Test
+//    public void getRoom(){
+//        Room room = dao.getRoom(1);
+//        Room room2 = dao.getRoom(2);
+//        
+//        assertEquals(room.getDescription(), "Der var en stor stor trold");
+//        assertEquals(room2.getDescription(), "Per");
+//    }
+
+    
+    
+    //You need to make sure you've got 0 people in your database, players.
     @Test
-    public void getRoom(){
-        Room room = dao.getRoom(1);
-        Room room2 = dao.getRoom(2);
-        
-        assertEquals(room.getDescription(), "Der var en stor stor trold");
-        assertEquals(room2.getDescription(), "Per");
-    }*/
-  /*  @Test 
-    public void checkUser(){
-        boolean per = dao.checkUser("Per");
-        boolean falsez = dao.checkUser("false");
-        assertEquals(per, true);
-        assertEquals(falsez, false);
-        
+    public void createUniquePlayerId() {
+        Controller ctrl = new Controller(dao);
+        dao.createUser(dao.createUniquePlayerId(), "bob", ctrl.createPlayerRoomId());
+        int check = dao.createUniquePlayerId();
+        assertEquals( check ,2);
+
     }
-    */
-//    @Test
-//    public void sortDirec(){
-//        ArrayList<Link> list = dao.getDirection(1);
-//        
-//        PNGPathCreator png = new PNGPathCreator();
-//        
-//        String directions = png.pathCreator(list);
-//        Controller ctrl = new Controller ();
-//        dao.createUser(dao.createUniquePlayerId(),"bob",ctrl.createPlayerRoomId());
-//       int check =  dao.createUniquePlayerId();
-//        
-//        assertEquals(4, check);
-//        
-//    }
-//    
-//    @Test
-//    public void getRoomItems(){
-//        ArrayList <Item> list = dao.getRoomItems(1);
-//        
-//        assertEquals(list.size(),1);
-//        assertEquals(list.get(0).getX(),200);
-//        dao.removeItem(1);
-//        list = dao.getRoomItems(1);
-//        assertEquals(list.size(), 0);
-//    }
-//    
+
     @Test
-    public void updateMonster(){
+    public void getRoomItems() {
+        ArrayList<Item> list = dao.getRoomItems(1);
+
+        assertEquals(list.size(), 2);
+        assertEquals(list.get(0).getX(), 200);
+        dao.removeItem(1);
+        list = dao.getRoomItems(1);
+        assertEquals(list.size(), 1);
+    }
+
+    @Test
+    public void updateMonster() {
         Monster monster = dao.getMonster(1);
         monster.setHealth(3);
-       dao.updateMonster(monster);
-       
-       assertEquals(monster.getHealth(), 3);
-       
-       
+        dao.updateMonster(monster);
+
+        assertEquals(monster.getHealth(), 3);
+
     }
 }

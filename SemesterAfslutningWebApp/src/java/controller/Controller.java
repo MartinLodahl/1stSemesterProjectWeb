@@ -16,7 +16,6 @@ public class Controller {
     }
 
     public int createPlayerRoomId() {
-        System.out.println("room nr generaet");
         return (int) Math.floor((Math.random() * 5) + 1);
     }
 
@@ -49,7 +48,6 @@ public class Controller {
 //    public int createPlayer()
 //    {
 //        int uniqPlayerId = dao.createUniquePlayerId();
-//        System.out.println("Talk fra unique"+uniqPlayerId);
 //        int playRoomId = createPlayerRoomId();
 //        dao.createUser(uniqPlayerId, "marton", playRoomId);
 //        
