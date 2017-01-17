@@ -10,6 +10,7 @@ var nameLabel = document.getElementById('label-name');
 var nameDiv = document.getElementById("name-div");
 var hpDiv = document.getElementById("hp-div");
 var hpBar = document.getElementById("hp-bar");
+var statDiv = document.getElementById("stat-div");
 
 var currentRoom = 0;
 var playerId = 0;
@@ -120,6 +121,8 @@ function show(obj) {
     hpDiv.style.display = 'block';
     // start: 36, stop: 464, diff: 428
     hpBar.style.width = Math.floor(36 + obj.player.health * 428 / 100) + 'px';
+    statDiv.innerText = 'att: '+obj.player.attack+' def: '+
+            obj.player.defense+' gold: '+obj.player.gold;
 }
 
 function logIn() {
