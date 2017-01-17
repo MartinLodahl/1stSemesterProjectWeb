@@ -52,48 +52,46 @@ public class Gameserv extends HttpServlet {
                 JsonResponse jResponse = new JsonResponse();
                 Player player;
                 // finder det næste rooms ID
-                if (action.equals("UPDATE")) {
-
-                    player = dao.getPlayer(playerId);
-                    jResponse.response(player, dao, png, response, action);
-                } else if (action.equals("PICKUP")) {
-                    
-                     player = dao.getPlayer(playerId);
-                    int itemId = Integer.parseInt(request.getParameter("itemId"));
-                    ctrl.applyItem(player, itemId);
-                    jResponse.response(player, dao, png, response, action);
-                } else if (action.equals("ATTACK")) {
-                    player = dao.getPlayer(playerId);
-                    int monsterId = Integer.parseInt(request.getParameter("monsterId"));
-                    MonsterType monsterType = dao.getMonsterType(monsterId);
-                    Monster monster = dao.getMonster(monsterId);
-                    if (monster.getHealth() == -1) {
-                        monster.setHealth(monsterType.getHealth());
-                        monster.setAttack(monsterType.getAttack());
-                    }
-
-                    ctrl.fight(monster, player);
-
-                    if (monster.getHealth() == 0) {
-                        dao.removeMonster(monster);
-                    }
-
-                    jResponse.response(player, dao, png, response, action);
-                } else {
-                    if (playerId == 0) {
+                switch (action) {
+                    case "UPDATE":
+                        player = dao.getPlayer(playerId);
+                        jResponse.response(player, dao, png, response, action);
+                        break;
+                    case "PICKUP":
+                        player = dao.getPlayer(playerId);
+                        int itemId = Integer.parseInt(request.getParameter("itemId"));
+                        ctrl.applyItem(player, itemId);
+                        jResponse.response(player, dao, png, response, action);
+                        break;
+                    case "ATTACK":
+                        player = dao.getPlayer(playerId);
+                        int monsterId = Integer.parseInt(request.getParameter("monsterId"));
+                        MonsterType monsterType = dao.getMonsterType(monsterId);
+                        Monster monster = dao.getMonster(monsterId);
+                        if (monster.getHealth() == -1) {
+                            monster.setHealth(monsterType.getHealth());
+                            monster.setAttack(monsterType.getAttack());
+                        }   ctrl.fight(monster, player);
+                        if (monster.getHealth() == 0) {
+                            dao.removeMonster(monster);
+                        }   jResponse.response(player, dao, png, response, action);
+                        break;
+                    case "START":
                         String name = request.getParameter("playerName");
                         playerId = dao.createUniquePlayerId();
                         int playRoomId = ctrl.createPlayerRoomId();
                         player = dao.createUser(playerId, name, playRoomId);
-
-                    } else {
+                        jResponse.response(player, dao, png, response, action);
+                        break;
+                    case "GOTO":
                         String direction = request.getParameter("direction");
                         player = dao.getPlayer(playerId);
                         int nextRoomId = dao.currentRoomId(currentroomId, direction);
                         player.setRoomId(nextRoomId);
                         dao.updateUser(nextRoomId, playerId);
-                    }
-                    jResponse.response(player, dao, png, response, action);
+                        jResponse.response(player, dao, png, response, action);
+                    default:
+                        break;
                 }
 
             } catch (Exception ex) {
