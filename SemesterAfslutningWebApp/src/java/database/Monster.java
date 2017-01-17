@@ -1,6 +1,7 @@
 package database;
 
 public class Monster {
+    private int playerId;
     private int id;
     private int type;
     private int roomId;
@@ -9,7 +10,8 @@ public class Monster {
     private int x;
     private int y;
 
-    public Monster(int id, int type, int roomId, int health, int attack, int x, int y) {
+    public Monster(int playerId, int id, int type, int roomId, int health, int attack, int x, int y) {
+        this.playerId = playerId;
         this.id = id;
         this.type = type;
         this.roomId = roomId;
@@ -17,6 +19,14 @@ public class Monster {
         this.attack = attack;
         this.x = x;
         this.y = y;
+    }
+
+    public int getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerId(int playerId) {
+        this.playerId = playerId;
     }
 
     @Override
