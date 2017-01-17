@@ -4,35 +4,27 @@ import database.ICharacter;
 
 public class Player implements ICharacter
 {
+    private int id;
     private String name;
-    private int health,roomId,playerId,attackDmg, gold;
+    private int health, roomId, attackDmg, gold;
     
-    public Player (String name){
+    public Player(int id, String name, int health,int attack, int roomId, int gold) {
+        this.id = id;
         this.name = name;
-        this.health=100;
-        this.gold =0;
+        this.health = health;
+        this.attackDmg = attack;
+        this.roomId = roomId;
+        this.gold = gold;
     }
 
-    public Player(String name, int health, int roomId, int playerId) {
-        this.name = name;
-        this.health = health;
-        this.roomId = roomId;
-        this.playerId = playerId;
+    public int getId()
+    {
+        return id;
     }
-       public Player(String name, int health,int attack, int roomId, int playerId) {
-        this.name = name;
-        this.health = health;
-        this.attackDmg = attack;
-        this.roomId = roomId;
-        this.playerId = playerId;
-    }
-       public Player(String name, int health,int attack, int roomId, int playerId, int gold) {
-        this.name = name;
-        this.health = health;
-        this.attackDmg = attack;
-        this.roomId = roomId;
-        this.playerId = playerId;
-        this.gold = gold;
+
+    public void setId(int id)
+    {
+        this.id = id;
     }
 
     public int getGold() {
@@ -42,8 +34,6 @@ public class Player implements ICharacter
     public void setGold(int gold) {
         this.gold = gold;
     }
-
-   
 
     @Override
     public String getName()
@@ -77,23 +67,13 @@ public class Player implements ICharacter
 
     @Override
     public String toString() {
-        return "Player{" + "name=" + name + ", health=" + health + ", roomId=" + roomId + ", playerId=" + playerId + ", attackDmg=" + attackDmg + '}';
+        return "Player{" + "name=" + name + ", health=" + health + ", roomId=" + roomId + ", id=" + id + ", attackDmg=" + attackDmg + '}';
     }
 
     @Override
     public int getRoomId()
     {
         return roomId;
-    }
-
-    public int getPlayerId()
-    {
-        return playerId;
-    }
-
-    public void setPlayerId(int playerId)
-    {
-        this.playerId = playerId;
     }
 
     @Override

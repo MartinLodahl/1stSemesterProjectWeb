@@ -93,13 +93,19 @@ public class DAO {
 
     public Player createUser(int playerId, String name, int roomId) {
         try {
-            String query = "INSERT INTO players(playerId ,name, health,attackDmg, gold, roomId) VALUES (?, ?, 100,5, 0, ?);";
+            int health = 100;
+            int attack = 5;
+            int gold = 0;
+            String query = "INSERT INTO players(playerId ,name, health,attackDmg, roomId, gold) VALUES (?, ?, ?, ?, ?, ?);";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, playerId);
             stmt.setString(2, name);
-            stmt.setInt(3, roomId);
+            stmt.setInt(3, health);
+            stmt.setInt(4, attack);
+            stmt.setInt(5, roomId);
+            stmt.setInt(6, gold);
             stmt.executeUpdate();
-            Player player = new Player(name, 100, roomId, playerId);
+            Player player = new Player(playerId, name, health, attack, roomId, gold);
             return player;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -130,7 +136,7 @@ public class DAO {
             stmt.setInt(3, player.getAttackDmg());
             stmt.setInt(4, player.getRoomId());
             stmt.setInt(5, player.getGold());
-            stmt.setInt(6, player.getPlayerId());
+            stmt.setInt(6, player.getId());
             stmt.executeUpdate();
 
         } catch (Exception ex) {
@@ -151,7 +157,7 @@ public class DAO {
             int attack = res.getInt("attackDmg");
             int room = res.getInt("roomId");
             int gold = res.getInt("gold");
-            Player player = new Player(name, health,attack, room, playerId, gold);
+            Player player = new Player(playerId, name, health, attack, room, gold);
             return player;
 
         } catch (Exception ex) {
