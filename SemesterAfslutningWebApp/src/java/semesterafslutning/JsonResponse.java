@@ -51,7 +51,7 @@ public class JsonResponse
             for (int i = 0; i < itemList.size(); i++)
             {
                 out.print("{\"id\":" + itemList.get(i).getId()
-                        + ", \"picture\":\"PicturesItems/" + dao.getItemPicture(itemList.get(i).getItemType()) + ".png\","
+                        + ", \"picture\":\"PicturesItems/" + dao.getItemPicture(itemList.get(i).getType()) + ".png\","
                         + " \"x\":" + itemList.get(i).getX()
                         + ", \"y\":" + itemList.get(i).getY() + "}");
                 if (itemList.size() - 1 > i)
@@ -80,9 +80,9 @@ public class JsonResponse
                     // close monster
                     "],");
             // Player
-            out.print("\"playerId\":" + player.getPlayerId() + ",");
+            out.print("\"playerId\":" + player.getId() + ",");
             out.print("\"player\":");
-            out.print("{\"id\":"+player.getPlayerId());
+            out.print("{\"id\":"+player.getId());
             out.print(",\"health\":"+player.getHealth());
             out.print(",\"name\":\""+player.getName()+"\"");
             out.print(",\"attack\":"+player.getAttackDmg());
