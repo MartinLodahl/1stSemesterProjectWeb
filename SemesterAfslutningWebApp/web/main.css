@@ -206,3 +206,8 @@ body {
     cursor: pointer;
 }
 
+.monster {
+    cursor: pointer;
+    width: 200px;
+    height: 200px;
+}

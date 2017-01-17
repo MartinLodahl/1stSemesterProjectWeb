@@ -66,7 +66,7 @@ function addItem(item) {
 function addMonster(monster) {
     var img = new Image();
     img.src = monster.picture;
-    img.className = 'item';
+    img.className = 'monster';
     img.style.position = 'absolute';
     img.style.left = monster.x+'px';
     img.style.top = monster.y+'px';
