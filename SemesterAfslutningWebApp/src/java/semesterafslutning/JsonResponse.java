@@ -9,6 +9,7 @@ import controller.PNGPathCreator;
 import database.Player;
 import database.Item;
 import database.DAO;
+import database.Link;
 import database.Monster;
 import database.MonsterType;
 import java.io.IOException;
@@ -26,6 +27,14 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class JsonResponse
 {
+    public static boolean isMoveValid(String direction, ArrayList<Link> links) {
+        for (int i = 0; i < links.size(); i++) {
+            if (direction.equals(links.get(i).getDirection())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public void response(Player player, DAO dao, PNGPathCreator png, HttpServletResponse response, String action) throws SQLException
     {
@@ -34,25 +43,24 @@ public class JsonResponse
         {
             out = response.getWriter();
             response.setContentType("application/json");
-            out.print("{"
-                    + "\"room\":" + player.getRoomId() + ","
-//                    + "\"player\": [" 
-                    
-//                    + "\"playerHealth\":" + player.getHealth()+ ","
-//                    + "\"playerDamage\":" + player.getAttackDmg()+ ","
-//                    + "],"
-                    + "\"picture\": \"PicturesRooms/" + png.pathCreator(dao.getDirection(player.getRoomId())) + ".png\","
-                    + "\"north\":" + png.ValidMove("NORTH", dao.getDirection(player.getRoomId())) + ","
-                    + "\"south\": " + png.ValidMove("SOUTH", dao.getDirection(player.getRoomId())) + ","
-                    + "\"east\": " + png.ValidMove("EAST", dao.getDirection(player.getRoomId())) + ","
-                    + "\"west\": " + png.ValidMove("WEST", dao.getDirection(player.getRoomId())) + ","
-                    + "\"items\": [");
+            ArrayList<Link> links = dao.getDirection(player.getRoomId());
+            out.print("{\"room\":" + player.getRoomId()
+                    + ",\"picture\": \"PicturesRooms/" + png.createPath(links) + ".png\"");
+            
+            // Directions
+            out.print(",\"north\":" + isMoveValid("NORTH", links)
+                    + ",\"south\": " + isMoveValid("SOUTH", links)
+                    + ",\"east\": " + isMoveValid("EAST", links)
+                    + ",\"west\": " + isMoveValid("WEST", links));
+
+            // Items
+            out.print(",\"items\": [");
             ArrayList<Item> itemList = dao.getRoomItems(player.getRoomId());
             for (int i = 0; i < itemList.size(); i++)
             {
                 out.print("{\"id\":" + itemList.get(i).getId()
-                        + ", \"picture\":\"PicturesItems/" + dao.getItemPicture(itemList.get(i).getType()) + ".png\","
-                        + " \"x\":" + itemList.get(i).getX()
+                        + ", \"picture\":\"PicturesItems/" + dao.getItemPicture(itemList.get(i).getType()) + ".png\""
+                        + ", \"x\":" + itemList.get(i).getX()
                         + ", \"y\":" + itemList.get(i).getY() + "}");
                 if (itemList.size() - 1 > i)
                 {
@@ -61,6 +69,7 @@ public class JsonResponse
             }
             out.print("],");
             
+            // Monsters
             out.print("\"monsters\":[");
             ArrayList<Monster> monsters = dao.getRoomMonsters(player.getRoomId());
             for (int i = 0; i < monsters.size(); i++) {
@@ -76,9 +85,8 @@ public class JsonResponse
                     out.print(",");
                 }
             }
-            out.print(
-                    // close monster
-                    "],");
+            out.print("],");
+
             // Player
             out.print("\"playerId\":" + player.getId() + ",");
             out.print("\"player\":");
