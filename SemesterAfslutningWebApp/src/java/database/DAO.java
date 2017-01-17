@@ -215,9 +215,9 @@ public class DAO {
             return (res.getInt("NUMBER") + 1);
 
         } catch (Exception ex) {
-
+            ex.printStackTrace();
+            return 0;
         }
-        return 5;
     }
 
     public ArrayList<Item> getRoomItems(int playerId, int roomId) {
@@ -254,6 +254,7 @@ public class DAO {
             stmt.setInt(1, playerId);
             stmt.executeUpdate();
         } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -265,6 +266,7 @@ public class DAO {
             stmt.setInt(1, playerId);
             stmt.executeUpdate();
         } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
