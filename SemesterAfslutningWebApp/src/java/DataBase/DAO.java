@@ -98,7 +98,7 @@ public class DAO {
 
     public Player createUser(int playerId, String name, int roomId) {
         try {
-            String query = "INSERT INTO players(playerId ,name, health,attackDmg, gold, roomId) VALUES (?, ?, 10,5, 0, ?);";
+            String query = "INSERT INTO players(playerId ,name, health,attackDmg, gold, roomId) VALUES (?, ?, 100,5, 0, ?);";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, playerId);
             stmt.setString(2, name);
