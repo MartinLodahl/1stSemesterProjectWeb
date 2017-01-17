@@ -18,10 +18,16 @@ public class Controller {
     public int createPlayerRoomId() {
         return (int) Math.floor((Math.random() * 5) + 1);
     }
+    
+    public int damageCalculator (int incommingDamage, int defence){
+        return (100/(100+defence))*incommingDamage;
+    }
 
     public void fight(Monster monster, Player player) {
-
-        player.setHealth(player.getHealth() - monster.getAttack());
+        
+        
+        
+        player.setHealth(player.getHealth() - damageCalculator(monster.getAttack(),player.getDefense()));
         monster.setHealth(monster.getHealth() - player.getAttackDmg());
         dao.updateMonster(monster);
         dao.updateUser(player);

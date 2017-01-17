@@ -6,12 +6,13 @@ public class Player implements ICharacter
 {
     private int id;
     private String name;
-    private int health, roomId, attackDmg, gold;
+    private int health, roomId, attackDmg, gold, defense;
     
-    public Player(int id, String name, int health,int attack, int roomId, int gold) {
+    public Player(int id, String name, int health,int attack,int defense, int roomId, int gold) {
         this.id = id;
         this.name = name;
         this.health = health;
+        this.defense = defense;
         this.attackDmg = attack;
         this.roomId = roomId;
         this.gold = gold;
@@ -26,6 +27,17 @@ public class Player implements ICharacter
     {
         this.id = id;
     }
+
+    public int getDefense()
+    {
+        return defense;
+    }
+
+    public void setDefence(int defence)
+    {
+        this.defense = defence;
+    }
+    
 
     public int getGold() {
         return gold;
