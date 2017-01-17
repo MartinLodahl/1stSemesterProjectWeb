@@ -131,7 +131,7 @@ public class DAO {
 
     public void updateUser(Player player) {
         try {
-            String query = "UPDATE players SET name = ?, health =?, attackDmg = ?,defense, roomId = ?, gold =? WHERE playerId=?;";
+            String query = "UPDATE players SET name = ?, health =?, attackDmg = ?,defense = ?, roomId = ?, gold =? WHERE playerId=?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setString(1, player.getName());
             stmt.setInt(2, player.getHealth());

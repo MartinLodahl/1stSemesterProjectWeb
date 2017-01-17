@@ -20,14 +20,15 @@ public class Controller {
     }
     
     public int damageCalculator (int incommingDamage, int defence){
-        return (100/(100+defence))*incommingDamage;
+        
+        return (int) ((100.0/(100.0+defence))*incommingDamage);
     }
 
     public void fight(Monster monster, Player player) {
         
+       int monsterDmg = damageCalculator(monster.getAttack(),player.getDefense());
+       player.setHealth(player.getHealth() - monsterDmg);
         
-        
-        player.setHealth(player.getHealth() - damageCalculator(monster.getAttack(),player.getDefense()));
         monster.setHealth(monster.getHealth() - player.getAttackDmg());
         dao.updateMonster(monster);
         dao.updateUser(player);
@@ -41,7 +42,7 @@ public class Controller {
                     if(itemType.getStat() == 1){
                         player.setGold(player.getGold()+itemType.getModifier());
                     } else if (itemType.getStat() == 2){
-                        player.setHealth(player.getHealth()+itemType.getModifier());
+                       player.setDefence(player.getDefense()+itemType.getModifier());
                     } else if (itemType.getStat()==3){
                         player.setAttackDmg(player.getAttackDmg() + itemType.getModifier());
                     }
