@@ -63,7 +63,10 @@
  (0, 1, 1, 1,-1,-1, 600, 600),
  (0, 2, 2, 2,-1,-1, 200, 400),
  (0, 3, 3, 3,-1,-1, 300, 200),
- (0, 4, 4, 4,-1,-1, 400, 400);
+ (0, 4, 4, 4,-1,-1, 400, 400),
+ (0, 5, 7, 7,-1,-1, 200, 300);
+ (0, 6, 7, 6,-1,-1, 800, 400);
+ (0, 7, 8, 5,-1,-1, 400, 400);
 
  
 INSERT INTO monstertype
@@ -71,7 +74,10 @@ INSERT INTO monstertype
  (1, 'PicturesPokemon/Psyduck', 'ARHWOO', 20, 5),
  (2, 'PicturesPokemon/Onix', 'Watch out, he is throwing bones!', 30, 5),
  (3, 'PicturesPokemon/Golem', 'Must.Have.BRAAAAAINS!', 50, 2),
- (4, 'PicturesPokemon/Gengar', 'This person.. It is a person! KILL IT', 10, 2);
+ (4, 'PicturesPokemon/Gengar', 'This person.. It is a person! KILL IT', 10, 2),
+ (5, 'PicturesPokemon/Mewtwo', '', 1000, 50),
+ (6, 'PicturesPokemon/Dugtrio', '', 100, 2),
+ (7, 'PicturesPokemon/Gastly', '', 50, 80);
 
  
  Insert into itemtypes
