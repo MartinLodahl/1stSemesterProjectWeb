@@ -30,6 +30,16 @@
     font-size: 40px;
 }
 
+#stat-div {
+    position: absolute;
+    left: 750px;
+    top: 100px;
+    
+    color: #fff;
+    font-family: RingBearer, serif;
+    font-size: 30px;
+}
+
 #hp-under {
     position: absolute;
     left: 10px;
