@@ -22,6 +22,7 @@
  name varchar(40),
  health int,
  attackDmg int,
+ defense int,
  gold int,
  roomId int);
  
@@ -100,4 +101,10 @@ VALUES
 (4, 'NORTH', 5),
 (5, 'SOUTH', 4),
 (5, 'EAST', 2),
+(2, 'NORTH', 6),
+(6, 'SOUTH', 2),
+(6, 'WEST', 7),
+(7, 'EAST', 6),
+(8, 'WEST', 6),
+(6, 'EAST', 8),
 (0, 'NORTH', 1);
