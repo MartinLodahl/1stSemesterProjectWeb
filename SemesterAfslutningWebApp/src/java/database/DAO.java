@@ -227,7 +227,8 @@ public class DAO {
         try {
             String query = "SELECT * FROM items WHERE playerId = ? AND roomId =?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
-            stmt.setInt(1, roomId);
+            stmt.setInt(1, playerId);
+            stmt.setInt(2, roomId);
             ResultSet res = stmt.executeQuery();
             while (res.next()) {
 
@@ -295,12 +296,13 @@ public class DAO {
         return null;
     }
 
-    public ArrayList<Monster> getRoomMonsters(int roomId) {
+    public ArrayList<Monster> getRoomMonsters(int playerId, int roomId) {
         ArrayList<Monster> list = new ArrayList<>();
         try {
-            String query = "SELECT * FROM monster WHERE roomId=?;";
+            String query = "SELECT * FROM monster WHERE playerId=? AND roomId=?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
-            stmt.setInt(1, roomId);
+            stmt.setInt(1, playerId);
+            stmt.setInt(2, roomId);
             ResultSet res = stmt.executeQuery();
             while (res.next()) {
                 int id = res.getInt("id");

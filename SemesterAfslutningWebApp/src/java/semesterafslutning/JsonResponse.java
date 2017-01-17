@@ -72,7 +72,7 @@ public class JsonResponse
             
             // Monsters
             out.print("\"monsters\":[");
-            ArrayList<Monster> monsters = dao.getRoomMonsters(player.getRoomId());
+            ArrayList<Monster> monsters = dao.getRoomMonsters(player.getId(), player.getRoomId());
             for (int i = 0; i < monsters.size(); i++) {
                 Monster monster = monsters.get(i);
                 MonsterType monsterType = dao.getMonsterType(monster.getType());
