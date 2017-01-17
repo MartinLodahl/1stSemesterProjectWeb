@@ -17,8 +17,6 @@ import static org.junit.Assert.*;
 import controller.Controller;
 import database.Item;
 import database.Link;
-import controller.PNGPathCreator;
-import database.Room;
 
 /**
  *
