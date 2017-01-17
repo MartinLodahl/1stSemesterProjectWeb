@@ -28,7 +28,7 @@
  
  CREATE TABLE items
  (playerId int NOT NULL DEFAULT 0,
- ItemId int NOT NULL UNIQUE,
+ ItemId int NOT NULL,
  type int,
  x int,
  y int,
@@ -43,7 +43,7 @@
 
  CREATE TABLE monster
  (playerId int NOT NULL DEFAULT 0,
- ID int (11) UNIQUE,
+ ID int (11),
  type int,
  roomId int,
  health int(11),
