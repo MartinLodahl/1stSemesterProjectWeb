@@ -247,7 +247,19 @@ public class DAO {
 
     public void copyItems(int playerId) {
         try {
-            String query = "INSERT INTO items (playerId, itemId, type, x, y, roomId) SELECT ?, itemId, type, x, y, roomId FROM items;";
+            String query = "INSERT INTO items (playerId, itemId, type, x, y, roomId) "+
+                           "SELECT ?, itemId, type, x, y, roomId FROM items WHERE playerId=0;";
+            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+            stmt.setInt(1, playerId);
+            stmt.executeUpdate();
+        } catch (Exception ex) {
+        }
+    }
+
+    public void copyMonsters(int playerId) {
+        try {
+            String query = "INSERT INTO monster (playerId, id, type, roomId, health, attack, x, y) "+
+                           "SELECT ?, id, type, roomId, health, attack, x, y FROM monster WHERE playerId=0;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, playerId);
             stmt.executeUpdate();
