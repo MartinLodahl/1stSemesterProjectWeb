@@ -231,7 +231,7 @@ public class DAO {
                 int x = res.getInt("x");
                 int y = res.getInt("y");
 
-                temp.add(new Item(itemId, x, y, roomId, type));
+                temp.add(new Item(itemId, type, roomId, x, y));
             }
 
         } catch (Exception ex) {

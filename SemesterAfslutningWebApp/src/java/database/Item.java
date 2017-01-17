@@ -2,26 +2,48 @@ package database;
 
 public class Item
 {
- int itemId,x,y,roomId;
- int type;
+    private int id;
+    private int roomId;
+    private int x, y;
+    private int type;
 
-    public Item(int itemId, int x, int y, int roomId, int type)
+    public Item(int id, int type, int roomId, int x, int y)
     {
-        this.itemId = itemId;
+        this.id = id;
+        this.type = type;
+        this.roomId = roomId;
         this.x = x;
         this.y = y;
-        this.roomId = roomId;
+    }
+
+    public int getId()
+    {
+        return id;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
+    }
+
+    public int getType()
+    {
+        return type;
+    }
+
+    public void setType(int type)
+    {
         this.type = type;
     }
 
-    public int getItemId()
+    public int getRoomId()
     {
-        return itemId;
+        return roomId;
     }
 
-    public void setItemId(int itemId)
+    public void setRoomId(int roomId)
     {
-        this.itemId = itemId;
+        this.roomId = roomId;
     }
 
     public int getX()
@@ -43,25 +65,4 @@ public class Item
     {
         this.y = y;
     }
-
-    public int getRoomId()
-    {
-        return roomId;
-    }
-
-    public void setRoomId(int roomId)
-    {
-        this.roomId = roomId;
-    }
-
-    public int getItemType()
-    {
-        return type;
-    }
-
-    public void setType(int itemType)
-    {
-        this.type = itemType;
-    }
-    
 }
