@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DataBase;
+package database;
 
-import controller.Link;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,11 +13,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
-import controller.ICharacter;
-import controller.Item;
 import controller.LinkCollectionSort;
-import controller.Player;
-import controller.Room;
 import java.sql.SQLException;
 
 /**

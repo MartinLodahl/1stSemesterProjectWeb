@@ -1,8 +1,9 @@
 package controller;
 
-import DataBase.DAO;
-import DataBase.DBConnector;
-import DataBase.Monster;
+import database.Player;
+import database.DAO;
+import database.DBConnector;
+import database.Monster;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

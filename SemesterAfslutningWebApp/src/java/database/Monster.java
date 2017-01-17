@@ -1,4 +1,4 @@
-package DataBase;
+package database;
 
 public class Monster {
     private int id;

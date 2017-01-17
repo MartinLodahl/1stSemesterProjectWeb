@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 
-import DataBase.DAO;
-import DataBase.DBConnector;
-import DataBase.Monster;
+import database.DAO;
+import database.DBConnector;
+import database.Monster;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -15,10 +15,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import controller.Controller;
-import controller.Item;
-import controller.Link;
+import database.Item;
+import database.Link;
 import controller.PNGPathCreator;
-import controller.Room;
+import database.Room;
 
 /**
  *

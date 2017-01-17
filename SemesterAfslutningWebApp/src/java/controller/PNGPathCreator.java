@@ -1,5 +1,6 @@
 package controller;
 
+import database.Link;
 import java.util.ArrayList;
 
 public class PNGPathCreator {

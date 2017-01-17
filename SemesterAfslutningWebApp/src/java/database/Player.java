@@ -1,4 +1,6 @@
-package controller;
+package database;
+
+import database.ICharacter;
 
 public class Player implements ICharacter
 {

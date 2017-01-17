@@ -6,11 +6,11 @@
 package semesterafslutning;
 
 import controller.PNGPathCreator;
-import controller.Player;
-import controller.Item;
-import DataBase.DAO;
-import DataBase.Monster;
-import DataBase.MonsterType;
+import database.Player;
+import database.Item;
+import database.DAO;
+import database.Monster;
+import database.MonsterType;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
