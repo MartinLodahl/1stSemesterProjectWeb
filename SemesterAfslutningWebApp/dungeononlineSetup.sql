@@ -27,7 +27,8 @@
  roomId int);
  
  CREATE TABLE items
- (ItemId int NOT NULL UNIQUE,
+ (playerId int NOT NULL DEFAULT 0,
+ ItemId int NOT NULL UNIQUE,
  type int,
  x int,
  y int,
@@ -41,7 +42,8 @@
  note varchar(200));
 
  CREATE TABLE monster
- (ID int (11) UNIQUE,
+ (playerId int NOT NULL DEFAULT 0,
+ ID int (11) UNIQUE,
  type int,
  roomId int,
  health int(11),
@@ -58,10 +60,10 @@
  
  INSERT INTO monster
  values 
- (1, 1, 1,-1,-1, 600, 600),
- (2, 2, 2,-1,-1, 200, 400),
- (3, 3, 3,-1,-1, 300, 200),
- (4, 4, 4,-1,-1, 400, 400);
+ (0, 1, 1, 1,-1,-1, 600, 600),
+ (0, 2, 2, 2,-1,-1, 200, 400),
+ (0, 3, 3, 3,-1,-1, 300, 200),
+ (0, 4, 4, 4,-1,-1, 400, 400);
 
  
 INSERT INTO monstertype
@@ -82,13 +84,13 @@ INSERT INTO monstertype
  
  INSERT INTO items
  VALUES
- (1,1,200,200,1),
-  (2,1,300,500,3),
-   (3,1,200,400,4),
-    (4,2,300,450,5),
-     (5,3,650,250,2),
-      (6,4,700,400,3),
-       (7,5,500,200,1);
+ (0, 1, 1,200,200,1),
+ (0, 2, 1,300,500,3),
+ (0, 3, 1,200,400,4),
+ (0, 4, 2,300,450,5),
+ (0, 5, 3,650,250,2),
+ (0, 6, 4,700,400,3),
+ (0, 7, 5,500,200,1);
  
  INSERT INTO link(room_id, direction, goto)
 VALUES 

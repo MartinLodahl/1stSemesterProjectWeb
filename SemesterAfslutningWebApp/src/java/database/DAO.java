@@ -220,12 +220,12 @@ public class DAO {
         return 5;
     }
 
-    public ArrayList<Item> getRoomItems(int roomId) {
+    public ArrayList<Item> getRoomItems(int playerId, int roomId) {
 
         ArrayList<Item> temp = new ArrayList();
 
         try {
-            String query = "SELECT * FROM items WHERE roomId =?;";
+            String query = "SELECT * FROM items WHERE playerId = ? AND roomId =?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, roomId);
             ResultSet res = stmt.executeQuery();
@@ -243,6 +243,16 @@ public class DAO {
 
         }
         return temp;
+    }
+
+    public void copyItems(int playerId) {
+        try {
+            String query = "INSERT INTO items (playerId, itemId, type, x, y, roomId) SELECT ?, itemId, type, x, y, roomId FROM items;";
+            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+            stmt.setInt(1, playerId);
+            stmt.executeUpdate();
+        } catch (Exception ex) {
+        }
     }
 
     public void removeItem(int itemId) {

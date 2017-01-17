@@ -84,12 +84,12 @@ public class DAOtest {
 
     @Test
     public void getRoomItems() {
-        ArrayList<Item> list = dao.getRoomItems(1);
+        ArrayList<Item> list = dao.getRoomItems(0, 1);
 
         assertEquals(list.size(), 2);
         assertEquals(list.get(0).getX(), 200);
         dao.removeItem(1);
-        list = dao.getRoomItems(1);
+        list = dao.getRoomItems(0, 1);
         assertEquals(list.size(), 1);
     }
 

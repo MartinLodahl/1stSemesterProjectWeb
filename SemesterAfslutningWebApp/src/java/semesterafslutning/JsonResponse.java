@@ -56,7 +56,7 @@ public class JsonResponse
 
             // Items
             out.print(",\"items\": [");
-            ArrayList<Item> itemList = dao.getRoomItems(player.getRoomId());
+            ArrayList<Item> itemList = dao.getRoomItems(player.getId(), player.getRoomId());
             for (int i = 0; i < itemList.size(); i++)
             {
                 out.print("{\"id\":" + itemList.get(i).getId()
