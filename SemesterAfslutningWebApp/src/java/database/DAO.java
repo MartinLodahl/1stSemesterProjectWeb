@@ -399,9 +399,10 @@ public class DAO {
 
     public void removeMonster(Monster monster) {
          try {
-            String query = "DELETE FROM monster WHERE ID =?;";
+            String query = "DELETE FROM monster WHERE playerId=? AND id=?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
-            stmt.setInt(1, monster.getId());
+            stmt.setInt(1, monster.getPlayerId());
+            stmt.setInt(2, monster.getId());
             stmt.executeUpdate();
         } catch (Exception ex) {
 
