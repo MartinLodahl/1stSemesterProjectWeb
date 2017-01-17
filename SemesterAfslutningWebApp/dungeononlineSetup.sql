@@ -64,12 +64,13 @@
  (4, 4, 4,-1,-1, 400, 400);
 
  
- INSERT INTO monstertype
+INSERT INTO monstertype
  values 
- (1, '', 'This is a mean alf', 20, 5),
- (2, '', 'This is a mean dog', 30, 5),
- (3, '', 'This is the Flying DutchMan', 50, 2),
- (4, '', 'This person.. Is it a person? KILL IT', 10, 2);
+ (1, 'PicturesMonsters/UglyKoreanWolf', 'ARHWOO', 20, 5),
+ (2, 'PicturesMonsters/Dragon', 'Watch out, he is throwing bones!', 30, 5),
+ (3, 'PicturesMonsters/Zombie', 'Must.Have.BRAAAAAINS!', 50, 2),
+ (4, 'PicturesMonsters/ManWithAxe', 'This person.. It is a person! KILL IT', 10, 2);
+
  
  Insert into itemtypes
  values
