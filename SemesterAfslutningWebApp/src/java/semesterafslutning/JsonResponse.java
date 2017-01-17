@@ -5,6 +5,7 @@
  */
 package semesterafslutning;
 
+import controller.Controller;
 import controller.PNGPathCreator;
 import database.Player;
 import database.Item;
@@ -38,6 +39,7 @@ public class JsonResponse
 
     public void response(Player player, DAO dao, PNGPathCreator png, HttpServletResponse response, String action) throws SQLException
     {
+        Controller ctrl = new Controller (dao);
         PrintWriter out = null;
         try
         {
@@ -79,6 +81,8 @@ public class JsonResponse
                 out.print("{\"id\":" + monster.getId()
                         + ", \"picture\":\"PicturesItems/" + monsterType.getPicture() + ".png\""
                         + ", \"description\":\"" + monsterType.getDescription() + "\""
+                        + ", \"monsterAtt\":" + ctrl.damageCalculator(monster.getAttack(), player.getDefense())
+                        + ", \"playerAtt\":" + ctrl.damageCalculator(player.getAttackDmg(), 0)
                         + ", \"x\":" + monster.getX()
                         + ", \"y\":" + monster.getY() + "}");
                 if (monsters.size() - 1 > i) {
