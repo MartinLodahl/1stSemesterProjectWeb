@@ -21,8 +21,6 @@ public class Controller {
 
     public void fight(Monster monster, Player player) {
 
-        System.out.println("monster id" + monster.getId() + " monster health" + monster.getHealth());
-
         player.setHealth(player.getHealth() - monster.getAttack());
         monster.setHealth(monster.getHealth() - player.getAttackDmg());
         dao.updateMonster(monster);

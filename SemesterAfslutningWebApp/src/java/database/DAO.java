@@ -170,9 +170,7 @@ public class DAO {
         try {
             
             String query = "SELECT * FROM items WHERE itemId =?;";
-            System.out.println("1");
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
-            System.out.println("2");
             stmt.setInt(1, itemId);
             ResultSet res = stmt.executeQuery();
             res.next();
