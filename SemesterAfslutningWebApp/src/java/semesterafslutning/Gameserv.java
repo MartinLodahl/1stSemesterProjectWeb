@@ -57,10 +57,10 @@ public class Gameserv extends HttpServlet {
                     player = dao.getPlayer(playerId);
                     jResponse.response(player, dao, png, response, action);
                 } else if (action.equals("PICKUP")) {
-                    player = dao.getPlayer(playerId);
+                    
+                     player = dao.getPlayer(playerId);
                     int itemId = Integer.parseInt(request.getParameter("itemId"));
-
-                    dao.removeItem(itemId);
+                    ctrl.applyItem(player, itemId);
                     jResponse.response(player, dao, png, response, action);
                 } else if (action.equals("ATTACK")) {
                     player = dao.getPlayer(playerId);
@@ -71,11 +71,7 @@ public class Gameserv extends HttpServlet {
                         monster.setHealth(monsterType.getHealth());
                         monster.setAttack(monsterType.getAttack());
                     }
-                    // fight sequence
-//                    player.setHealth(player.getHealth() - monster.getAttack());
-//                    monster.setHealth(monster.getHealth() - player.getAttackDmg());
-//                    dao.updateMonster(monster);
-//                    dao.updateUser(player);
+
                     ctrl.fight(monster, player);
 
                     if (monster.getHealth() == 0) {

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import controller.ItemType;
 import controller.LinkCollectionSort;
 import java.sql.SQLException;
 
@@ -92,7 +93,7 @@ public class DAO {
 
     public Player createUser(int playerId, String name, int roomId) {
         try {
-            String query = "INSERT INTO players(playerId ,name, health,attackDmg, gold, roomId) VALUES (?, ?, 10,5, 0, ?);";
+            String query = "INSERT INTO players(playerId ,name, health,attackDmg, gold, roomId) VALUES (?, ?, 100,5, 0, ?);";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, playerId);
             stmt.setString(2, name);
@@ -122,13 +123,14 @@ public class DAO {
 
     public void updateUser(Player player) {
         try {
-            String query = "UPDATE players SET name = ?, health =?, attackDmg = ?, roomId = ? WHERE playerId=?;";
+            String query = "UPDATE players SET name = ?, health =?, attackDmg = ?, roomId = ?, gold =? WHERE playerId=?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setString(1, player.getName());
             stmt.setInt(2, player.getHealth());
             stmt.setInt(3, player.getAttackDmg());
             stmt.setInt(4, player.getRoomId());
-            stmt.setInt(5, player.getPlayerId());
+            stmt.setInt(5, player.getGold());
+            stmt.setInt(6, player.getPlayerId());
             stmt.executeUpdate();
 
         } catch (Exception ex) {
@@ -148,7 +150,8 @@ public class DAO {
             int health = res.getInt("health");
             int attack = res.getInt("attackDmg");
             int room = res.getInt("roomId");
-            Player player = new Player(name, health,attack, room, playerId);
+            int gold = res.getInt("gold");
+            Player player = new Player(name, health,attack, room, playerId, gold);
             return player;
 
         } catch (Exception ex) {
@@ -157,23 +160,44 @@ public class DAO {
         return null;
     }
 
-    public int getItemType(int itemId){
+    public int getItemTypeInt(int itemId){
         try {
+            
             String query = "SELECT * FROM items WHERE itemId =?;";
+            System.out.println("1");
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+            System.out.println("2");
             stmt.setInt(1, itemId);
             ResultSet res = stmt.executeQuery();
             res.next();
 
-            int itemType = res.getInt("itemType");
+            int itemType = res.getInt("type");
             return itemType;
         } catch (Exception ex) {
 
         }
-        return -1;
-        
-        
+        return -1;        
     }
+    
+    public ItemType getItemType(int type){
+        try {
+            String query = "SELECT * FROM itemtypes WHERE type=?;";
+            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+            stmt.setInt(1, type);
+            ResultSet res = stmt.executeQuery();
+            ItemType itemType;
+            res.next(); 
+            int stat = res.getInt("stat");
+            int modifier= res.getInt("modify");
+            String note = res.getString("note");
+            itemType = new ItemType(stat,modifier,note);
+
+            return itemType;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    } 
     
     public int createUniquePlayerId() {
 
@@ -273,7 +297,7 @@ public class DAO {
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, id);
             ResultSet res = stmt.executeQuery();
-            Monster monster = null;
+            Monster monster;
             res.next(); 
             int type = res.getInt("type");
             int roomId = res.getInt("roomId");

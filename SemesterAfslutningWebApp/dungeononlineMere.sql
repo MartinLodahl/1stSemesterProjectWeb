@@ -35,7 +35,7 @@
  CREATE TABLE itemtypes
  (type int,
  picture VARCHAR(40),
- stat double,
+ stat int,
  modify int,
  note varchar(200));
 
