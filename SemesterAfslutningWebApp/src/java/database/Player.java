@@ -1,7 +1,5 @@
 package database;
 
-import database.ICharacter;
-
 public class Player implements ICharacter
 {
     private int id;
