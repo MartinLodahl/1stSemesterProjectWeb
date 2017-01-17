@@ -94,6 +94,8 @@ public class JsonResponse
             out.print(",\"health\":"+player.getHealth());
             out.print(",\"name\":\""+player.getName()+"\"");
             out.print(",\"attack\":"+player.getAttackDmg());
+            //out.print(",\"defense\":"+player.getDefense());
+            out.print(",\"gold\":"+player.getGold());
             out.print("}");
             
             out.print("}");
