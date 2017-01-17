@@ -66,10 +66,10 @@
  
 INSERT INTO monstertype
  values 
- (1, 'PicturesMonsters/UglyKoreanWolf', 'ARHWOO', 20, 5),
- (2, 'PicturesMonsters/Dragon', 'Watch out, he is throwing bones!', 30, 5),
- (3, 'PicturesMonsters/Zombie', 'Must.Have.BRAAAAAINS!', 50, 2),
- (4, 'PicturesMonsters/ManWithAxe', 'This person.. It is a person! KILL IT', 10, 2);
+ (1, 'PicturesPokemon/Psyduck', 'ARHWOO', 20, 5),
+ (2, 'PicturesPokemon/Onix', 'Watch out, he is throwing bones!', 30, 5),
+ (3, 'PicturesPokemon/Golem', 'Must.Have.BRAAAAAINS!', 50, 2),
+ (4, 'PicturesPokemon/Gengar', 'This person.. It is a person! KILL IT', 10, 2);
 
  
  Insert into itemtypes
