@@ -46,6 +46,9 @@ public class Controller {
             case 3:
                 player.setAttackDmg(player.getAttackDmg() + itemType.getModifier());
                 break;
+            case 4:
+                player.setHealth(player.getHealth() + itemType.getModifier());
+                break;
             default:
                 break;
         }
