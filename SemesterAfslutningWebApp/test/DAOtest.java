@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import Exceptions.DontExistException;
 import database.DAO;
 import database.DBConnector;
 import businessLogic.Monster;
@@ -18,6 +19,7 @@ import controller.Controller;
 import businessLogic.Item;
 import businessLogic.Link;
 import businessLogic.Player;
+import java.sql.SQLException;
 
 /**
  *
@@ -92,7 +94,7 @@ public class DAOtest {
     }
 
     @Test
-    public void updateMonster() {
+    public void updateMonster() throws SQLException, DontExistException {
         Monster monster = dao.getMonster(0, 1);
         monster.setHealth(3);
         dao.updateMonster(monster);

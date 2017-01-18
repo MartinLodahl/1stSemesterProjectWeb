@@ -5,6 +5,7 @@
  */
 package server;
 
+import Exceptions.DontExistException;
 import controller.Controller;
 import controller.PNGPathCreator;
 import businessLogic.Player;
@@ -36,7 +37,7 @@ public class JsonResponse {
         return false;
     }
 
-    public void response(Player player, DAO dao, PNGPathCreator png, HttpServletResponse response, String action) throws SQLException {
+    public void response(Player player, DAO dao, PNGPathCreator png, HttpServletResponse response, String action) throws SQLException, DontExistException {
         Controller ctrl = new Controller(dao);
         PrintWriter out = null;
         try {
