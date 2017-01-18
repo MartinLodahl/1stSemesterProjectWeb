@@ -1,4 +1,4 @@
-package database;
+package businessLogic;
 
 public class Monster {
     private int playerId;

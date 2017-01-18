@@ -6,7 +6,7 @@
 
 import database.DAO;
 import database.DBConnector;
-import database.Monster;
+import businessLogic.Monster;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -15,8 +15,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import controller.Controller;
-import database.Item;
-import database.Link;
+import businessLogic.Item;
+import businessLogic.Link;
 
 /**
  *

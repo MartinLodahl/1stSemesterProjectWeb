@@ -1,4 +1,4 @@
-package controller;
+package businessLogic;
 
 public class ItemType {
     

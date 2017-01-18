@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package semesterafslutning;
+package server;
 
 import controller.Controller;
 import controller.PNGPathCreator;
-import database.Player;
-import database.Item;
+import businessLogic.Player;
+import businessLogic.Item;
 import database.DAO;
-import database.Link;
-import database.Monster;
-import database.MonsterType;
+import businessLogic.Link;
+import businessLogic.Monster;
+import businessLogic.MonsterType;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
