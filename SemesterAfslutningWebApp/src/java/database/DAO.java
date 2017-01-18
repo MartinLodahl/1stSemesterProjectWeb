@@ -313,7 +313,7 @@ public class DAO {
                 int attack = res.getInt("attack");
                 int x = res.getInt("x");
                 int y = res.getInt("y");
-                list.add(new Monster(id, type, roomId, health, attack, x, y));
+                list.add(new Monster(playerId, id, type, roomId, health, attack, x, y));
 
             }
         } catch (SQLException ex) {
@@ -322,11 +322,12 @@ public class DAO {
         return list;
     }
 
-    public Monster getMonster(int id) {
+    public Monster getMonster(int playerId, int id) {
         try {
-            String query = "SELECT * FROM monster WHERE id=?;";
+            String query = "SELECT * FROM monster WHERE playerId=? AND id=?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
-            stmt.setInt(1, id);
+            stmt.setInt(1, playerId);
+            stmt.setInt(2, id);
             ResultSet res = stmt.executeQuery();
             Monster monster;
             res.next(); 
@@ -336,7 +337,7 @@ public class DAO {
             int attack = res.getInt("attack");
             int x = res.getInt("x");
             int y = res.getInt("y");
-            monster = new Monster(id, type, roomId, health, attack, x, y);
+            monster = new Monster(playerId, id, type, roomId, health, attack, x, y);
 
             return monster;
         } catch (SQLException ex) {
@@ -347,12 +348,13 @@ public class DAO {
 
     public void updateMonster(Monster monster) {
         try {
-            String query = "UPDATE monster SET roomId=?, health = ?, attack =? WHERE id=?;";
+            String query = "UPDATE monster SET roomId=?, health = ?, attack =? WHERE playerId=? AND id=?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, monster.getRoomId());
             stmt.setInt(2, monster.getHealth());
             stmt.setInt(3, monster.getAttack());
-            stmt.setInt(4, monster.getId());
+            stmt.setInt(4, monster.getPlayerId());
+            stmt.setInt(5, monster.getId());
             stmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -397,9 +399,10 @@ public class DAO {
 
     public void removeMonster(Monster monster) {
          try {
-            String query = "DELETE FROM monster WHERE ID =?;";
+            String query = "DELETE FROM monster WHERE playerId=? AND id=?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
-            stmt.setInt(1, monster.getId());
+            stmt.setInt(1, monster.getPlayerId());
+            stmt.setInt(2, monster.getId());
             stmt.executeUpdate();
         } catch (Exception ex) {
 
