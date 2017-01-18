@@ -14,7 +14,7 @@ public class Controller {
     }
 
     public int createPlayerRoomId() {
-        return (int) Math.floor((Math.random() * 5) + 1);
+        return 41;
     }
     
     public int damageCalculator (int incommingDamage, int defence){
