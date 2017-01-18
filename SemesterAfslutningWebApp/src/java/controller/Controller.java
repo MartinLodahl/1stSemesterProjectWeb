@@ -18,32 +18,47 @@ public class Controller {
     public int createPlayerRoomId() {
         return 41;
     }
-    
-    public int damageCalculator (int incommingDamage, int defence){
-        
-        return (int)Math.ceil((50.0/(50.0+defence))*incommingDamage);
+
+    public int damageCalculator(int incommingDamage, int defence) {
+
+        return (int) Math.ceil((50.0 / (50.0 + defence)) * incommingDamage);
     }
 
     public void fight(Monster monster, Player player) {
-        
-       int monsterDmg = damageCalculator(monster.getAttack(),player.getDefense());
-       player.setHealth(player.getHealth() - monsterDmg);
-        
-        monster.setHealth(monster.getHealth() - player.getAttackDmg());
+
+        double dicePlayer = Math.random();
+        double diceMonster = Math.random();
+
+        if (dicePlayer > 0.2) {
+            monster.setHealth(monster.getHealth() - player.getAttackDmg());
+        } else if (dicePlayer < 0.2 && dicePlayer > 0.1) {
+        } else if (dicePlayer < 0.1) {
+            monster.setHealth(monster.getHealth() - player.getAttackDmg() * 3);
+        }
+        if (diceMonster > 0.2) {
+            int monsterDmg = damageCalculator(monster.getAttack(), player.getDefense());
+            player.setHealth(player.getHealth() - monsterDmg);
+        } else if (diceMonster < 0.2 && diceMonster > 0.1) {
+
+        } else if (diceMonster < 0.1) {
+            int monsterDmg = damageCalculator(monster.getAttack(), player.getDefense());
+            player.setHealth(player.getHealth() - monsterDmg*3);
+        }
+
         dao.updateMonster(monster);
         dao.updateUser(player);
 
     }
-    
-    public void applyItem (Player player, int itemId) throws SQLException, DontExistException{
+
+    public void applyItem(Player player, int itemId) throws SQLException, DontExistException {
         int itemTypeInt = dao.getItem(player.getId(), itemId).getType();
         ItemType itemType = dao.getItemType(itemTypeInt);
         switch (itemType.getStat()) {
             case 1:
-                player.setGold(player.getGold()+itemType.getModifier());
+                player.setGold(player.getGold() + itemType.getModifier());
                 break;
             case 2:
-                player.setDefense(player.getDefense()+itemType.getModifier());
+                player.setDefense(player.getDefense() + itemType.getModifier());
                 break;
             case 3:
                 player.setAttackDmg(player.getAttackDmg() + itemType.getModifier());

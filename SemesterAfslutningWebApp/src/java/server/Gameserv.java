@@ -76,6 +76,16 @@ public class Gameserv extends HttpServlet {
                             dao.removePlayer(player.getId());
                         }
                         if (monster.getHealth() == 0) {
+                            double dice = Math.random();
+                            if (dice > 0.75){
+                                dao.createItem(type1);
+                            } else if (dice<0.75 && dice >0.50){
+                                dao.createItem(type2);
+                            } else if (dice<0.50 && dice>0.25){
+                                dao.createItem(type3);
+                            } else {
+                                dao.createItem(type4);
+                            }
                             dao.removeMonster(monster);
                         }
                         jResponse.response(player, dao, png, response, action);
