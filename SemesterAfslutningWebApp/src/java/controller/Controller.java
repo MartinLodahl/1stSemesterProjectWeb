@@ -34,7 +34,7 @@ public class Controller {
     
     public void applyItem (Player player, int itemId){
        
-                    int itemTypeInt = dao.getItemTypeInt(itemId);
+                    int itemTypeInt = dao.getItem(player.getId(), itemId).getType();
                     ItemType itemType = dao.getItemType(itemTypeInt);
                     if(itemType.getStat() == 1){
                         player.setGold(player.getGold()+itemType.getModifier());

@@ -123,7 +123,6 @@ public class DAO {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
     }
 
     public void updateUser(Player player) {
@@ -167,23 +166,6 @@ public class DAO {
         return null;
     }
 
-    public int getItemTypeInt(int itemId){
-        try {
-            
-            String query = "SELECT * FROM items WHERE itemId =?;";
-            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
-            stmt.setInt(1, itemId);
-            ResultSet res = stmt.executeQuery();
-            res.next();
-
-            int itemType = res.getInt("type");
-            return itemType;
-        } catch (Exception ex) {
-
-        }
-        return -1;        
-    }
-    
     public ItemType getItemType(int type){
         try {
             String query = "SELECT * FROM itemtypes WHERE type=?;";
@@ -195,8 +177,8 @@ public class DAO {
             int stat = res.getInt("stat");
             int modifier= res.getInt("modify");
             String note = res.getString("note");
-            itemType = new ItemType(stat,modifier,note);
-
+            String picture = res.getString("picture");
+            itemType = new ItemType(stat, modifier, note, picture);
             return itemType;
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -218,6 +200,27 @@ public class DAO {
             ex.printStackTrace();
             return 0;
         }
+    }
+
+    public Item getItem(int playerId, int itemId) {
+        try {
+            String query = "SELECT * FROM items WHERE playerId = ? AND roomId =?;";
+            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+            stmt.setInt(1, playerId);
+            stmt.setInt(2, itemId);
+            ResultSet res = stmt.executeQuery();
+            while (res.next()) {
+                int type = res.getInt("type");
+                int roomId = res.getInt("roomId");
+                int x = res.getInt("x");
+                int y = res.getInt("y");
+                Item item = new Item(itemId, type, roomId, x, y);
+                return item;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     public void removePlayer(int playerId){
@@ -242,7 +245,6 @@ public class DAO {
             stmt.setInt(2, roomId);
             ResultSet res = stmt.executeQuery();
             while (res.next()) {
-
                 int itemId = res.getInt("itemId");
                 int type = res.getInt("type");
                 int x = res.getInt("x");
@@ -250,9 +252,8 @@ public class DAO {
 
                 temp.add(new Item(itemId, type, roomId, x, y));
             }
-
         } catch (Exception ex) {
-
+            ex.printStackTrace();
         }
         return temp;
     }
@@ -288,25 +289,8 @@ public class DAO {
             stmt.setInt(1, itemId);
             stmt.executeUpdate();
         } catch (Exception ex) {
-
+            ex.printStackTrace();
         }
-
-    }
-
-    public String getItemPicture(int itemType) throws SQLException {
-        try {
-            String query = "SELECT * FROM itemtypes WHERE type =?;";
-            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
-            stmt.setInt(1, itemType);
-            ResultSet res = stmt.executeQuery();
-            res.next();
-
-            String pictureName = res.getString("picture");
-            return pictureName;
-        } catch (Exception ex) {
-
-        }
-        return null;
     }
 
     public ArrayList<Monster> getRoomMonsters(int playerId, int roomId) {
@@ -325,7 +309,6 @@ public class DAO {
                 int x = res.getInt("x");
                 int y = res.getInt("y");
                 list.add(new Monster(playerId, id, type, roomId, health, attack, x, y));
-
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -349,7 +332,6 @@ public class DAO {
             int x = res.getInt("x");
             int y = res.getInt("y");
             monster = new Monster(playerId, id, type, roomId, health, attack, x, y);
-
             return monster;
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -416,8 +398,7 @@ public class DAO {
             stmt.setInt(2, monster.getId());
             stmt.executeUpdate();
         } catch (Exception ex) {
-
+            ex.printStackTrace();
         }
-
     }
 }
