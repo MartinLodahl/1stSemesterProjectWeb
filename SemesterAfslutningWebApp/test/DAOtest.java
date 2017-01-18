@@ -95,7 +95,7 @@ public class DAOtest {
 
     @Test
     public void updateMonster() {
-        Monster monster = dao.getMonster(1);
+        Monster monster = dao.getMonster(1, 1);
         monster.setHealth(3);
         dao.updateMonster(monster);
 
