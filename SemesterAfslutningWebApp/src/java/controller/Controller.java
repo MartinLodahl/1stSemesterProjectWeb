@@ -21,7 +21,7 @@ public class Controller {
     
     public int damageCalculator (int incommingDamage, int defence){
         
-        return (int) ((100.0/(100.0+defence))*incommingDamage);
+        return (int)Math.ceil((50.0/(50.0+defence))*incommingDamage);
     }
 
     public void fight(Monster monster, Player player) {
