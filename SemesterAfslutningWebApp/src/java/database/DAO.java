@@ -5,7 +5,7 @@
  */
 package database;
 
-
+import Exceptions.DontExistException;
 import businessLogic.MonsterType;
 import businessLogic.Monster;
 import businessLogic.Item;
@@ -24,25 +24,30 @@ import java.sql.SQLException;
  *
  * @author MartinLodahl
  */
-public class DAO {
+public class DAO
+{
 
     private final DBConnector connector;
     LinkCollectionSort linkSort;
 
-    public DAO(DBConnector connector) {
+    public DAO(DBConnector connector)
+    {
         this.connector = connector;
         linkSort = new LinkCollectionSort();
     }
 
-    public ArrayList<Link> getDirection(int currentRoom) {
+    public ArrayList<Link> getDirection(int currentRoom)
+    {
         ArrayList<Link> list = new ArrayList<>();
 
-        try {
+        try
+        {
             String query = "SELECT * FROM link WHERE room_id = ?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, currentRoom);
             ResultSet res = stmt.executeQuery();
-            while (res.next()) {
+            while (res.next())
+            {
                 String direction = res.getString("direction");
                 int to = res.getInt("goto");
                 Link way = new Link(currentRoom, direction, to);
@@ -50,52 +55,63 @@ public class DAO {
             }
 
             return list;
-        } catch (Exception ex) {
+        } catch (Exception ex)
+        {
             ex.printStackTrace();
             return null;
         }
     }
 
-    public int currentRoomId(int currentRoomId, String direction) {
-        try {
+    public int currentRoomId(int currentRoomId, String direction)
+    {
+        try
+        {
             String query = "SELECT * FROM link WHERE room_id = ? and direction= ?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, currentRoomId);
             stmt.setString(2, direction);
             ResultSet res = stmt.executeQuery();
             int goTo = currentRoomId;
-            while (res.next()) {
+            while (res.next())
+            {
                 goTo = res.getInt("goto");
 
             }
             return goTo;
-        } catch (Exception ex) {
+        } catch (Exception ex)
+        {
             ex.printStackTrace();
             return currentRoomId;
         }
     }
 
-    public Room getRoom(int currentRoom) {
+    public Room getRoom(int currentRoom) throws SQLException, DontExistException
+    {
 
-        try {
-            String query = "SELECT * FROM room WHERE ID = ?;";
-            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
-            stmt.setInt(1, currentRoom);
-            ResultSet res = stmt.executeQuery();
-            Room room = null;
-            while (res.next()) {
+        String query = "SELECT * FROM room WHERE ID = ?;";
+        PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+        stmt.setInt(1, currentRoom);
+        ResultSet res = stmt.executeQuery();
+        Room room = null;
+        if (!res.next())
+        {
+            throw new DontExistException(currentRoom, "Room");
+        } else
+        {
+            while (res.next())
+            {
                 String description = res.getString("Description");
                 room = new Room(currentRoom, description);
             }
             return room;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return null;
         }
+
     }
 
-    public Player createUser(int playerId, String name, int roomId) {
-        try {
+    public Player createUser(int playerId, String name, int roomId)
+    {
+        try
+        {
             int health = 100;
             int attack = 5;
             int gold = 0;
@@ -110,29 +126,35 @@ public class DAO {
             stmt.setInt(6, roomId);
             stmt.setInt(7, gold);
             stmt.executeUpdate();
-            Player player = new Player(playerId, name, health, attack,defense, roomId, gold);
+            Player player = new Player(playerId, name, health, attack, defense, roomId, gold);
             return player;
-        } catch (Exception ex) {
+        } catch (Exception ex)
+        {
             ex.printStackTrace();
         }
         return null;
     }
 
-    public void updateUser(int roomId, int playerId) {
-        try {
+    public void updateUser(int roomId, int playerId)
+    {
+        try
+        {
             String query = "UPDATE players SET roomId = ? WHERE playerId=?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, roomId);
             stmt.setInt(2, playerId);
             stmt.executeUpdate();
 
-        } catch (Exception ex) {
+        } catch (Exception ex)
+        {
             ex.printStackTrace();
         }
     }
 
-    public void updateUser(Player player) {
-        try {
+    public void updateUser(Player player)
+    {
+        try
+        {
             String query = "UPDATE players SET name = ?, health =?, attackDmg = ?,defense = ?, roomId = ?, gold =? WHERE playerId=?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setString(1, player.getName());
@@ -144,57 +166,66 @@ public class DAO {
             stmt.setInt(7, player.getId());
             stmt.executeUpdate();
 
-        } catch (Exception ex) {
+        } catch (Exception ex)
+        {
             ex.printStackTrace();
         }
     }
 
-    public Player getPlayer(int playerId) {
-        try {
-            String query = "SELECT * FROM players WHERE playerId = ?;";
-            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
-            stmt.setInt(1, playerId);
-            ResultSet res = stmt.executeQuery();
-            res.next();
+    public Player getPlayer(int playerId) throws SQLException, DontExistException
+    {
 
+        String query = "SELECT * FROM players WHERE playerId = ?;";
+        PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+        stmt.setInt(1, playerId);
+        ResultSet res = stmt.executeQuery();
+        if (!res.next())
+        {
+            throw new DontExistException(playerId, "Player");
+        } else
+        {
+            res.next();
             String name = res.getString("name");
             int health = res.getInt("health");
             int attack = res.getInt("attackDmg");
             int defense = res.getInt("defense");
             int room = res.getInt("roomId");
             int gold = res.getInt("gold");
-            Player player = new Player(playerId, name, health, attack,defense, room, gold);
+            Player player = new Player(playerId, name, health, attack, defense, room, gold);
             return player;
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
         }
-        return null;
     }
 
-    public ItemType getItemType(int type){
-        try {
-            String query = "SELECT * FROM itemtypes WHERE type=?;";
-            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
-            stmt.setInt(1, type);
-            ResultSet res = stmt.executeQuery();
-            ItemType itemType;
-            res.next(); 
+    public ItemType getItemType(int type) throws SQLException, DontExistException
+    {
+
+        String query = "SELECT * FROM itemtypes WHERE type=?;";
+        PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+        stmt.setInt(1, type);
+        ResultSet res = stmt.executeQuery();
+        ItemType itemType;
+        if (!res.next())
+        {
+            throw new DontExistException(type, "ItemType");
+        } else
+        {
+            res.next();
             int stat = res.getInt("stat");
-            int modifier= res.getInt("modify");
+            int modifier = res.getInt("modify");
             String note = res.getString("note");
             String picture = res.getString("picture");
             itemType = new ItemType(stat, modifier, note, picture);
             return itemType;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
         }
-    } 
-    
-    public int createUniquePlayerId() {
 
-        try {
+    }
+
+    public int createUniquePlayerId()
+    {
+
+        try
+        {
             String query = "SELECT max(playerId) as HIGHESTID FROM players;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             ResultSet res = stmt.executeQuery();
@@ -202,35 +233,45 @@ public class DAO {
 
             return (res.getInt("HIGHESTID") + 1);
 
-        } catch (Exception ex) {
+        } catch (Exception ex)
+        {
             ex.printStackTrace();
             return 0;
         }
     }
 
-    public Item getItem(int playerId, int itemId) {
-        try {
-            String query = "SELECT * FROM items WHERE playerId = ? AND itemId =?;";
-            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
-            stmt.setInt(1, playerId);
-            stmt.setInt(2, itemId);
-            ResultSet res = stmt.executeQuery();
-            while (res.next()) {
+    public Item getItem(int playerId, int itemId) throws SQLException, DontExistException
+    {
+
+        String query = "SELECT * FROM items WHERE playerId = ? AND itemId =?;";
+        PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+        stmt.setInt(1, playerId);
+        stmt.setInt(2, itemId);
+        ResultSet res = stmt.executeQuery();
+        if (!res.next())
+        {
+            throw new DontExistException(itemId, "Item");
+        } else
+        {
+            Item item = null;
+            while (res.next())
+            {
                 int type = res.getInt("type");
                 int roomId = res.getInt("roomId");
                 int x = res.getInt("x");
                 int y = res.getInt("y");
-                Item item = new Item(itemId, type, roomId, x, y);
-                return item;
+                item = new Item(itemId, type, roomId, x, y);
+
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            return item;
         }
-        return null;
+
     }
 
-    public void removePlayer(int playerId) {
-        try {
+    public void removePlayer(int playerId)
+    {
+        try
+        {
             String query = "DELETE FROM players WHERE playerId =?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, playerId);
@@ -245,22 +286,26 @@ public class DAO {
             stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, playerId);
             stmt.executeUpdate();
-        } catch (Exception ex) {
+        } catch (Exception ex)
+        {
             ex.printStackTrace();
         }
     }
-    
-    public ArrayList<Item> getRoomItems(int playerId, int roomId) {
+
+    public ArrayList<Item> getRoomItems(int playerId, int roomId)
+    {
 
         ArrayList<Item> temp = new ArrayList();
 
-        try {
+        try
+        {
             String query = "SELECT * FROM items WHERE playerId = ? AND roomId =?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, playerId);
             stmt.setInt(2, roomId);
             ResultSet res = stmt.executeQuery();
-            while (res.next()) {
+            while (res.next())
+            {
                 int itemId = res.getInt("itemId");
                 int type = res.getInt("type");
                 int x = res.getInt("x");
@@ -268,57 +313,70 @@ public class DAO {
 
                 temp.add(new Item(itemId, type, roomId, x, y));
             }
-        } catch (Exception ex) {
+        } catch (Exception ex)
+        {
             ex.printStackTrace();
         }
         return temp;
     }
 
-    public void copyItems(int playerId) {
-        try {
-            String query = "INSERT INTO items (playerId, itemId, type, x, y, roomId) "+
-                           "SELECT ?, itemId, type, x, y, roomId FROM items WHERE playerId=0;";
+    public void copyItems(int playerId)
+    {
+        try
+        {
+            String query = "INSERT INTO items (playerId, itemId, type, x, y, roomId) "
+                    + "SELECT ?, itemId, type, x, y, roomId FROM items WHERE playerId=0;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, playerId);
             stmt.executeUpdate();
-        } catch (Exception ex) {
+        } catch (Exception ex)
+        {
             ex.printStackTrace();
         }
     }
 
-    public void copyMonsters(int playerId) {
-        try {
-            String query = "INSERT INTO monster (playerId, id, type, roomId, health, attack, x, y) "+
-                           "SELECT ?, id, type, roomId, health, attack, x, y FROM monster WHERE playerId=0;";
+    public void copyMonsters(int playerId)
+    {
+        try
+        {
+            String query = "INSERT INTO monster (playerId, id, type, roomId, health, attack, x, y) "
+                    + "SELECT ?, id, type, roomId, health, attack, x, y FROM monster WHERE playerId=0;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, playerId);
             stmt.executeUpdate();
-        } catch (Exception ex) {
+        } catch (Exception ex)
+        {
             ex.printStackTrace();
         }
     }
 
-    public void removeItem(int playerId, int itemId) {
-        try {
+    public void removeItem(int playerId, int itemId)
+    {
+        try
+        {
             String query = "DELETE FROM items WHERE playerId=? AND itemId =?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, playerId);
             stmt.setInt(2, itemId);
             stmt.executeUpdate();
-        } catch (Exception ex) {
+        } catch (Exception ex)
+        {
             ex.printStackTrace();
         }
     }
 
-    public ArrayList<Monster> getRoomMonsters(int playerId, int roomId) {
+    public ArrayList<Monster> getRoomMonsters(int playerId, int roomId)
+    {
         ArrayList<Monster> list = new ArrayList<>();
-        try {
+        try
+        {
             String query = "SELECT * FROM monster WHERE playerId=? AND roomId=?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, playerId);
             stmt.setInt(2, roomId);
             ResultSet res = stmt.executeQuery();
-            while (res.next()) {
+            while (res.next())
+            {
                 int id = res.getInt("id");
                 int type = res.getInt("type");
                 int health = res.getInt("health");
@@ -327,21 +385,28 @@ public class DAO {
                 int y = res.getInt("y");
                 list.add(new Monster(playerId, id, type, roomId, health, attack, x, y));
             }
-        } catch (SQLException ex) {
+        } catch (SQLException ex)
+        {
             ex.printStackTrace();
         }
         return list;
     }
 
-    public Monster getMonster(int playerId, int id) {
-        try {
-            String query = "SELECT * FROM monster WHERE playerId=? AND id=?;";
-            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
-            stmt.setInt(1, playerId);
-            stmt.setInt(2, id);
-            ResultSet res = stmt.executeQuery();
-            Monster monster;
-            res.next(); 
+    public Monster getMonster(int playerId, int id) throws SQLException, DontExistException
+    {
+
+        String query = "SELECT * FROM monster WHERE playerId=? AND id=?;";
+        PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+        stmt.setInt(1, playerId);
+        stmt.setInt(2, id);
+        ResultSet res = stmt.executeQuery();
+        Monster monster;
+        if (res.next())
+        {
+            throw new DontExistException(id, "Monster");
+        } else
+        {
+            res.next();
             int type = res.getInt("type");
             int roomId = res.getInt("roomId");
             int health = res.getInt("health");
@@ -350,14 +415,14 @@ public class DAO {
             int y = res.getInt("y");
             monster = new Monster(playerId, id, type, roomId, health, attack, x, y);
             return monster;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
         }
+
     }
 
-    public void updateMonster(Monster monster) {
-        try {
+    public void updateMonster(Monster monster)
+    {
+        try
+        {
             String query = "UPDATE monster SET roomId=?, health = ?, attack =? WHERE playerId=? AND id=?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, monster.getRoomId());
@@ -366,19 +431,23 @@ public class DAO {
             stmt.setInt(4, monster.getPlayerId());
             stmt.setInt(5, monster.getId());
             stmt.executeUpdate();
-        } catch (SQLException ex) {
+        } catch (SQLException ex)
+        {
             ex.printStackTrace();
         }
     }
 
-    public MonsterType getMonsterType(int type) {
-        try {
+    public MonsterType getMonsterType(int type)
+    {
+        try
+        {
             String query = "SELECT * FROM monstertype WHERE type=?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, type);
             ResultSet res = stmt.executeQuery();
             MonsterType monsterType = null;
-            while (res.next()) {
+            while (res.next())
+            {
                 String picture = res.getString("picture");
                 String description = res.getString("description");
                 int health = res.getInt("health");
@@ -386,14 +455,17 @@ public class DAO {
                 monsterType = new MonsterType(type, picture, description, health, attack);
             }
             return monsterType;
-        } catch (SQLException ex) {
+        } catch (SQLException ex)
+        {
             ex.printStackTrace();
             return null;
         }
     }
 
-    public void updateMonsterType(MonsterType monsterType) {
-        try {
+    public void updateMonsterType(MonsterType monsterType)
+    {
+        try
+        {
             String query = "UPDATE monster SET picture=?, description=?, health=?, attack=? WHERE type=?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setString(1, monsterType.getPicture());
@@ -402,19 +474,23 @@ public class DAO {
             stmt.setInt(4, monsterType.getAttack());
             stmt.setInt(5, monsterType.getType());
             stmt.executeUpdate();
-        } catch (SQLException ex) {
+        } catch (SQLException ex)
+        {
             ex.printStackTrace();
         }
     }
 
-    public void removeMonster(Monster monster) {
-         try {
+    public void removeMonster(Monster monster)
+    {
+        try
+        {
             String query = "DELETE FROM monster WHERE playerId=? AND id=?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, monster.getPlayerId());
             stmt.setInt(2, monster.getId());
             stmt.executeUpdate();
-        } catch (Exception ex) {
+        } catch (Exception ex)
+        {
             ex.printStackTrace();
         }
     }
