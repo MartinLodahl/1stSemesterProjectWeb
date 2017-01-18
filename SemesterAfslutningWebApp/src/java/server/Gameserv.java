@@ -1,12 +1,12 @@
-package semesterafslutning;
+package server;
 
 import controller.Controller;
 import controller.PNGPathCreator;
-import database.Player;
+import businessLogic.Player;
 import database.DAO;
 import database.DBConnector;
-import database.Monster;
-import database.MonsterType;
+import businessLogic.Monster;
+import businessLogic.MonsterType;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;

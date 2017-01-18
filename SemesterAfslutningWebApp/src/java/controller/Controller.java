@@ -1,8 +1,9 @@
 package controller;
 
-import database.Player;
+import businessLogic.ItemType;
+import businessLogic.Player;
 import database.DAO;
-import database.Monster;
+import businessLogic.Monster;
 
 public class Controller {
 

@@ -1,4 +1,4 @@
-package database;
+package businessLogic;
 
 public class MonsterType {
     private int type;

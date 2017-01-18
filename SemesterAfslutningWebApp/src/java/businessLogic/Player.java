@@ -1,4 +1,4 @@
-package database;
+package businessLogic;
 
 public class Player implements ICharacter
 {
