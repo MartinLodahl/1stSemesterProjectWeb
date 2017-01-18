@@ -11,7 +11,7 @@
     
     position: absolute;
     left: 350px;
-    top: 620px;
+    top: 740px;
     width: 496px;
     height: 124px;
 }
@@ -78,7 +78,7 @@
     
     position: absolute;
     left: 100px;
-    top: 645px;
+    top: 765px;
 }
 
 input {
@@ -109,8 +109,8 @@ body {
     border: none;
 
     position: absolute;
-    left: 450px;
-    top: 750px;
+    left: 910px;
+    top: 740px;
     width: 300px;
     height: 130px;
 
