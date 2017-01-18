@@ -17,6 +17,7 @@ import static org.junit.Assert.*;
 import controller.Controller;
 import businessLogic.Item;
 import businessLogic.Link;
+import businessLogic.Player;
 
 /**
  *
@@ -70,15 +71,13 @@ public class DAOtest {
 //        assertEquals(room2.getDescription(), "Per");
 //    }
 
-    
-    
     //You need to make sure you've got 0 people in your database, players.
     @Test
     public void createUniquePlayerId() {
         Controller ctrl = new Controller(dao);
-        dao.createUser(dao.createUniquePlayerId(), "bob", ctrl.createPlayerRoomId());
+        Player bob = dao.createUser(dao.createUniquePlayerId(), "bob", ctrl.createPlayerRoomId());
         int check = dao.createUniquePlayerId();
-        assertEquals( check ,2);
+        assertEquals(check, bob.getId()+1);
 
     }
 
@@ -86,20 +85,27 @@ public class DAOtest {
     public void getRoomItems() {
         ArrayList<Item> list = dao.getRoomItems(0, 1);
 
-        assertEquals(list.size(), 2);
-        assertEquals(list.get(0).getX(), 200);
-        dao.removeItem(1);
-        list = dao.getRoomItems(0, 1);
         assertEquals(list.size(), 1);
+        dao.removeItem(7);
+        list = dao.getRoomItems(0, 1);
+        assertEquals(list.size(), 0);
     }
 
     @Test
     public void updateMonster() {
-        Monster monster = dao.getMonster(1, 1);
+        Monster monster = dao.getMonster(0, 1);
         monster.setHealth(3);
         dao.updateMonster(monster);
 
         assertEquals(monster.getHealth(), 3);
+
+    }
+
+    //You need atleast 1 player with the id of 1 (will get created in test for uniqueId), for this test to work.
+    @Test
+    public void removePlayer() {
+
+        dao.removePlayer(1);
 
     }
 }
