@@ -75,9 +75,9 @@ public class DAOtest {
     @Test
     public void createUniquePlayerId() {
         Controller ctrl = new Controller(dao);
-        dao.createUser(dao.createUniquePlayerId(), "bob", ctrl.createPlayerRoomId());
+        Player bob = dao.createUser(dao.createUniquePlayerId(), "bob", ctrl.createPlayerRoomId());
         int check = dao.createUniquePlayerId();
-        assertEquals(check, 2);
+        assertEquals(check, bob.getId()+1);
 
     }
 

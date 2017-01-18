@@ -207,12 +207,12 @@ public class DAO {
     public int createUniquePlayerId() {
 
         try {
-            String query = "SELECT count(*) AS NUMBER FROM players;";
+            String query = "SELECT max(playerId) as HIGHESTID FROM players;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             ResultSet res = stmt.executeQuery();
             res.next();
 
-            return (res.getInt("NUMBER") + 1);
+            return (res.getInt("HIGHESTID") + 1);
 
         } catch (Exception ex) {
             ex.printStackTrace();
