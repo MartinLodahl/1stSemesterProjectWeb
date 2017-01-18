@@ -210,7 +210,7 @@ public class DAO {
 
     public Item getItem(int playerId, int itemId) {
         try {
-            String query = "SELECT * FROM items WHERE playerId = ? AND roomId =?;";
+            String query = "SELECT * FROM items WHERE playerId = ? AND itemId =?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, playerId);
             stmt.setInt(2, itemId);
@@ -229,14 +229,14 @@ public class DAO {
         return null;
     }
 
-    public void removePlayer(int playerId){
+    public void removePlayer(int playerId) {
         try {
             String query = "DELETE FROM players WHERE playerId =?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, playerId);
             stmt.executeUpdate();
         } catch (Exception ex) {
-
+            ex.printStackTrace();
         }
     }
     
@@ -288,11 +288,12 @@ public class DAO {
         }
     }
 
-    public void removeItem(int itemId) {
+    public void removeItem(int playerId, int itemId) {
         try {
-            String query = "DELETE FROM items WHERE itemId =?;";
+            String query = "DELETE FROM items WHERE playerId=? AND itemId =?;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
-            stmt.setInt(1, itemId);
+            stmt.setInt(1, playerId);
+            stmt.setInt(2, itemId);
             stmt.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
