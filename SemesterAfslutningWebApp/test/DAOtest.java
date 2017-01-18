@@ -86,7 +86,7 @@ public class DAOtest {
         ArrayList<Item> list = dao.getRoomItems(0, 1);
 
         assertEquals(list.size(), 1);
-        dao.removeItem(7);
+        dao.removeItem(0, 7);
         list = dao.getRoomItems(0, 1);
         assertEquals(list.size(), 0);
     }
