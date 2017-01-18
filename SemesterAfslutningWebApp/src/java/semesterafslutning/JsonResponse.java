@@ -25,8 +25,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Pravien
  */
-public class JsonResponse
-{
+public class JsonResponse {
+
     public static boolean isMoveValid(String direction, ArrayList<Link> links) {
         for (int i = 0; i < links.size(); i++) {
             if (direction.equals(links.get(i).getDirection())) {
@@ -36,18 +36,16 @@ public class JsonResponse
         return false;
     }
 
-    public void response(Player player, DAO dao, PNGPathCreator png, HttpServletResponse response, String action) throws SQLException
-    {
-        Controller ctrl = new Controller (dao);
+    public void response(Player player, DAO dao, PNGPathCreator png, HttpServletResponse response, String action) throws SQLException {
+        Controller ctrl = new Controller(dao);
         PrintWriter out = null;
-        try
-        {
+        try {
             out = response.getWriter();
             response.setContentType("application/json");
             ArrayList<Link> links = dao.getDirection(player.getRoomId());
             out.print("{\"room\":" + player.getRoomId()
                     + ",\"picture\": \"PicturesRooms/" + png.createPath(links) + ".png\"");
-            
+
             // Directions
             out.print(",\"north\":" + isMoveValid("NORTH", links)
                     + ",\"south\": " + isMoveValid("SOUTH", links)
@@ -57,26 +55,24 @@ public class JsonResponse
             // Items
             out.print(",\"items\": [");
             ArrayList<Item> itemList = dao.getRoomItems(player.getId(), player.getRoomId());
-            for (int i = 0; i < itemList.size(); i++)
-            {
+            for (int i = 0; i < itemList.size(); i++) {
                 out.print("{\"id\":" + itemList.get(i).getId()
                         + ", \"picture\":\"PicturesItems/" + dao.getItemPicture(itemList.get(i).getType()) + ".png\""
                         + ", \"x\":" + itemList.get(i).getX()
                         + ", \"y\":" + itemList.get(i).getY() + "}");
-                if (itemList.size() - 1 > i)
-                {
+                if (itemList.size() - 1 > i) {
                     out.print(",");
                 }
             }
             out.print("],");
-            
+
             // Monsters
             out.print("\"monsters\":[");
             ArrayList<Monster> monsters = dao.getRoomMonsters(player.getId(), player.getRoomId());
             for (int i = 0; i < monsters.size(); i++) {
                 Monster monster = monsters.get(i);
                 MonsterType monsterType = dao.getMonsterType(monster.getType());
-                
+
                 out.print("{\"id\":" + monster.getId()
                         + ", \"picture\":\"PicturesItems/" + monsterType.getPicture() + ".png\""
                         + ", \"description\":\"" + monsterType.getDescription() + "\""
@@ -93,17 +89,21 @@ public class JsonResponse
             // Player
             out.print("\"playerId\":" + player.getId() + ",");
             out.print("\"player\":");
-            out.print("{\"id\":"+player.getId());
-            out.print(",\"health\":"+player.getHealth());
-            out.print(",\"name\":\""+player.getName()+"\"");
-            out.print(",\"attack\":"+player.getAttackDmg());
-            out.print(",\"defense\":"+player.getDefense());
-            out.print(",\"gold\":"+player.getGold());
+            out.print("{\"id\":" + player.getId());
+            out.print(",\"health\":" + player.getHealth());
+            out.print(",\"name\":\"" + player.getName() + "\"");
+            out.print(",\"attack\":" + player.getAttackDmg());
+            out.print(",\"defense\":" + player.getDefense());
+            out.print(",\"gold\":" + player.getGold());
+            if (player.getHealth() == 0) {
+                out.print(",\"death\":true");
+            } else {
+                out.print(",\"death\":false");
+            }
             out.print("}");
-            
+
             out.print("}");
-        } catch (IOException ex)
-        {
+        } catch (IOException ex) {
             Logger.getLogger(JsonResponse.class.getName()).log(Level.SEVERE, null, ex);
         }
 
