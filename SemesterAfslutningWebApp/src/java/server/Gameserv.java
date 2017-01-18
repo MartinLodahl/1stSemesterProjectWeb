@@ -76,6 +76,7 @@ public class Gameserv extends HttpServlet {
                             dao.removePlayer(player.getId());
                         }
                         if (monster.getHealth() == 0) {
+                            
                             dao.removeMonster(monster);
                         }
                         jResponse.response(player, dao, png, response, action);
