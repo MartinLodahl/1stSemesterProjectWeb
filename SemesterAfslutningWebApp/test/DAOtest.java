@@ -71,7 +71,7 @@ public class DAOtest {
 //        assertEquals(room2.getDescription(), "Per");
 //    }
 
-    //You need to make sure you've got 0 people in your database, players.
+    
     @Test
     public void createUniquePlayerId() {
         Controller ctrl = new Controller(dao);
@@ -101,7 +101,7 @@ public class DAOtest {
 
     }
 
-    //You need atleast 1 player with the id of 1 (will get created in test for uniqueId), for this test to work.
+    //You need atleast 1 player with the id of 1, for this test to work.
     @Test
     public void removePlayer() {
 
