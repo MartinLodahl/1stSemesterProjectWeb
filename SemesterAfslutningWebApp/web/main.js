@@ -80,6 +80,9 @@ function addMonster(monster) {
 
 
 function show(obj) {
+    if (obj.player.health === 0){
+        window.location.replace("index.html");
+    }
     nameDiv.innerText = obj.player.name;
     startImg.style.display = 'none';
     nameLabel.style.display = 'none';

@@ -70,13 +70,15 @@ public class Gameserv extends HttpServlet {
                         if (monster.getHealth() == -1) {
                             monster.setHealth(monsterType.getHealth());
                             monster.setAttack(monsterType.getAttack());
-                        }   ctrl.fight(monster, player);
-                        if(player.getHealth() == 0){
+                        }
+                        ctrl.fight(monster, player);
+                        if (player.getHealth() == 0) {
                             dao.removePlayer(player.getId());
                         }
                         if (monster.getHealth() == 0) {
                             dao.removeMonster(monster);
-                        }   jResponse.response(player, dao, png, response, action);
+                        }
+                        jResponse.response(player, dao, png, response, action);
                         break;
                     case "START":
                         String name = request.getParameter("playerName");
