@@ -92,20 +92,13 @@ public class DAO
         PreparedStatement stmt = connector.getConnection().prepareStatement(query);
         stmt.setInt(1, currentRoom);
         ResultSet res = stmt.executeQuery();
-        Room room = null;
-        if (!res.next())
+        if (res.next())
         {
-            throw new DontExistException(currentRoom, "Room");
-        } else
-        {
-            while (res.next())
-            {
-                String description = res.getString("Description");
-                room = new Room(currentRoom, description);
-            }
+            String description = res.getString("Description");
+            Room room = new Room(currentRoom, description);
             return room;
         }
-
+        throw new DontExistException(currentRoom, "Room");
     }
 
     public Player createUser(int playerId, String name, int roomId)
@@ -179,12 +172,8 @@ public class DAO
         PreparedStatement stmt = connector.getConnection().prepareStatement(query);
         stmt.setInt(1, playerId);
         ResultSet res = stmt.executeQuery();
-        if (!res.next())
+        if (res.next())
         {
-            throw new DontExistException(playerId, "Player");
-        } else
-        {
-            res.next();
             String name = res.getString("name");
             int health = res.getInt("health");
             int attack = res.getInt("attackDmg");
@@ -193,8 +182,8 @@ public class DAO
             int gold = res.getInt("gold");
             Player player = new Player(playerId, name, health, attack, defense, room, gold);
             return player;
-
         }
+        throw new DontExistException(playerId, "Player");
     }
 
     public ItemType getItemType(int type) throws SQLException, DontExistException
@@ -205,12 +194,8 @@ public class DAO
         stmt.setInt(1, type);
         ResultSet res = stmt.executeQuery();
         ItemType itemType;
-        if (!res.next())
+        if (res.next())
         {
-            throw new DontExistException(type, "ItemType");
-        } else
-        {
-            res.next();
             int stat = res.getInt("stat");
             int modifier = res.getInt("modify");
             String note = res.getString("note");
@@ -218,7 +203,7 @@ public class DAO
             itemType = new ItemType(stat, modifier, note, picture);
             return itemType;
         }
-
+        throw new DontExistException(type, "ItemType");
     }
 
     public int createUniquePlayerId()
@@ -248,24 +233,16 @@ public class DAO
         stmt.setInt(1, playerId);
         stmt.setInt(2, itemId);
         ResultSet res = stmt.executeQuery();
-        if (!res.next())
+        if (res.next())
         {
-            throw new DontExistException(itemId, "Item");
-        } else
-        {
-            Item item = null;
-            while (res.next())
-            {
-                int type = res.getInt("type");
-                int roomId = res.getInt("roomId");
-                int x = res.getInt("x");
-                int y = res.getInt("y");
-                item = new Item(itemId, type, roomId, x, y);
-
-            }
+            int type = res.getInt("type");
+            int roomId = res.getInt("roomId");
+            int x = res.getInt("x");
+            int y = res.getInt("y");
+            Item item = new Item(itemId, type, roomId, x, y);
             return item;
         }
-
+        throw new DontExistException(itemId, "Item");
     }
 
     public void removePlayer(int playerId)
@@ -403,10 +380,6 @@ public class DAO
         Monster monster;
         if (res.next())
         {
-            throw new DontExistException(id, "Monster");
-        } else
-        {
-            res.next();
             int type = res.getInt("type");
             int roomId = res.getInt("roomId");
             int health = res.getInt("health");
@@ -416,7 +389,7 @@ public class DAO
             monster = new Monster(playerId, id, type, roomId, health, attack, x, y);
             return monster;
         }
-
+        throw new DontExistException(id, "Monster");
     }
 
     public void updateMonster(Monster monster)
