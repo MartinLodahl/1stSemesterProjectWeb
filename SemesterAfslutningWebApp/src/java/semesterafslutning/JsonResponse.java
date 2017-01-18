@@ -95,11 +95,6 @@ public class JsonResponse {
             out.print(",\"attack\":" + player.getAttackDmg());
             out.print(",\"defense\":" + player.getDefense());
             out.print(",\"gold\":" + player.getGold());
-            if (player.getHealth() == 0) {
-                out.print(",\"death\":true");
-            } else {
-                out.print(",\"death\":false");
-            }
             out.print("}");
 
             out.print("}");
