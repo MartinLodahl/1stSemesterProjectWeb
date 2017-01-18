@@ -235,6 +235,16 @@ public class DAO {
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, playerId);
             stmt.executeUpdate();
+
+            query = "DELETE FROM monster WHERE playerId=?;";
+            stmt = connector.getConnection().prepareStatement(query);
+            stmt.setInt(1, playerId);
+            stmt.executeUpdate();
+
+            query = "DELETE FROM items WHERE playerId=?;";
+            stmt = connector.getConnection().prepareStatement(query);
+            stmt.setInt(1, playerId);
+            stmt.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
