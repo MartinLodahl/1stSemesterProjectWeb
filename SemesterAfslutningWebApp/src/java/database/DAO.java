@@ -220,6 +220,17 @@ public class DAO {
         }
     }
 
+    public void removePlayer(int playerId){
+        try {
+            String query = "DELETE FROM players WHERE playerId =?;";
+            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+            stmt.setInt(1, playerId);
+            stmt.executeUpdate();
+        } catch (Exception ex) {
+
+        }
+    }
+    
     public ArrayList<Item> getRoomItems(int playerId, int roomId) {
 
         ArrayList<Item> temp = new ArrayList();
