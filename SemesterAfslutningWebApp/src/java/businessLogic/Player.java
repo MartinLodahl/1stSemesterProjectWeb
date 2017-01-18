@@ -66,10 +66,7 @@ public class Player implements ICharacter
     @Override
     public void setHealth(int health)
     {
-        this.health = health;
-        if(health<0){
-            this.health = 0;
-        }
+        this.health = Math.min(Math.max(0, health), 100);
     }
 
     @Override
