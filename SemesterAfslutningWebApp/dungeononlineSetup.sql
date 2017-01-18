@@ -32,9 +32,9 @@
  roomId int,
  x int,
  y int,
- picture VARCHAR(40),
  stat int,
- note varchar(200));
+ modifier int,
+ picture VARCHAR(40));
 
  CREATE TABLE monster
  (playerId int NOT NULL DEFAULT 0,
