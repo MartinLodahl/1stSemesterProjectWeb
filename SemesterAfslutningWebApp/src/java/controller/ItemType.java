@@ -1,24 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
-/**
- *
- * @author MartinLodahl
- */
 public class ItemType {
     
-    int stat;
-    int modifier;
-    String note;
+    private int stat;
+    private int modifier;
+    private String note;
+    private String picture;
 
-    public ItemType(int stat, int modifier, String note) {
+    public ItemType(int stat, int modifier, String note, String picture) {
         this.stat = stat;
         this.modifier = modifier;
         this.note = note;
+        this.picture = picture;
     }
 
     public int getStat() {
@@ -44,6 +37,12 @@ public class ItemType {
     public void setNote(String note) {
         this.note = note;
     }
-            
-    
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
 }

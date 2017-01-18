@@ -59,8 +59,9 @@ public class JsonResponse
             ArrayList<Item> itemList = dao.getRoomItems(player.getId(), player.getRoomId());
             for (int i = 0; i < itemList.size(); i++)
             {
+                String picture = dao.getItemType(itemList.get(i).getType()).getPicture();
                 out.print("{\"id\":" + itemList.get(i).getId()
-                        + ", \"picture\":\"PicturesItems/" + dao.getItemPicture(itemList.get(i).getType()) + ".png\""
+                        + ", \"picture\":\"PicturesItems/" + picture + ".png\""
                         + ", \"x\":" + itemList.get(i).getX()
                         + ", \"y\":" + itemList.get(i).getY() + "}");
                 if (itemList.size() - 1 > i)
