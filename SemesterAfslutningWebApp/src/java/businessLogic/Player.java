@@ -31,9 +31,9 @@ public class Player implements ICharacter
         return defense;
     }
 
-    public void setDefence(int defence)
+    public void setDefense(int defense)
     {
-        this.defense = defence;
+        this.defense = defense;
     }
     
 

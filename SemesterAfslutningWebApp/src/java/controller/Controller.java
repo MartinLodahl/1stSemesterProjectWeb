@@ -7,7 +7,7 @@ import businessLogic.Monster;
 
 public class Controller {
 
-    DAO dao;
+    private DAO dao;
 
     public Controller(DAO dao) {
         this.dao = dao;
@@ -34,18 +34,23 @@ public class Controller {
     }
     
     public void applyItem (Player player, int itemId){
-       
-                    int itemTypeInt = dao.getItem(player.getId(), itemId).getType();
-                    ItemType itemType = dao.getItemType(itemTypeInt);
-                    if(itemType.getStat() == 1){
-                        player.setGold(player.getGold()+itemType.getModifier());
-                    } else if (itemType.getStat() == 2){
-                       player.setDefence(player.getDefense()+itemType.getModifier());
-                    } else if (itemType.getStat()==3){
-                        player.setAttackDmg(player.getAttackDmg() + itemType.getModifier());
-                    }
-                    dao.updateUser(player);
-                    dao.removeItem(itemId);
+        int itemTypeInt = dao.getItem(player.getId(), itemId).getType();
+        ItemType itemType = dao.getItemType(itemTypeInt);
+        switch (itemType.getStat()) {
+            case 1:
+                player.setGold(player.getGold()+itemType.getModifier());
+                break;
+            case 2:
+                //player.setDefense(player.getDefense()+itemType.getModifier());
+                break;
+            case 3:
+                //player.setAttackDmg(player.getAttackDmg() + itemType.getModifier());
+                break;
+            default:
+                break;
+        }
+        dao.updateUser(player);
+        dao.removeItem(player.getId(), itemId);
     }
 
 //    public int createPlayer()
