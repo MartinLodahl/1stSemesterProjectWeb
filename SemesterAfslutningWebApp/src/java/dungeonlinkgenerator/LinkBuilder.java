@@ -10,11 +10,12 @@ public class LinkBuilder
 
     public LinkBuilder()
     {
+        sb = new StringBuilder();
     }
 
     public String create()
     {
-        sb = new StringBuilder();
+        sb.delete(0, sb.length());
         sb.append("INSERT INTO link(room_id, direction, goto) VALUES\n");
 
         sb.append("/*Horizontal*/\n");

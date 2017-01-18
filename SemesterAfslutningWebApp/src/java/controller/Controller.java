@@ -1,9 +1,11 @@
 package controller;
 
+import Exceptions.DontExistException;
 import businessLogic.ItemType;
 import businessLogic.Player;
 import database.DAO;
 import businessLogic.Monster;
+import java.sql.SQLException;
 
 public class Controller {
 
@@ -19,7 +21,7 @@ public class Controller {
     
     public int damageCalculator (int incommingDamage, int defence){
         
-        return (int) ((100.0/(100.0+defence))*incommingDamage);
+        return (int)Math.ceil((50.0/(50.0+defence))*incommingDamage);
     }
 
     public void fight(Monster monster, Player player) {
@@ -33,7 +35,7 @@ public class Controller {
 
     }
     
-    public void applyItem (Player player, int itemId){
+    public void applyItem (Player player, int itemId) throws SQLException, DontExistException{
         int itemTypeInt = dao.getItem(player.getId(), itemId).getType();
         ItemType itemType = dao.getItemType(itemTypeInt);
         switch (itemType.getStat()) {
