@@ -100,6 +100,31 @@ public class DAO
         }
         throw new DontExistException(currentRoom, "Room");
     }
+    
+    public Item createItem(int playerId, int roomId, int x, int y, int type) throws SQLException
+    {
+        String query = "SELECT MAX(itemId)+1 AS itemId FROM items;";
+        PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+        ResultSet res = stmt.executeQuery();
+        if (res.next())
+        {
+            int itemId = res.getInt("itemId");
+            
+            query = "INSERT INTO items(playerId, itemId, roomId, x, y, type) " +
+                "VALUES (?, ?, ?, ?, ?, ?);";
+            stmt = connector.getConnection().prepareStatement(query);
+            stmt.setInt(1, playerId);
+            stmt.setInt(2, itemId);
+            stmt.setInt(3, roomId);
+            stmt.setInt(4, x);
+            stmt.setInt(5, y);
+            stmt.setInt(6, type);
+            stmt.executeUpdate();
+            Item item = new Item(itemId, type, roomId, x, y);
+            return item;
+        }
+        return null;
+    }
 
     public Player createUser(int playerId, String name, int roomId)
     {
