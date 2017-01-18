@@ -68,7 +68,7 @@ public class Player implements ICharacter
     {
         this.health = health;
         if(health<0){
-            health = 0;
+            this.health = 0;
         }
     }
 
