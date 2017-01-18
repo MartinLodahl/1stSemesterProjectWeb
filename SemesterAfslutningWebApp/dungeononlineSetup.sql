@@ -28,17 +28,12 @@
  
  CREATE TABLE items
  (playerId int NOT NULL DEFAULT 0,
- ItemId int NOT NULL,
- type int,
+ itemId int NOT NULL,
+ roomId int,
  x int,
  y int,
- roomId int);
- 
- CREATE TABLE itemtypes
- (type int,
  picture VARCHAR(40),
  stat int,
- modify int,
  note varchar(200));
 
  CREATE TABLE monster
@@ -80,7 +75,7 @@ INSERT INTO monstertype
  (7, 'PicturesPokemon/Gastly', '', 50, 80);
 
  
- Insert into itemtypes
+/* Insert into itemtypes
  values
  (1,'coins',1,50,'Conin give you money'),
  (2,'ArmorChest/Kindregret',2,20,'Armor of type Kindregret, give u bonus health'),
@@ -96,7 +91,7 @@ INSERT INTO monstertype
  (0, 4, 2,300,450,5),
  (0, 5, 3,650,250,2),
  (0, 6, 4,700,400,3),
- (0, 7, 5,500,200,1);
+ (0, 7, 5,500,200,1);*/
  
  INSERT INTO link(room_id, direction, goto)
 VALUES 
