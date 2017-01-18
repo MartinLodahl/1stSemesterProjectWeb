@@ -41,10 +41,10 @@ public class Controller {
                 player.setGold(player.getGold()+itemType.getModifier());
                 break;
             case 2:
-                //player.setDefense(player.getDefense()+itemType.getModifier());
+                player.setDefense(player.getDefense()+itemType.getModifier());
                 break;
             case 3:
-                //player.setAttackDmg(player.getAttackDmg() + itemType.getModifier());
+                player.setAttackDmg(player.getAttackDmg() + itemType.getModifier());
                 break;
             default:
                 break;
