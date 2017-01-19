@@ -65,8 +65,9 @@ public class Gameserv extends HttpServlet {
                     case "ATTACK":
                         player = dao.getPlayer(playerId);
                         int monsterId = Integer.parseInt(request.getParameter("monsterId"));
-                        MonsterType monsterType = dao.getMonsterType(monsterId);
                         Monster monster = dao.getMonster(playerId, monsterId);
+                        MonsterType monsterType = dao.getMonsterType(monster.getType());
+                        
                         if (monster.getHealth() == -1) {
                             monster.setHealth(monsterType.getHealth());
                             monster.setAttack(monsterType.getAttack());
