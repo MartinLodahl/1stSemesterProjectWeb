@@ -24,6 +24,15 @@ import javax.servlet.http.HttpServletResponse;
 public class Gameserv extends HttpServlet {
 
     PNGPathCreator png = new PNGPathCreator();
+    DBConnector connector;
+    DAO dao;
+    Controller ctrl;
+
+    public Gameserv() throws Exception {
+        this.connector = new DBConnector();
+        this.dao = new DAO(connector);
+        this.ctrl = new Controller(dao);
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,9 +54,8 @@ public class Gameserv extends HttpServlet {
 
                 String action = request.getParameter("action");
 
-                DBConnector connector = new DBConnector();
-                DAO dao = new DAO(connector);
-                Controller ctrl = new Controller(dao);
+                
+                
                 JsonResponse jResponse = new JsonResponse();
                 Player player;
                 // finder det næste rooms ID

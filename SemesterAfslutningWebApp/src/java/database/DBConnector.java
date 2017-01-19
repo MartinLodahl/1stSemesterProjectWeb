@@ -3,6 +3,7 @@ package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 
 
@@ -28,4 +29,8 @@ public class DBConnector {
    		return this.connection;
 	}
 
+        public void close() throws SQLException{
+            this.connection.close();
+        }
+        
 }

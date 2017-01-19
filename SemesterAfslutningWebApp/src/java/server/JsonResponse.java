@@ -116,6 +116,8 @@ public class JsonResponse {
             }
 
             out.print("}");
+            
+            
         } catch (IOException ex) {
             Logger.getLogger(JsonResponse.class.getName()).log(Level.SEVERE, null, ex);
         }
