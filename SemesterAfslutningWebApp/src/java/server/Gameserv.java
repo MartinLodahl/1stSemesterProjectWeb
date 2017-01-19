@@ -73,14 +73,14 @@ public class Gameserv extends HttpServlet {
                             monster.setAttack(monsterType.getAttack());
                         }
                         ctrl.fight(monster, player);
-                        if (player.getHealth() == 0) {
-                            dao.addScore(player);
-                            dao.removePlayer(player.getId());
-                        }
                         if (monster.getHealth() == 0) {
                             int type = ctrl.getDropType();
                             dao.createItem(player.getId(), player.getRoomId(), monster.getX(), monster.getY(), type);
                             dao.removeMonster(monster);
+                        }
+                        if (player.getHealth() == 0) {
+                            dao.addScore(player);
+                            dao.removePlayer(player.getId());
                         }
                         jResponse.response(player, dao, png, response, action);
                         break;
