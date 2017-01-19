@@ -49,7 +49,6 @@ public class DAO {
                 Link way = new Link(currentRoom, direction, to);
                 list.add(way);
             }
-            //stmt.close();
             return list;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -69,7 +68,6 @@ public class DAO {
                 goTo = res.getInt("goto");
 
             }
-           //stmt.close();
             return goTo;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -86,7 +84,6 @@ public class DAO {
         if (res.next()) {
             String description = res.getString("Description");
             Room room = new Room(currentRoom, description);
-            //stmt.close();
             return room;
         }
         throw new DontExistException(currentRoom, "Room");
@@ -110,7 +107,6 @@ public class DAO {
             stmt.setInt(6, type);
             stmt.executeUpdate();
             Item item = new Item(itemId, type, roomId, x, y);
-            //stmt.close();
             return item;
         }
         return null;
@@ -133,7 +129,6 @@ public class DAO {
             stmt.setInt(7, gold);
             stmt.executeUpdate();
             Player player = new Player(playerId, name, health, attack, defense, roomId, gold);
-            //stmt.close();
             return player;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -148,7 +143,6 @@ public class DAO {
             stmt.setInt(1, roomId);
             stmt.setInt(2, playerId);
             stmt.executeUpdate();
-            //stmt.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -166,7 +160,6 @@ public class DAO {
             stmt.setInt(6, player.getGold());
             stmt.setInt(7, player.getId());
             stmt.executeUpdate();
-            //stmt.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -186,7 +179,6 @@ public class DAO {
             int room = res.getInt("roomId");
             int gold = res.getInt("gold");
             Player player = new Player(playerId, name, health, attack, defense, room, gold);
-            //stmt.close();
             return player;
         }
         throw new DontExistException(playerId, "Player");
@@ -205,7 +197,6 @@ public class DAO {
             String note = res.getString("note");
             String picture = res.getString("picture");
             itemType = new ItemType(stat, modifier, note, picture);
-            //stmt.close();
             return itemType;
         }
         throw new DontExistException(type, "ItemType");
@@ -218,7 +209,6 @@ public class DAO {
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             ResultSet res = stmt.executeQuery();
             res.next();
-            //stmt.close();
             return (res.getInt("HIGHESTID") + 1);
 
         } catch (Exception ex) {
@@ -240,7 +230,6 @@ public class DAO {
             int x = res.getInt("x");
             int y = res.getInt("y");
             Item item = new Item(itemId, type, roomId, x, y);
-            //stmt.close();
             return item;
         }
         throw new DontExistException(itemId, "Item");
@@ -262,7 +251,6 @@ public class DAO {
             stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, playerId);
             stmt.executeUpdate();
-            //stmt.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -286,7 +274,6 @@ public class DAO {
 
                 temp.add(new Item(itemId, type, roomId, x, y));
             }
-            //stmt.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -300,7 +287,6 @@ public class DAO {
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, playerId);
             stmt.executeUpdate();
-           // stmt.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -313,7 +299,6 @@ public class DAO {
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             stmt.setInt(1, playerId);
             stmt.executeUpdate();
-           // stmt.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -326,7 +311,6 @@ public class DAO {
             stmt.setInt(1, playerId);
             stmt.setInt(2, itemId);
             stmt.executeUpdate();
-           // stmt.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -349,7 +333,6 @@ public class DAO {
                 int y = res.getInt("y");
                 list.add(new Monster(playerId, id, type, roomId, health, attack, x, y));
             }
-           // stmt.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -373,10 +356,8 @@ public class DAO {
             int x = res.getInt("x");
             int y = res.getInt("y");
             monster = new Monster(playerId, id, type, roomId, health, attack, x, y);
-         //   stmt.close();
             return monster;
         }
-       // stmt.close();
         throw new DontExistException(id, "Monster");
     }
 
@@ -390,7 +371,6 @@ public class DAO {
             stmt.setInt(4, monster.getPlayerId());
             stmt.setInt(5, monster.getId());
             stmt.executeUpdate();
-          //  stmt.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -410,7 +390,6 @@ public class DAO {
                 int attack = res.getInt("attack");
                 monsterType = new MonsterType(type, picture, description, health, attack);
             }
-            //stmt.close();
             return monsterType;
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -428,7 +407,6 @@ public class DAO {
             stmt.setInt(4, monsterType.getAttack());
             stmt.setInt(5, monsterType.getType());
             stmt.executeUpdate();
-           // stmt.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -441,7 +419,6 @@ public class DAO {
             stmt.setInt(1, monster.getPlayerId());
             stmt.setInt(2, monster.getId());
             stmt.executeUpdate();
-            //stmt.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -454,7 +431,6 @@ public class DAO {
             stmt.setString(1, player.getName());
             stmt.setInt(2, player.getGold());
             stmt.executeUpdate();
-           // stmt.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -472,7 +448,6 @@ public class DAO {
                 Highscore thisScore = new Highscore(score, name);
                 highscore.add(thisScore);
             }
-            //stmt.close();
             return highscore;
         } catch (SQLException ex) {
             ex.printStackTrace();
