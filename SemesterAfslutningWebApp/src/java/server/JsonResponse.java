@@ -37,7 +37,7 @@ public class JsonResponse {
         return false;
     }
 
-    public void response(Player player, DAO dao, PNGPathCreator png, HttpServletResponse response, String action) throws SQLException, DontExistException {
+    public void response(Player player, DAO dao, PNGPathCreator png, HttpServletResponse response, String action, boolean isAlive) throws SQLException, DontExistException {
         Controller ctrl = new Controller(dao);
         PrintWriter out = null;
         try {
@@ -94,6 +94,7 @@ public class JsonResponse {
             out.print("\"player\":");
             out.print("{\"id\":" + player.getId());
             out.print(",\"health\":" + player.getHealth());
+            out.print(",\"isAlive\":" + isAlive);
             out.print(",\"name\":\"" + player.getName() + "\"");
             out.print(",\"attack\":" + player.getAttackDmg());
             out.print(",\"defense\":" + player.getDefense());
