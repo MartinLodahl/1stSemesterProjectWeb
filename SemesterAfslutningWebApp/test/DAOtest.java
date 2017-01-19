@@ -27,8 +27,8 @@ import java.sql.SQLException;
  */
 public class DAOtest {
 
-    DBConnector connector;
-    DAO dao;
+    private DBConnector connector;
+    private DAO dao;
 
     public DAOtest() {
     }
