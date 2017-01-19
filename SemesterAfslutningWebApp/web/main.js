@@ -79,21 +79,30 @@ function addMonster(monster) {
     itemsDiv.appendChild(img);
 }
 
-function addHighscore() {
-    
-}
-
 function showHighscores(obj) {
-    highscoresDiv.innerHTML = text;
     overlayDiv.style.display = 'block';
-    var text = '';
+    var y = 0;
     for (var i = 0; i < obj.highscores.length; i++) {
-        text += obj.highscores[i].name;
-        text += '   ';
-        text += obj.highscores[i].score;
-        text += '<br>';
+        var name = document.createElement('div');
+        name.style.position = 'absolute';
+        name.style.top = y + 'px';
+        name.style.left = '300px';
+        name.style.width = '600px';
+        name.style.textAlign = 'left';
+        name.innerText = obj.highscores[i].name;
+        highscoresDiv.appendChild(name);
+        
+        var score = document.createElement('div');
+        score.style.position = 'absolute';
+        score.style.top = y + 'px';
+        score.style.left = '300px';
+        score.style.width = '600px';
+        score.style.textAlign = 'right';
+        score.innerText = obj.highscores[i].score;
+        
+        highscoresDiv.appendChild(score);
+        y += 100;
     }
-    highscoresDiv.innerHTML = text;
     startImg.style.display = 'block';
     nameLabel.style.display = 'block';
     nameInput.style.display = 'block';
@@ -200,21 +209,6 @@ function attack(monsterId) {
         show(obj);
     });
 }
-
-function update() {
-    if (playerId !== 0) {
-        ajax({
-            room: currentRoom,
-            action: 'UPDATE',
-            playerId: playerId,
-            direction: ''
-        }, function (obj) {
-            show(obj);
-        });
-    }
-}
-
-//window.setInterval(update, 1000)
 
 window.onload = startGame;
 
