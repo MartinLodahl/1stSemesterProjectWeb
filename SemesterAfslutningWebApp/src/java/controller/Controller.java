@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class Controller {
 
-    private DAO dao;
+    private final DAO dao;
 
     public Controller(DAO dao) {
         this.dao = dao;
@@ -58,10 +58,10 @@ public class Controller {
                 player.setGold(player.getGold() + itemType.getModifier());
                 break;
             case 2:
-                player.setDefense(player.getDefense() + itemType.getModifier());
+                player.setAttackDmg(player.getAttackDmg() + itemType.getModifier());
                 break;
             case 3:
-                player.setAttackDmg(player.getAttackDmg() + itemType.getModifier());
+                player.setDefense(player.getDefense() + itemType.getModifier());
                 break;
             case 4:
                 player.setHealth(player.getHealth() + itemType.getModifier());
