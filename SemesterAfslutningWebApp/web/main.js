@@ -132,8 +132,8 @@ function show(obj) {
     hpDiv.style.display = 'block';
     // start: 36, stop: 464, diff: 428
     hpBar.style.width = Math.floor(36 + obj.player.health * 428 / 100) + 'px';
-    statDiv.innerText = 'att: '+obj.player.attack+' def: '+
-            obj.player.defense+' gold: '+obj.player.gold;
+    statDiv.innerText = 'att: '+obj.player.attack+' | def: '+
+            obj.player.defense+' | gold: '+obj.player.gold;
 }
 
 function logIn() {
