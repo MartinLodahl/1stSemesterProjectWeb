@@ -204,6 +204,8 @@ body {
 
 .item {
     cursor: pointer;
+    width: 128px;
+    height: 128px;
 }
 
 .monster {
