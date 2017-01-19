@@ -5,6 +5,7 @@
  */
 package server;
 
+import businessLogic.Highscore;
 import exceptions.DontExistException;
 import controller.Controller;
 import controller.PNGPathCreator;
@@ -56,16 +57,15 @@ public class JsonResponse {
             // Items
             out.print(",\"items\": [");
             ArrayList<Item> itemList = dao.getRoomItems(player.getId(), player.getRoomId());
-            for (int i = 0; i < itemList.size(); i++)
-            {
+            for (int i = 0; i < itemList.size(); i++) {
                 String picture = dao.getItemType(itemList.get(i).getType()).getPicture();
                 out.print("{\"id\":" + itemList.get(i).getId()
                         + ", \"picture\":\"PicturesItems/" + picture + ".png\""
                         + ", \"x\":" + itemList.get(i).getX()
                         + ", \"y\":" + itemList.get(i).getY() + "}");
-                if (itemList.size() - 1 > i) {
-                    out.print(",");
-                }
+//                if (itemList.size() - 1 > i) {
+//                    out.print(",");
+//                }
             }
             out.print("],");
 
@@ -83,9 +83,9 @@ public class JsonResponse {
                         + ", \"playerAtt\":" + ctrl.damageCalculator(player.getAttackDmg(), 0)
                         + ", \"x\":" + monster.getX()
                         + ", \"y\":" + monster.getY() + "}");
-                if (monsters.size() - 1 > i) {
-                    out.print(",");
-                }
+//                if (monsters.size() - 1 > i) {
+//                    out.print(",");
+//                }
             }
             out.print("],");
 
@@ -99,6 +99,19 @@ public class JsonResponse {
             out.print(",\"defense\":" + player.getDefense());
             out.print(",\"gold\":" + player.getGold());
             out.print("}");
+
+            if (player.getHealth() == 0) {
+                ArrayList<Highscore> highscore = dao.getHighscore();
+                out.print("\"highscores\":[");
+                for (int i = 0; i < highscore.size(); i++) {
+                    
+                    out.print("{\"name\":" + highscore.get(i).getName());
+                    out.print(",\"score\":" + highscore.get(i).getScore());
+                    out.print("}");
+                }
+                out.print("]");
+                
+            }
 
             out.print("}");
         } catch (IOException ex) {
