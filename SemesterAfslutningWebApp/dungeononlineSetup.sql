@@ -131,7 +131,7 @@ INSERT INTO monstertype
  (2,'atk',2,10,'Small attack'),
  (3,'def',3,20,'Small defence'),
  (4,'heal',4,15,'Small heal'),
- (5,'coins',1,50,'Big coins'),
+ (5,'coinsbig',1,50,'Big coins'),
  (6,'atkbig',2,20,'Bit attack'),
  (7,'defbig',3,30,'Big defence'),
  (8,'healbig',4,25,'Big heal');
