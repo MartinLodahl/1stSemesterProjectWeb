@@ -14,7 +14,8 @@
  CREATE TABLE link 
  (room_id int(11),
  direction varchar(255),
- goto int(11));
+ goto int(11),
+ UNIQUE(room_id, goto));
  
  
  CREATE TABLE players
@@ -32,7 +33,8 @@
  type int,
  x int,
  y int,
- roomId int);
+ roomId int,
+ UNIQUE(playerId, ItemId));
  
  CREATE TABLE itemtypes
  (type int,
@@ -50,7 +52,8 @@
  health int(11),
  attack int (11),
  x int,
- y int);
+ y int,
+ UNIQUE(playerId, ID));
 
  CREATE TABLE monstertype
  (type int,
