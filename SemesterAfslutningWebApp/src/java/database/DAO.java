@@ -10,7 +10,6 @@ import exceptions.DontExistException;
 import businessLogic.MonsterType;
 import businessLogic.Monster;
 import businessLogic.Item;
-import businessLogic.Room;
 import businessLogic.Link;
 import businessLogic.Player;
 import java.sql.PreparedStatement;
@@ -74,21 +73,7 @@ public class DAO {
             return currentRoomId;
         }
     }
-
-    public Room getRoom(int currentRoom) throws SQLException, DontExistException {
-
-        String query = "SELECT * FROM room WHERE ID = ?;";
-        PreparedStatement stmt = connector.getConnection().prepareStatement(query);
-        stmt.setInt(1, currentRoom);
-        ResultSet res = stmt.executeQuery();
-        if (res.next()) {
-            String description = res.getString("Description");
-            Room room = new Room(currentRoom, description);
-            return room;
-        }
-        throw new DontExistException(currentRoom, "Room");
-    }
-
+    
     public Item createItem(int playerId, int roomId, int x, int y, int type) throws SQLException {
         String query = "SELECT MAX(itemId)+1 AS itemId FROM items;";
         PreparedStatement stmt = connector.getConnection().prepareStatement(query);

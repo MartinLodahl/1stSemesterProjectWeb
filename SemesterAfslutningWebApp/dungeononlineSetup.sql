@@ -12,10 +12,6 @@
  (name varchar(40),
  score int(11));
  
- CREATE TABLE room
- (ID int(11),
- Description text);
- 
  CREATE TABLE link 
  (room_id int(11),
  direction varchar(255),
