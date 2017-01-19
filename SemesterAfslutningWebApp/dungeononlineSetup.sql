@@ -81,35 +81,50 @@
  (0, 10, 4, 22,-1,-1, 400, 400),
  (0, 11, 7, 23,-1,-1, 200, 300),
  (0, 12, 7, 24,-1,-1, 800, 400),
- (0, 13, 5, 31,-1,-1, 400, 400),
- (0, 14, 2, 32,-1,-1, 200, 400),
- (0, 15, 3, 33,-1,-1, 300, 200),
+ (0, 13, 5, 31,-1,-1, 450, 400),
+ (0, 14, 2, 32,-1,-1, 1000, 400),
+ (0, 15, 3, 33,-1,-1, 800, 200),
  (0, 16, 4, 35,-1,-1, 400, 400),
  (0, 17, 7, 42,-1,-1, 200, 300),
  (0, 18, 7, 43,-1,-1, 800, 400),
  (0, 19, 4, 45,-1,-1, 400, 400),
  (0, 20, 7, 51,-1,-1, 200, 300),
  (0, 21, 7, 55,-1,-1, 800, 400),
- (0, 22, 5, 44,-1,-1, 400, 400);
+ (0, 22, 5, 44,-1,-1, 400, 400),
+ (0, 23, 8, 41,-1,-1, 100, 350),
+ (0, 24, 4, 61,-1,-1, 400, 200),
+ (0, 25, 1, 62,-1,-1, 200, 150),
+ (0, 26, 2, 63,-1,-1, 400, 300),
+ (0, 27, 7, 64,-1,-1, 250, 350),
+ (0, 28, 1, 65,-1,-1, 700, 400),
+ (0, 29, 5, 71,-1,-1, 350, 400),
+ (0, 30, 5, 72,-1,-1, 900, 350);
 
  
 INSERT INTO monstertype
  values 
- (1, 'PicturesPokemon/Psyduck', 'ARHWOO', 20, 5),
- (2, 'PicturesPokemon/Onix', 'Watch out, he is throwing bones!', 30, 5),
- (3, 'PicturesPokemon/Golem', 'Must.Have.BRAAAAAINS!', 50, 2),
- (4, 'PicturesPokemon/Gengar', 'This person.. It is a person! KILL IT', 10, 2),
+ (1, 'PicturesPokemon/Psyduck', '', 20, 1),
+ (2, 'PicturesPokemon/Onix', '', 30, 5),
+ (3, 'PicturesPokemon/Golem', '', 50, 2),
+ (4, 'PicturesPokemon/Gengar', '', 10, 2),
  (5, 'PicturesPokemon/Mewtwo', '', 1000, 50),
  (6, 'PicturesPokemon/Dugtrio', '', 100, 2),
- (7, 'PicturesPokemon/Gastly', '', 50, 80);
+ (7, 'PicturesPokemon/Gastly', '', 50, 80),
+ (8, 'PicturesPokemon/Zubat', '', 20, 20),
+ (9, 'PicturesPokemon/Dugtrio', '', 100, 2),
+ (10, 'PicturesPokemon/Gastly', '', 50, 80);
 
  
  Insert into itemtypes
  values
- (1,'coins',1,50,'Conin give you money'),
- (2,'atk',2,20,'Armor of type Kindregret, give u bonus health'),
- (3,'def',3,10,'Ranged weapon type Manticore, give u bonus attack dmg'),
- (4,'heal',3,15,'Melee weapon type Bonewrath, give u bonus attack dmg');
+ (1,'coins',1,20,'Conin give you money'),
+ (2,'atk',2,10,'Armor of type Kindregret, give u bonus health'),
+ (3,'def',3,20,'Ranged weapon type Manticore, give u bonus attack dmg'),
+ (4,'heal',4,15,'Melee weapon type Bonewrath, give u bonus attack dmg'),
+ (5,'coins',1,50,'Conin give you money'),
+ (6,'atk',2,20,'Armor of type Kindregret, give u bonus health'),
+ (7,'def',3,30,'Ranged weapon type Manticore, give u bonus attack dmg'),
+ (8,'heal',4,25,'Melee weapon type Bonewrath, give u bonus attack dmg');
  
  INSERT INTO items
  VALUES

@@ -11,6 +11,7 @@ var nameDiv = document.getElementById("name-div");
 var hpDiv = document.getElementById("hp-div");
 var hpBar = document.getElementById("hp-bar");
 var statDiv = document.getElementById("stat-div");
+var overlayDiv = document.getElementById("overlay-div");
 
 var currentRoom = 0;
 var playerId = 0;
@@ -77,11 +78,18 @@ function addMonster(monster) {
     itemsDiv.appendChild(img);
 }
 
+function addHighscore() {
+    
+}
 
+function showHighscores(obj) {
+    overlayDiv.style.display = 'block';
+    
+}
 
 function show(obj) {
     if (obj.player.health === 0){
-        window.location.replace("index.html");
+        showHighscores(obj);
     }
     nameDiv.innerText = obj.player.name;
     startImg.style.display = 'none';
