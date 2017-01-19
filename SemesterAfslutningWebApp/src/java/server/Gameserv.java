@@ -67,13 +67,14 @@ public class Gameserv extends HttpServlet {
                         int monsterId = Integer.parseInt(request.getParameter("monsterId"));
                         Monster monster = dao.getMonster(playerId, monsterId);
                         MonsterType monsterType = dao.getMonsterType(monster.getType());
-                        
+                        boolean isAlive = true;
                         if (monster.getHealth() == -1) {
                             monster.setHealth(monsterType.getHealth());
                             monster.setAttack(monsterType.getAttack());
                         }
                         ctrl.fight(monster, player);
                         if (player.getHealth() == 0) {
+                            dao.addScore(player);
                             dao.removePlayer(player.getId());
                         }
                         if (monster.getHealth() == 0) {

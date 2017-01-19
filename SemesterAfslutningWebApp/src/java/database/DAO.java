@@ -5,6 +5,7 @@
  */
 package database;
 
+import businessLogic.Highscore;
 import exceptions.DontExistException;
 import businessLogic.MonsterType;
 import businessLogic.Monster;
@@ -490,6 +491,42 @@ public class DAO
         } catch (Exception ex)
         {
             ex.printStackTrace();
+        }
+    }
+    
+    public void addScore(Player player){
+        try
+        {
+            String query = "INSERT INTO highscore VALUES (?, ?)";                    
+            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+            stmt.setString(1, player.getName());
+            stmt.setInt(2, player.getGold());
+            stmt.executeUpdate();
+        } catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+    
+    public ArrayList<Highscore> getHighscore (){
+        try
+        {
+            ArrayList<Highscore> highscore = new ArrayList<>();
+            String query = "SELECT * FROM highscore ORDER BY score DESC;";
+            PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+            ResultSet res = stmt.executeQuery();
+            while (res.next())
+            {
+                int score = res.getInt("score");
+                String name = res.getString("name");
+                Highscore thisScore = new Highscore(score, name);
+                highscore.add(thisScore);
+            }
+            return highscore;
+        } catch (SQLException ex)
+        {
+            ex.printStackTrace();
+            return null;
         }
     }
 }

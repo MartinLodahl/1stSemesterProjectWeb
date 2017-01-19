@@ -6,6 +6,11 @@
  DROP TABLE IF exists itemtypes;
  DROP TABLE IF exists monster;
  DROP TABLE IF exists monstertype;
+ DROP TABLE IF exists highscore;
+ 
+ CREATE TABLE highscore
+ (name varchar(40),
+ score int(11));
  
  CREATE TABLE room
  (ID int(11),
