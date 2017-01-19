@@ -58,10 +58,10 @@ public class DAOtest {
     // public void hello() {}
     @Test
     public void getDirectionTest() {
-        ArrayList<Link> links = dao.getDirection(1);
+        ArrayList<Link> links = dao.getDirection(41);
         //east 2 & north 3
-        assertEquals(links.get(0).getTo(), 2);
-        assertEquals(links.get(1).getDirection(), "WEST");
+        assertEquals(links.get(0).getTo(), 42);
+        assertEquals(links.get(0).getDirection(), "NORTH");
 
     }
 
@@ -73,32 +73,44 @@ public class DAOtest {
         assertEquals(check, bob.getId()+1);
 
     }
-
+    
     @Test
-    public void getRoomItems() {
-        ArrayList<Item> list = dao.getRoomItems(0, 1);
-
-        assertEquals(list.size(), 1);
-        dao.removeItem(0, 7);
-        list = dao.getRoomItems(0, 1);
-        assertEquals(list.size(), 0);
+    public void createPlayer() throws SQLException, DontExistException{
+        Controller ctrl = new Controller(dao);
+        int id  =dao.createUniquePlayerId();
+        dao.createUser(id, "bob", ctrl.createPlayerRoomId());
+        Player newPlayer = dao.getPlayer(id);
+        assertEquals(newPlayer.getName(),"bob");
+        assertEquals(newPlayer.getHealth(),100);
+        assertEquals(newPlayer.getId(),id);
+               
     }
-
+    
     @Test
-    public void updateMonster() throws SQLException, DontExistException {
-        Monster monster = dao.getMonster(0, 1);
-        monster.setHealth(3);
-        dao.updateMonster(monster);
-
-        assertEquals(monster.getHealth(), 3);
-
+    public void applyItem() throws SQLException, DontExistException{
+       Controller ctrl = new Controller(dao);
+       int id  =dao.createUniquePlayerId();
+       dao.createUser(id, "bob", ctrl.createPlayerRoomId());
+       Player newPlayer = dao.getPlayer(id);
+       dao.copyItems(id);
+       dao.copyMonsters(id);
+       ctrl.applyItem(newPlayer, 2);
+       newPlayer = dao.getPlayer(id);
+       assertEquals(newPlayer.getGold(),20);
+       
     }
-
-    //You need atleast 1 player with the id of 1, for this test to work.
-    @Test
-    public void removePlayer() {
-
-        dao.removePlayer(1);
-
+    
+    @ Test(expected=DontExistException.class)
+         public void testDontExistException () throws DontExistException, SQLException{
+             
+             Player newPlayer = dao.getPlayer(888);
+        
     }
+//
+    
+//
+
+//
+//    //You need atleast 1 player with the id of 1, for this test to work.
+   
 }
