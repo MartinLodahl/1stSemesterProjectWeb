@@ -64,16 +64,7 @@ public class DAOtest {
         assertEquals(links.get(1).getDirection(), "WEST");
 
     }
-//    @Test
-//    public void getRoom(){
-//        Room room = dao.getRoom(1);
-//        Room room2 = dao.getRoom(2);
-//        
-//        assertEquals(room.getDescription(), "Der var en stor stor trold");
-//        assertEquals(room2.getDescription(), "Per");
-//    }
 
-    
     @Test
     public void createUniquePlayerId() {
         Controller ctrl = new Controller(dao);
