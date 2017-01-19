@@ -12,6 +12,7 @@ var hpDiv = document.getElementById("hp-div");
 var hpBar = document.getElementById("hp-bar");
 var statDiv = document.getElementById("stat-div");
 var overlayDiv = document.getElementById("overlay-div");
+var highscoresDiv = document.getElementById("highscores-div");
 
 var currentRoom = 0;
 var playerId = 0;
@@ -83,14 +84,31 @@ function addHighscore() {
 }
 
 function showHighscores(obj) {
+    highscoresDiv.innerHTML = text;
     overlayDiv.style.display = 'block';
-    
+    var text = '';
+    for (var i = 0; i < obj.highscores.length; i++) {
+        text += obj.highscores[i].name;
+        text += '   ';
+        text += obj.highscores[i].score;
+        text += '<br>';
+    }
+    highscoresDiv.innerHTML = text;
+    startImg.style.display = 'block';
+    nameLabel.style.display = 'block';
+    nameInput.style.display = 'block';
+    nameInput.focus();
 }
 
 function show(obj) {
     if (obj.player.health === 0){
         showHighscores(obj);
+        return;
     }
+    while (highscoresDiv.firstChild) {
+        highscoresDiv.removeChild(highscoresDiv.firstChild);
+    }
+    overlayDiv.style.display = 'none';
     nameDiv.innerText = obj.player.name;
     startImg.style.display = 'none';
     nameLabel.style.display = 'none';

@@ -9,8 +9,6 @@
 <body>
     <div class="outer">
         <div id="game" class="page">
-            <label id="label-name">Name:</label><input type="text" value="" id="input-name" autocomplete="off">
-            <input type="button" value="-" id="start" onclick="logIn();">
             <input type="button" value="-" id="north" onclick="goTo('NORTH');">
             <input type="button" value="-" id="south" onclick="goTo('SOUTH');">
             <input type="button" value="-" id="east" onclick="goTo('EAST');">
@@ -24,6 +22,9 @@
             </div>
             <div id="stat-div"></div>
             <div id="overlay-div"></div>
+            <label id="label-name">Name:</label><input type="text" value="" id="input-name" autocomplete="off">
+            <input type="button" value="-" id="start" onclick="logIn();">
+            <div id="highscores-div"></div>
         </div>
     </div>
     <script src="main.js"></script>

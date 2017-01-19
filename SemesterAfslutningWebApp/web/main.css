@@ -222,3 +222,11 @@ body {
     height: 900px;
     background-color: rgba(255, 0, 0, 0.5);
 }
+
+#highscores-div {
+    color: #fff;
+    position: absolute;
+    top: 200px;
+    font-size: 40px;
+    font-family: RingBearer, serif;
+}
