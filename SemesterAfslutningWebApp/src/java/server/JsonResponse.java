@@ -38,7 +38,7 @@ public class JsonResponse {
         return false;
     }
 
-    public void response(Player player, DAO dao, PNGPathCreator png, HttpServletResponse response, String action) throws SQLException, DontExistException {
+    public void response(Player player, DAO dao, PNGPathCreator png, HttpServletResponse response, String action, boolean gameOver) throws SQLException, DontExistException {
         Controller ctrl = new Controller(dao);
         PrintWriter out = null;
         try {
@@ -100,7 +100,9 @@ public class JsonResponse {
             out.print(",\"gold\":" + player.getGold());
             out.print("}");
 
-            if (player.getHealth() == 0) {
+            out.print(",\"gameOver\":" + gameOver);
+
+            if (gameOver) {
                 ArrayList<Highscore> highscore = dao.getHighscores();
                 out.print(",\"highscores\":[");
                 for (int i = 0; i < highscore.size(); i++) {        

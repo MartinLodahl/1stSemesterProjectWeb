@@ -80,6 +80,9 @@ function addMonster(monster) {
 }
 
 function showHighscores(obj) {
+    if (obj.player.health > 0) {
+        overlayDiv.style.backgroundColor = 'rgba(128, 128, 128, 0.5)';
+    }
     overlayDiv.style.display = 'block';
     var y = 0;
     for (var i = 0; i < obj.highscores.length; i++) {
@@ -110,10 +113,6 @@ function showHighscores(obj) {
 }
 
 function show(obj) {
-    if (obj.player.health === 0){
-        showHighscores(obj);
-        return;
-    }
     while (highscoresDiv.firstChild) {
         highscoresDiv.removeChild(highscoresDiv.firstChild);
     }
@@ -161,6 +160,10 @@ function show(obj) {
     hpBar.style.width = Math.floor(36 + obj.player.health * 428 / 100) + 'px';
     statDiv.innerText = 'att: '+obj.player.attack+' | def: '+
             obj.player.defense+' | gold: '+obj.player.gold;
+    if (obj.gameOver) {
+        showHighscores(obj);
+        return;
+    }
 }
 
 function logIn() {

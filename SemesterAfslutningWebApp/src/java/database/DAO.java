@@ -55,6 +55,18 @@ public class DAO {
         }
     }
 
+    public boolean allMonstersDead(int playerId) throws SQLException {
+        String query = "SELECT COUNT(*) AS count FROM monster WHERE playerId = ?;";
+        PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+        stmt.setInt(1, playerId);
+        ResultSet res = stmt.executeQuery();
+        while (res.next()) {
+            int count = res.getInt("count");
+            return count == 0;
+        }
+        return false;
+    }
+    
     public int currentRoomId(int currentRoomId, String direction) {
         try {
             String query = "SELECT * FROM link WHERE room_id = ? and direction= ?;";
