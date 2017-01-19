@@ -54,13 +54,13 @@ public class Gameserv extends HttpServlet {
                 switch (action) {
                     case "UPDATE":
                         player = dao.getPlayer(playerId);
-                        jResponse.response(player, dao, png, response, action, true);
+                        jResponse.response(player, dao, png, response, action);
                         break;
                     case "PICKUP":
                         player = dao.getPlayer(playerId);
                         int itemId = Integer.parseInt(request.getParameter("itemId"));
                         ctrl.applyItem(player, itemId);
-                        jResponse.response(player, dao, png, response, action, true);
+                        jResponse.response(player, dao, png, response, action);
                         break;
                     case "ATTACK":
                         player = dao.getPlayer(playerId);
@@ -74,15 +74,15 @@ public class Gameserv extends HttpServlet {
                         }
                         ctrl.fight(monster, player);
                         if (player.getHealth() == 0) {
+                            dao.addScore(player);
                             dao.removePlayer(player.getId());
-                            isAlive = false;
                         }
                         if (monster.getHealth() == 0) {
                             int type = ctrl.getDropType();
                             dao.createItem(player.getId(), player.getRoomId(), monster.getX(), monster.getY(), type);
                             dao.removeMonster(monster);
                         }
-                        jResponse.response(player, dao, png, response, action, isAlive);
+                        jResponse.response(player, dao, png, response, action);
                         break;
                     case "START":
                         String name = request.getParameter("playerName");
@@ -91,7 +91,7 @@ public class Gameserv extends HttpServlet {
                         player = dao.createUser(playerId, name, playRoomId);
                         dao.copyItems(playerId);
                         dao.copyMonsters(playerId);
-                        jResponse.response(player, dao, png, response, action, true);
+                        jResponse.response(player, dao, png, response, action);
                         break;
                     case "GOTO":
                         String direction = request.getParameter("direction");
@@ -99,7 +99,7 @@ public class Gameserv extends HttpServlet {
                         int nextRoomId = dao.currentRoomId(currentroomId, direction);
                         player.setRoomId(nextRoomId);
                         dao.updateUser(nextRoomId, playerId);
-                        jResponse.response(player, dao, png, response, action, true);
+                        jResponse.response(player, dao, png, response, action);
                     default:
                         break;
                 }
