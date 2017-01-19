@@ -63,9 +63,9 @@ public class JsonResponse {
                         + ", \"picture\":\"PicturesItems/" + picture + ".png\""
                         + ", \"x\":" + itemList.get(i).getX()
                         + ", \"y\":" + itemList.get(i).getY() + "}");
-//                if (itemList.size() - 1 > i) {
-//                    out.print(",");
-//                }
+                if (itemList.size() - 1 > i) {
+                    out.print(",");
+                }
             }
             out.print("],");
 
@@ -83,9 +83,9 @@ public class JsonResponse {
                         + ", \"playerAtt\":" + ctrl.damageCalculator(player.getAttackDmg(), 0)
                         + ", \"x\":" + monster.getX()
                         + ", \"y\":" + monster.getY() + "}");
-//                if (monsters.size() - 1 > i) {
-//                    out.print(",");
-//                }
+                if (monsters.size() - 1 > i) {
+                    out.print(",");
+                }
             }
             out.print("],");
 
