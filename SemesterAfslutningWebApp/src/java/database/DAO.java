@@ -436,10 +436,10 @@ public class DAO {
         }
     }
 
-    public ArrayList<Highscore> getHighscore() {
+    public ArrayList<Highscore> getHighscores() {
         try {
             ArrayList<Highscore> highscore = new ArrayList<>();
-            String query = "SELECT * FROM highscore ORDER BY score DESC;";
+            String query = "SELECT * FROM highscore ORDER BY score DESC LIMIT 5;";
             PreparedStatement stmt = connector.getConnection().prepareStatement(query);
             ResultSet res = stmt.executeQuery();
             while (res.next()) {

@@ -101,7 +101,7 @@ public class JsonResponse {
             out.print("}");
 
             if (player.getHealth() == 0) {
-                ArrayList<Highscore> highscore = dao.getHighscore();
+                ArrayList<Highscore> highscore = dao.getHighscores();
                 out.print(",\"highscores\":[");
                 for (int i = 0; i < highscore.size(); i++) {        
                     out.print("{\"name\":\"" + highscore.get(i).getName()+"\"");
