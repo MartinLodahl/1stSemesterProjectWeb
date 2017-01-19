@@ -90,21 +90,28 @@
  
 INSERT INTO monstertype
  values 
- (1, 'PicturesPokemon/Psyduck', 'ARHWOO', 20, 5),
- (2, 'PicturesPokemon/Onix', 'Watch out, he is throwing bones!', 30, 5),
- (3, 'PicturesPokemon/Golem', 'Must.Have.BRAAAAAINS!', 50, 2),
- (4, 'PicturesPokemon/Gengar', 'This person.. It is a person! KILL IT', 10, 2),
+ (1, 'PicturesPokemon/Psyduck', '', 20, 5),
+ (2, 'PicturesPokemon/Onix', '', 30, 5),
+ (3, 'PicturesPokemon/Golem', '', 50, 2),
+ (4, 'PicturesPokemon/Gengar', '', 10, 2),
  (5, 'PicturesPokemon/Mewtwo', '', 1000, 50),
  (6, 'PicturesPokemon/Dugtrio', '', 100, 2),
- (7, 'PicturesPokemon/Gastly', '', 50, 80);
+ (7, 'PicturesPokemon/Gastly', '', 50, 80),
+ (8, 'PicturesPokemon/Zubat', '', 1000, 50),
+ (9, 'PicturesPokemon/Dugtrio', '', 100, 2),
+ (10, 'PicturesPokemon/Gastly', '', 50, 80);
 
  
  Insert into itemtypes
  values
- (1,'coins',1,50,'Conin give you money'),
- (2,'atk',2,20,'Armor of type Kindregret, give u bonus health'),
- (3,'def',3,10,'Ranged weapon type Manticore, give u bonus attack dmg'),
- (4,'heal',3,15,'Melee weapon type Bonewrath, give u bonus attack dmg');
+ (1,'coins',1,20,'Conin give you money'),
+ (2,'atk',2,10,'Armor of type Kindregret, give u bonus health'),
+ (3,'def',3,20,'Ranged weapon type Manticore, give u bonus attack dmg'),
+ (4,'heal',4,15,'Melee weapon type Bonewrath, give u bonus attack dmg'),
+ (5,'coins',1,50,'Conin give you money'),
+ (6,'atk',2,20,'Armor of type Kindregret, give u bonus health'),
+ (7,'def',3,30,'Ranged weapon type Manticore, give u bonus attack dmg'),
+ (8,'heal',4,25,'Melee weapon type Bonewrath, give u bonus attack dmg');
  
  INSERT INTO items
  VALUES

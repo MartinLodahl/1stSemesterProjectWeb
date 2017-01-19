@@ -51,16 +51,8 @@ public class Controller {
     }
 
     public int getDropType() {
-        double dice = Math.random();
-        if (dice >= 0.75){
-            return 1;
-        } else if (dice >= 0.50){
-            return 2;
-        } else if (dice >= 0.25){
-            return 3;
-        } else {
-            return 4;
-        }
+        int type = 1 + (int)Math.floor(Math.random() * 8);
+        return type;
     }
     
     public void applyItem(Player player, int itemId) throws SQLException, DontExistException {
