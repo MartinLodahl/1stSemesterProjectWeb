@@ -5,7 +5,7 @@
  */
 package database;
 
-import Exceptions.DontExistException;
+import exceptions.DontExistException;
 import businessLogic.MonsterType;
 import businessLogic.Monster;
 import businessLogic.Item;

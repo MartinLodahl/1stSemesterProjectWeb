@@ -1,6 +1,6 @@
 package controller;
 
-import Exceptions.DontExistException;
+import exceptions.DontExistException;
 import businessLogic.ItemType;
 import businessLogic.Player;
 import database.DAO;

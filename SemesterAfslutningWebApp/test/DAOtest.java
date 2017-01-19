@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-import Exceptions.DontExistException;
+import exceptions.DontExistException;
 import database.DAO;
 import database.DBConnector;
 import businessLogic.Monster;

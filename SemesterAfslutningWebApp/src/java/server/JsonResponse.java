@@ -5,7 +5,7 @@
  */
 package server;
 
-import Exceptions.DontExistException;
+import exceptions.DontExistException;
 import controller.Controller;
 import controller.PNGPathCreator;
 import businessLogic.Player;
