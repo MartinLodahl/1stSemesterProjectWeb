@@ -107,6 +107,9 @@ public class JsonResponse {
                     out.print("{\"name\":" + highscore.get(i).getName());
                     out.print(",\"score\":" + highscore.get(i).getScore());
                     out.print("}");
+                    if (highscore.size() - 1 > i) {
+                        out.print(",");
+                    }
                 }
                 out.print("]");
                 
