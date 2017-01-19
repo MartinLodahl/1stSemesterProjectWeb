@@ -78,17 +78,7 @@ public class Gameserv extends HttpServlet {
                             isAlive = false;
                         }
                         if (monster.getHealth() == 0) {
-                            double dice = Math.random();
-                            int type;
-                            if (dice > 0.75){
-                                type= 1;
-                            } else if (dice<0.75 && dice >0.50){
-                                type= 2;
-                            } else if (dice<0.50 && dice>0.25){
-                                type= 3;
-                            } else {
-                                type= 4;
-                            }
+                            int type = ctrl.getDropType();
                             dao.createItem(player.getId(), player.getRoomId(), monster.getX(), monster.getY(), type);
                             dao.removeMonster(monster);
                         }

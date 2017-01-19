@@ -50,6 +50,19 @@ public class Controller {
 
     }
 
+    public int getDropType() {
+        double dice = Math.random();
+        if (dice >= 0.75){
+            return 1;
+        } else if (dice >= 0.50){
+            return 2;
+        } else if (dice >= 0.25){
+            return 3;
+        } else {
+            return 4;
+        }
+    }
+    
     public void applyItem(Player player, int itemId) throws SQLException, DontExistException {
         int itemTypeInt = dao.getItem(player.getId(), itemId).getType();
         ItemType itemType = dao.getItemType(itemTypeInt);
